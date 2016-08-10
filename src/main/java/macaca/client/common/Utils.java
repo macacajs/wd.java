@@ -122,14 +122,13 @@ public class Utils {
 
 	public Object request(String method, String url, JSONObject jsonObj) throws Exception {
 
-		switch (method.toUpperCase()) {
-		case "GET":
+		if(method.toUpperCase() == "GET")
 			return getRequest(url, jsonObj);
-		case "POST":
+		if(method.toUpperCase() == "POST")
 			return postRequest(url, jsonObj);
-		case "DELETE":
+		if(method.toUpperCase() == "DELETE")
 			return deleteRequest(url, jsonObj);
-		}
+		
 		return null;
 	}
 
