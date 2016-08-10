@@ -26,8 +26,9 @@ public class MacacaClient {
 	private Source source = new Source(driver);
 	private ScreenShot screenshot = new ScreenShot(driver);
 
-	public void initDriver(JSONObject jsonObj) throws Exception {
+	public MacacaClient initDriver(JSONObject jsonObj) throws Exception {
 		session.createSession(jsonObj);
+		return this;
 	}
 
 	public void quit() throws Exception {
@@ -151,6 +152,10 @@ public class MacacaClient {
 	public MacacaClient sleep(int mseconds) throws InterruptedException {
 		Thread.sleep(mseconds);
 		return this;
+	}
+	
+	public String getAttribute(String name) throws Exception {
+		return element.getAttribute(name);
 	}
 
 }

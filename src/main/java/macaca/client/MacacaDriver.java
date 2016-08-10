@@ -1,10 +1,13 @@
 package macaca.client;
 
+import com.alibaba.fastjson.JSONObject;
+
 public class MacacaDriver {
 	private String sessionId;
 	private String windowHandle;
 	private String elementId;
 	private String context;
+	private JSONObject capabilities;
 
 	public String getContext() {
 		return context;
@@ -37,4 +40,13 @@ public class MacacaDriver {
 	public String getElementId() {
 		return this.elementId;
 	}
+
+	public JSONObject getCapabilities() {
+		return capabilities;
+	}
+
+	public void setCapabilities(JSONObject capabilities) {
+		this.capabilities = capabilities;
+	}
+
 }

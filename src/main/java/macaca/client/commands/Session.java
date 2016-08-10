@@ -16,13 +16,20 @@ public class Session {
 	}
 
 	public void createSession(JSONObject jsonObj) throws Exception {
-		JSONObject response = (JSONObject) utils.postRequest(DriverCommand.CREATE_SESSION, jsonObj);
+		JSONObject response = (JSONObject) utils.request("POST", DriverCommand.CREATE_SESSION, jsonObj);
 		String sessionId = (String) response.get("sessionId");
 		this.driver.setSessionId(sessionId);
+		this.driver.setCapabilities(response);
+		
 	}
 
 	public void delSession() throws Exception {
-		String sessionId = this.driver.getSessionId();
-		utils.deleteRequest(DriverCommand.SESSION.replace(":sessionId", sessionId));
+		JSONObject jsonObj = new JSONObject();
+		jsonObj.put("sessionId", driver.getSessionId());
+		utils.request("DELETE", DriverCommand.SESSION, jsonObj);
+	}
+	
+	public JSONObject sessionAvailable() throws Exception {
+		return this.driver.getCapabilities();
 	}
 }

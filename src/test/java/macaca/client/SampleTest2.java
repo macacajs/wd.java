@@ -28,13 +28,14 @@ public class SampleTest2 {
 		porps.put("platform", "ANY");
 		JSONObject desiredCapabilities = new JSONObject();
 		desiredCapabilities.put("desiredCapabilities", porps);
-		driver.initDriver(desiredCapabilities);
-		driver.setWindowSize(1280, 800);
-		driver.get("https://www.baidu.com");
+		driver.initDriver(desiredCapabilities)
+			.setWindowSize(1280, 800)
+			.get("https://www.baidu.com");
 	}
 
 	@Test
 	public void test_case_1() throws Exception {
+		/*
 		driver.elementById("kw");
 		driver.sendKeys("macaca");
 		Thread.sleep(1000);
@@ -50,9 +51,9 @@ public class SampleTest2 {
 		driver.sendKeys(" elementByXPath");
 		driver.elementById("su");
 		driver.click();
-		driver.takeScreenshot();
+		driver.takeScreenshot();*/
 	}
-
+/*
 	@Test
 	public void test_case_2() throws Exception {
 		System.out.println("test case #2");
@@ -67,9 +68,9 @@ public class SampleTest2 {
 		Assert.assertThat(html, containsString("testerhome"));
 		driver.takeScreenshot();
 	}
-
+*/
 	@After
 	public void tearDown() throws Exception {
-		driver.quit();
+		//driver.quit();
 	}
 }

@@ -1,5 +1,7 @@
 package macaca.client.commands;
 
+import com.alibaba.fastjson.JSONObject;
+
 import macaca.client.MacacaDriver;
 import macaca.client.common.DriverCommand;
 import macaca.client.common.Utils;
@@ -14,6 +16,8 @@ public class ScreenShot {
 	}
 
 	public void takeScreenshot() throws Exception {
-		utils.getRequest(DriverCommand.SCREENSHOT.replace(":sessionId", driver.getSessionId()));
+		JSONObject jsonObj = new JSONObject();
+		jsonObj.put("sessionId", driver.getSessionId());
+		utils.request("GET", DriverCommand.SCREENSHOT, jsonObj);
 	}
 }
