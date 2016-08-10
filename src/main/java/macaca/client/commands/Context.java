@@ -16,19 +16,21 @@ public class Context {
 		this.driver = driver;
 	}
 
-	public void getContext() {
-
+	public String getContext() {
+		return this.driver.getContext();
 	}
 
 	public JSONArray getContexts() throws Exception {
-		JSONArray contexts = (JSONArray) utils
-				.getRequest(DriverCommand.CONTEXTS.replace(":sessionId", driver.getSessionId()));
+		JSONObject jsonObj = new JSONObject();
+		jsonObj.put("sessionId", driver.getSessionId());
+		JSONArray contexts = (JSONArray) utils.request("GET", DriverCommand.CONTEXTS, jsonObj);
 		return contexts;
 	}
 
 	public void setContext(JSONObject jsonObj) throws Exception {
+		jsonObj.put("sessionId", driver.getSessionId());
 		driver.setContext(jsonObj.getString("name"));
-		utils.postRequest(DriverCommand.CONTEXT.replace(":sessionId", driver.getSessionId()), jsonObj);
+		utils.request("POST", DriverCommand.CONTEXT, jsonObj);
 	}
 
 }
