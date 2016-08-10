@@ -35,42 +35,42 @@ public class SampleTest2 {
 
 	@Test
 	public void test_case_1() throws Exception {
-		/*
-		driver.elementById("kw");
-		driver.sendKeys("macaca");
-		Thread.sleep(1000);
-		driver.elementById("su");
-		driver.click();
+		driver
+			.elementById("kw")
+			.sendKeys("macaca")
+			.sleep(1000)
+			.elementById("su")
+			.click();
 		String html = driver.source();
 
 		Assert.assertThat(html, containsString("macaca"));
 
-		driver.elementByCss("#head > div.head_wrapper");
-
-		driver.elementByXPath("//*[@id=\"kw\"]");
-		driver.sendKeys(" elementByXPath");
-		driver.elementById("su");
-		driver.click();
-		driver.takeScreenshot();*/
+		driver
+			.elementByCss("#head > div.head_wrapper")
+			.elementByXPath("//*[@id=\"kw\"]")
+			.sendKeys(" elementByXPath")
+			.elementById("su")
+			.click()
+			.takeScreenshot();
 	}
-/*
+
 	@Test
 	public void test_case_2() throws Exception {
 		System.out.println("test case #2");
-		driver.get("https://www.baidu.com");
-		driver.elementById("kw");
-		driver.sendKeys("testerhome");
-
-		driver.elementByXPath("//*[@id=\"kw\"]");
-		driver.click();
-		Thread.sleep(3000);
+		driver
+			.get("https://www.baidu.com")
+			.elementById("kw")
+			.sendKeys("testerhome")
+			.elementByXPath("//*[@id=\"kw\"]")
+			.click()
+			.sleep(3000);
 		String html = driver.source();
 		Assert.assertThat(html, containsString("testerhome"));
 		driver.takeScreenshot();
 	}
-*/
+
 	@After
 	public void tearDown() throws Exception {
-		//driver.quit();
+		driver.quit();
 	}
 }
