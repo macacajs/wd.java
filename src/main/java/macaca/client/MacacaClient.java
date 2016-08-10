@@ -155,7 +155,7 @@ public class MacacaClient {
 		Thread.sleep(mseconds);
 		return this;
 	}
-	
+
 	public String getAttribute(String name) throws Exception {
 		return element.getAttribute(name);
 	}

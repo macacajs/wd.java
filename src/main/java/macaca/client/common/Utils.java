@@ -31,8 +31,7 @@ public class Utils {
 	private JSONObject jsonResponse = null;
 	private String stringResponse = "";
 
-	public Object getRequest(String method, JSONObject jsonBody)
-			throws Exception {
+	public Object getRequest(String method, JSONObject jsonBody) throws Exception {
 
 		for (String key : jsonBody.keySet()) {
 			String value = jsonBody.get(key).toString();
@@ -60,8 +59,7 @@ public class Utils {
 		return null;
 	}
 
-	public Object postRequest(String method, JSONObject jsonBody)
-			throws Exception {
+	public Object postRequest(String method, JSONObject jsonBody) throws Exception {
 		JSONObject tempObj = new JSONObject();
 		for (String key : jsonBody.keySet()) {
 			String value = jsonBody.get(key).toString();
@@ -100,8 +98,7 @@ public class Utils {
 		return null;
 	}
 
-	public Object deleteRequest(String method, JSONObject jsonBody)
-			throws Exception {
+	public Object deleteRequest(String method, JSONObject jsonBody) throws Exception {
 
 		for (String key : jsonBody.keySet()) {
 			String value = jsonBody.get(key).toString();
@@ -123,16 +120,14 @@ public class Utils {
 		return null;
 	}
 
-	public Object request(String method, String url, JSONObject jsonObj)
-			throws Exception {
+	public Object request(String method, String url, JSONObject jsonObj) throws Exception {
 
-		if (method.toUpperCase() == "GET") {
+		switch (method.toUpperCase()) {
+		case "GET":
 			return getRequest(url, jsonObj);
-		}
-		if (method.toUpperCase() == "POST") {
+		case "POST":
 			return postRequest(url, jsonObj);
-		}
-		if (method.toUpperCase() == "DELETE") {
+		case "DELETE":
 			return deleteRequest(url, jsonObj);
 		}
 		return null;

@@ -18,8 +18,7 @@ public class Window {
 	public void getWindow() throws Exception {
 		JSONObject jsonObj = new JSONObject();
 		jsonObj.put("sessionId", driver.getSessionId());
-		String windowHandle = (String) utils
-				.request("GET", DriverCommand.WINDOW_HANDLE, jsonObj);
+		String windowHandle = (String) utils.request("GET", DriverCommand.WINDOW_HANDLE, jsonObj);
 		driver.setWindowHandle(windowHandle);
 	}
 

@@ -31,8 +31,8 @@ public class Element {
 
 	public void findElement(JSONObject jsonObj) throws Exception {
 		jsonObj.put("sessionId", driver.getSessionId());
-		JSONObject response = (JSONObject) utils
-				.request("POST", DriverCommand.FIND_ELEMENT, jsonObj);
+		JSONObject response = (JSONObject) utils.request("POST",
+				DriverCommand.FIND_ELEMENT, jsonObj);
 		JSONObject element = (JSONObject) response.get("value");
 		Object elementId = (Object) element.get("ELEMENT");
 		driver.setElementId(elementId);
@@ -41,8 +41,8 @@ public class Element {
 	public JSONArray findElements(JSONObject jsonObj) throws Exception {
 		jsonObj.put("sessionId", driver.getSessionId());
 		JSONArray elements = new JSONArray();
-		elements = (JSONArray) utils
-				.request("POST", DriverCommand.FIND_ELEMENTS, jsonObj);
+		elements = (JSONArray) utils.request("POST",
+				DriverCommand.FIND_ELEMENTS, jsonObj);
 		return elements;
 	}
 
@@ -65,7 +65,8 @@ public class Element {
 		JSONObject jsonObj = new JSONObject();
 		jsonObj.put("sessionId", driver.getSessionId());
 		jsonObj.put("elementId", driver.getElementId());
-		String text = (String) utils.request("GET", DriverCommand.GET_ELEMENT_TEXT, jsonObj);
+		String text = (String) utils.request("GET",
+				DriverCommand.GET_ELEMENT_TEXT, jsonObj);
 		return text;
 	}
 
@@ -75,13 +76,14 @@ public class Element {
 		jsonObj.put("elementId", driver.getElementId());
 		utils.request("POST", DriverCommand.CLEAR_ELEMENT, jsonObj);
 	}
-	
+
 	public String getAttribute(String name) throws Exception {
 		JSONObject jsonObj = new JSONObject();
 		jsonObj.put("sessionId", driver.getSessionId());
 		jsonObj.put("elementId", driver.getElementId());
 		jsonObj.put(":name", name);
-		String attribute = (String) utils.request("GET", DriverCommand.GET_ELEMENT_ATTRIBUTE, jsonObj);
+		String attribute = (String) utils.request("GET",
+				DriverCommand.GET_ELEMENT_ATTRIBUTE, jsonObj);
 		return attribute;
 	}
 
@@ -90,27 +92,30 @@ public class Element {
 		jsonObj.put("sessionId", driver.getSessionId());
 		jsonObj.put("elementId", driver.getElementId());
 		jsonObj.put(":name", name);
-		String property = (String) utils.request("GET", DriverCommand.GET_ELEMENT_ATTRIBUTE, jsonObj);
+		String property = (String) utils.request("GET",
+				DriverCommand.GET_ELEMENT_ATTRIBUTE, jsonObj);
 		return property;
 	}
-	
+
 	public String getComputedCss(String propertyName) throws Exception {
 		JSONObject jsonObj = new JSONObject();
 		jsonObj.put("sessionId", driver.getSessionId());
 		jsonObj.put("elementId", driver.getElementId());
 		jsonObj.put(":propertyName", propertyName);
-		String computedCss = (String) utils.request("GET", DriverCommand.GET_ELEMENT_VALUE_OF_CSS_PROPERTY, jsonObj);
+		String computedCss = (String) utils.request("GET",
+				DriverCommand.GET_ELEMENT_VALUE_OF_CSS_PROPERTY, jsonObj);
 		return computedCss;
 	}
-	
+
 	public boolean isDisplayed() throws Exception {
 		JSONObject jsonObj = new JSONObject();
 		jsonObj.put("sessionId", driver.getSessionId());
 		jsonObj.put("elementId", driver.getElementId());
-		boolean displayed = Boolean.parseBoolean((String) utils.request("GET", DriverCommand.IS_ELEMENT_DISPLAYED, jsonObj));
+		boolean displayed = Boolean.parseBoolean((String) utils.request("GET",
+				DriverCommand.IS_ELEMENT_DISPLAYED, jsonObj));
 		return displayed;
 	}
-	
+
 	public void moveTo(JSONObject jsonObj) throws Exception {
 		jsonObj.put("sessionId", driver.getSessionId());
 		utils.request("POST", DriverCommand.MOVE_TO, jsonObj);
