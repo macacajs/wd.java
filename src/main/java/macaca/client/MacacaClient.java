@@ -5,19 +5,7 @@ import java.util.ArrayList;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 
-import macaca.client.commands.Alert;
-import macaca.client.commands.Context;
-import macaca.client.commands.Element;
-import macaca.client.commands.Execute;
-import macaca.client.commands.Keys;
-import macaca.client.commands.ScreenShot;
-import macaca.client.commands.Session;
-import macaca.client.commands.Source;
-import macaca.client.commands.Status;
-import macaca.client.commands.Timeouts;
-import macaca.client.commands.Title;
-import macaca.client.commands.Url;
-import macaca.client.commands.Window;
+import macaca.client.commands.*;
 import macaca.client.common.ElementSelector;
 
 public class MacacaClient {
