@@ -15,9 +15,10 @@ public class Url {
 		this.driver = driver;
 	}
 
-	public void url(JSONObject jsonObj) throws Exception {
+	public void url() throws Exception {
+		JSONObject jsonObj = new JSONObject();
 		jsonObj.put("sessionId", driver.getSessionId());
-		utils.request("POST", DriverCommand.URL, jsonObj);
+		utils.request("GET", DriverCommand.URL, jsonObj);
 	}
 
 	public void getUrl(JSONObject jsonObj) throws Exception {
