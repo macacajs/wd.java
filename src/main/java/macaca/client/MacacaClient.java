@@ -2,6 +2,7 @@ package macaca.client;
 
 import java.util.ArrayList;
 
+import macaca.client.commands.Alert;
 import macaca.client.commands.Context;
 import macaca.client.commands.Element;
 import macaca.client.commands.ScreenShot;
@@ -18,6 +19,7 @@ public class MacacaClient {
 
 	private MacacaDriver driver = new MacacaDriver();
 
+	private Alert alert = new Alert(driver);
 	private Context context = new Context(driver);
 	private Session session = new Session(driver);
 	private Window window = new Window(driver);

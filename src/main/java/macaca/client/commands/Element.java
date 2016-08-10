@@ -19,20 +19,20 @@ public class Element {
 	public void setValue(JSONObject jsonObj) throws Exception {
 		jsonObj.put("sessionId", driver.getSessionId());
 		jsonObj.put("elementId", driver.getElementId());
-		utils.postRequest(DriverCommand.ELEMENT_VALUE, jsonObj);
+		utils.request("POST", DriverCommand.ELEMENT_VALUE, jsonObj);
 	}
 
 	public void click() throws Exception {
 		JSONObject jsonObj = new JSONObject();
 		jsonObj.put("sessionId", driver.getSessionId());
 		jsonObj.put("elementId", driver.getElementId());
-		utils.postRequest(DriverCommand.CLICK_ELEMENT, jsonObj);
+		utils.request("POST", DriverCommand.CLICK_ELEMENT, jsonObj);
 	}
 
 	public void findElement(JSONObject jsonObj) throws Exception {
 		jsonObj.put("sessionId", driver.getSessionId());
 		JSONObject response = (JSONObject) utils
-				.postRequest(DriverCommand.FIND_ELEMENT, jsonObj);
+				.request("POST", DriverCommand.FIND_ELEMENT, jsonObj);
 		JSONObject element = (JSONObject) response.get("value");
 		Object elementId = (Object) element.get("ELEMENT");
 		driver.setElementId(elementId);
@@ -42,30 +42,30 @@ public class Element {
 		jsonObj.put("sessionId", driver.getSessionId());
 		JSONArray elements = new JSONArray();
 		elements = (JSONArray) utils
-				.postRequest(DriverCommand.FIND_ELEMENTS, jsonObj);
+				.request("POST", DriverCommand.FIND_ELEMENTS, jsonObj);
 		return elements;
 	}
 
 	public void swipe(JSONObject jsonObj) throws Exception {
 		jsonObj.put("sessionId", driver.getSessionId());
-		utils.postRequest(DriverCommand.SWIPE, jsonObj);
+		utils.request("POST", DriverCommand.SWIPE, jsonObj);
 	}
 
 	public void flick(JSONObject jsonObj) throws Exception {
 		jsonObj.put("sessionId", driver.getSessionId());
-		utils.postRequest(DriverCommand.TOUCH_FLICK, jsonObj);
+		utils.request("POST", DriverCommand.TOUCH_FLICK, jsonObj);
 	}
 
 	public void tap(JSONObject jsonObj) throws Exception {
 		jsonObj.put("sessionId", driver.getSessionId());
-		utils.postRequest(DriverCommand.TOUCH_CLICK, jsonObj);
+		utils.request("POST", DriverCommand.TOUCH_CLICK, jsonObj);
 	}
 
 	public String getText() throws Exception {
 		JSONObject jsonObj = new JSONObject();
 		jsonObj.put("sessionId", driver.getSessionId());
 		jsonObj.put("elementId", driver.getElementId());
-		String text = (String) utils.getRequest(DriverCommand.GET_ELEMENT_TEXT, jsonObj);
+		String text = (String) utils.request("GET", DriverCommand.GET_ELEMENT_TEXT, jsonObj);
 		return text;
 	}
 
@@ -73,7 +73,7 @@ public class Element {
 		JSONObject jsonObj = new JSONObject();
 		jsonObj.put("sessionId", driver.getSessionId());
 		jsonObj.put("elementId", driver.getElementId());
-		utils.postRequest(DriverCommand.CLEAR_ELEMENT, jsonObj);
+		utils.request("POST", DriverCommand.CLEAR_ELEMENT, jsonObj);
 	}
 	
 	public String getAttribute(String name) throws Exception {
