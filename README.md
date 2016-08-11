@@ -19,7 +19,6 @@ $ mvn test
 - testcase
 - ci
 - sample
-- comment
 
 ## License
 

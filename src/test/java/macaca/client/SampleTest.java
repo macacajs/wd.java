@@ -14,7 +14,6 @@ public class SampleTest {
 
 	@Before
 	public void setUp() throws Exception {
-		Logger logger = Logger.getLogger(getClass());
 		JSONObject porps = new JSONObject();
 		porps.put("autoAcceptAlerts", true);
 		porps.put("platformVersion", "9.3");
