@@ -4,7 +4,7 @@ Java Client binding for Macaca
 
 ## Doc
 
-[javadoc](//macacajs.github.io/macacajs/wd.java/doc/)
+[javadoc](//macacajs.github.io/wd.java/doc/)
 
 ## Test
 
