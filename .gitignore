@@ -1,0 +1,12 @@
+*.dex
+*.class
+bin/
+gen/
+local.properties
+.classpath
+.project
+.DS_Store
+*.sw*
+*.un~
+target
+.settings
