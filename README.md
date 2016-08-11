@@ -18,6 +18,8 @@ $ mvn test
 - maven center jar
 - testcase
 - ci
+- sample
+- comment
 
 ## License
 
