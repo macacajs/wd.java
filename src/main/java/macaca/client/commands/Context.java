@@ -1,11 +1,11 @@
 package macaca.client.commands;
 
-import macaca.client.MacacaDriver;
-import macaca.client.common.DriverCommand;
-import macaca.client.common.Utils;
-
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+
+import macaca.client.common.DriverCommand;
+import macaca.client.common.MacacaDriver;
+import macaca.client.common.Utils;
 
 public class Context {
 

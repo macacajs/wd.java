@@ -1,10 +1,9 @@
 package macaca.client.common;
 
-import macaca.client.MacacaClient;
-import macaca.client.MacacaDriver;
-
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+
+import macaca.client.MacacaClient;
 
 public class ElementSelector {
 

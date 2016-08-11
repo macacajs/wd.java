@@ -1,4 +1,4 @@
-package macaca.client;
+package macaca.client.common;
 
 import com.alibaba.fastjson.JSONObject;
 

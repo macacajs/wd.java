@@ -1,10 +1,10 @@
 package macaca.client.commands;
 
-import macaca.client.MacacaDriver;
-import macaca.client.common.DriverCommand;
-import macaca.client.common.Utils;
-
 import com.alibaba.fastjson.JSONObject;
+
+import macaca.client.common.DriverCommand;
+import macaca.client.common.MacacaDriver;
+import macaca.client.common.Utils;
 
 public class Window {
 
@@ -28,11 +28,11 @@ public class Window {
 		utils.request("GET", DriverCommand.WINDOW_HANDLES, jsonObject);
 	}
 
-	public void getWindowSize() throws Exception {
+	public String getWindowSize() throws Exception {
 		JSONObject jsonObject = new JSONObject();
 		jsonObject.put("sessionId", driver.getSessionId());
 		jsonObject.put("windowHandle", "current");
-		utils.request("GET", DriverCommand.WINDOW_SIZE, jsonObject);
+		return (String) utils.request("GET", DriverCommand.WINDOW_SIZE, jsonObject);
 	}
 
 	public void setWindowSize(JSONObject jsonObject) throws Exception {

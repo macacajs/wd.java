@@ -2,8 +2,8 @@ package macaca.client.commands;
 
 import com.alibaba.fastjson.JSONObject;
 
-import macaca.client.MacacaDriver;
 import macaca.client.common.DriverCommand;
+import macaca.client.common.MacacaDriver;
 import macaca.client.common.Utils;
 
 public class Keys {

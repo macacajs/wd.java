@@ -1,10 +1,10 @@
 package macaca.client.commands;
 
-import macaca.client.MacacaDriver;
-import macaca.client.common.DriverCommand;
-import macaca.client.common.Utils;
-
 import com.alibaba.fastjson.JSONObject;
+
+import macaca.client.common.DriverCommand;
+import macaca.client.common.MacacaDriver;
+import macaca.client.common.Utils;
 
 public class Alert {
 
@@ -34,7 +34,9 @@ public class Alert {
 		return alert;
 	}
 
-	public void alertKeys(JSONObject jsonObject) throws Exception {
+	public void alertKeys(String keys) throws Exception {
+		JSONObject jsonObject = new JSONObject();
+		jsonObject.put("keys", keys);
 		jsonObject.put("sessionId", driver.getSessionId());
 		utils.request("POST", DriverCommand.ALERT_TEXT, jsonObject);
 	}
