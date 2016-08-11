@@ -16,9 +16,9 @@ public class Title {
 	}
 	
 	public String title() throws Exception {
-		JSONObject jsonObj = new JSONObject();
-		jsonObj.put("sessionId", driver.getSessionId());
-		String title = (String) utils.request("GET", DriverCommand.GET_TITLE, jsonObj);
+		JSONObject jsonObject = new JSONObject();
+		jsonObject.put("sessionId", driver.getSessionId());
+		String title = (String) utils.request("GET", DriverCommand.GET_TITLE, jsonObject);
 		return title;
 	}
 }

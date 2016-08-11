@@ -16,28 +16,28 @@ public class Url {
 	}
 
 	public void url() throws Exception {
-		JSONObject jsonObj = new JSONObject();
-		jsonObj.put("sessionId", driver.getSessionId());
-		utils.request("GET", DriverCommand.URL, jsonObj);
+		JSONObject jsonObject = new JSONObject();
+		jsonObject.put("sessionId", driver.getSessionId());
+		utils.request("GET", DriverCommand.URL, jsonObject);
 	}
 
-	public void getUrl(JSONObject jsonObj) throws Exception {
-		jsonObj.put("sessionId", driver.getSessionId());
-		utils.request("POST", DriverCommand.URL, jsonObj);
+	public void getUrl(JSONObject jsonObject) throws Exception {
+		jsonObject.put("sessionId", driver.getSessionId());
+		utils.request("POST", DriverCommand.URL, jsonObject);
 	}
 
-	public void forward(JSONObject jsonObj) throws Exception {
-		jsonObj.put("sessionId", driver.getSessionId());
-		utils.request("POST", DriverCommand.URL, jsonObj);
+	public void forward(JSONObject jsonObject) throws Exception {
+		jsonObject.put("sessionId", driver.getSessionId());
+		utils.request("POST", DriverCommand.URL, jsonObject);
 	}
 
-	public void back(JSONObject jsonObj) throws Exception {
-		jsonObj.put("sessionId", driver.getSessionId());
-		utils.request("POST", DriverCommand.URL, jsonObj);
+	public void back(JSONObject jsonObject) throws Exception {
+		jsonObject.put("sessionId", driver.getSessionId());
+		utils.request("POST", DriverCommand.URL, jsonObject);
 	}
 
-	public void refresh(JSONObject jsonObj) throws Exception {
-		jsonObj.put("sessionId", driver.getSessionId());
-		utils.request("POST", DriverCommand.URL, jsonObj);
+	public void refresh(JSONObject jsonObject) throws Exception {
+		jsonObject.put("sessionId", driver.getSessionId());
+		utils.request("POST", DriverCommand.URL, jsonObject);
 	}
 }

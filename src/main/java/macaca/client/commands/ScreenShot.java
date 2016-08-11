@@ -16,8 +16,8 @@ public class ScreenShot {
 	}
 
 	public void takeScreenshot() throws Exception {
-		JSONObject jsonObj = new JSONObject();
-		jsonObj.put("sessionId", driver.getSessionId());
-		utils.request("GET", DriverCommand.SCREENSHOT, jsonObj);
+		JSONObject jsonObject = new JSONObject();
+		jsonObject.put("sessionId", driver.getSessionId());
+		utils.request("GET", DriverCommand.SCREENSHOT, jsonObject);
 	}
 }

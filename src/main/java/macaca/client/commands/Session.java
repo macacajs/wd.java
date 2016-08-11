@@ -20,15 +20,15 @@ public class Session {
 		String sessionId = (String) response.get("sessionId");
 		this.driver.setSessionId(sessionId);
 		this.driver.setCapabilities(response);
-		
+
 	}
 
 	public void delSession() throws Exception {
-		JSONObject jsonObj = new JSONObject();
-		jsonObj.put("sessionId", driver.getSessionId());
-		utils.request("DELETE", DriverCommand.SESSION, jsonObj);
+		JSONObject jsonObject = new JSONObject();
+		jsonObject.put("sessionId", driver.getSessionId());
+		utils.request("DELETE", DriverCommand.SESSION, jsonObject);
 	}
-	
+
 	public JSONObject sessionAvailable() throws Exception {
 		return this.driver.getCapabilities();
 	}

@@ -16,8 +16,8 @@ public class Source {
 	}
 
 	public String getSource() throws Exception {
-		JSONObject jsonObj = new JSONObject();
-		jsonObj.put("sessionId", driver.getSessionId());
-		return utils.request("GET", DriverCommand.GET_SOURCE, jsonObj).toString();
+		JSONObject jsonObject = new JSONObject();
+		jsonObject.put("sessionId", driver.getSessionId());
+		return utils.request("GET", DriverCommand.GET_SOURCE, jsonObject).toString();
 	}
 }

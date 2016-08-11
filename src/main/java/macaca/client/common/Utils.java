@@ -3,8 +3,6 @@ package macaca.client.common;
 import java.io.IOException;
 import java.util.Map;
 
-import macaca.client.model.JsonwireErrors;
-
 import org.apache.http.HttpEntity;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.methods.CloseableHttpResponse;
@@ -18,6 +16,8 @@ import org.apache.http.util.EntityUtils;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+
+import macaca.client.model.JsonwireErrors;
 
 public class Utils {
 
@@ -122,13 +122,14 @@ public class Utils {
 
 	public Object request(String method, String url, JSONObject jsonObj) throws Exception {
 
-		if(method.toUpperCase() == "GET")
+		if (method.toUpperCase() == "GET") {
 			return getRequest(url, jsonObj);
-		if(method.toUpperCase() == "POST")
+		} else if (method.toUpperCase() == "POST") {
 			return postRequest(url, jsonObj);
-		if(method.toUpperCase() == "DELETE")
+		} else if (method.toUpperCase() == "DELETE") {
 			return deleteRequest(url, jsonObj);
-		
+		}
+
 		return null;
 	}
 

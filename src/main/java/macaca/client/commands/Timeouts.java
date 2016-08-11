@@ -15,8 +15,8 @@ public class Timeouts {
 		this.driver = driver;
 	}
 	
-	public void implicitWait(JSONObject jsonObj) throws Exception {
-		jsonObj.put("sessionId", driver.getSessionId());
-		utils.request("POST", DriverCommand.IMPLICITLY_WAIT, jsonObj);
+	public void implicitWait(JSONObject jsonObject) throws Exception {
+		jsonObject.put("sessionId", driver.getSessionId());
+		utils.request("POST", DriverCommand.IMPLICITLY_WAIT, jsonObject);
 	}
 }
