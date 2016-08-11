@@ -1,11 +1,11 @@
 package macaca.client.commands;
 
-import macaca.client.MacacaDriver;
-import macaca.client.common.DriverCommand;
-import macaca.client.common.Utils;
-
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+
+import macaca.client.common.DriverCommand;
+import macaca.client.common.MacacaDriver;
+import macaca.client.common.Utils;
 
 public class Context {
 
@@ -16,19 +16,21 @@ public class Context {
 		this.driver = driver;
 	}
 
-	public void getContext() {
-
+	public String getContext() {
+		return this.driver.getContext();
 	}
 
 	public JSONArray getContexts() throws Exception {
-		JSONArray contexts = (JSONArray) utils
-				.getRequest(DriverCommand.CONTEXTS.replace(":sessionId", driver.getSessionId()));
+		JSONObject jsonObject = new JSONObject();
+		jsonObject.put("sessionId", driver.getSessionId());
+		JSONArray contexts = (JSONArray) utils.request("GET", DriverCommand.CONTEXTS, jsonObject);
 		return contexts;
 	}
 
-	public void setContext(JSONObject jsonObj) throws Exception {
-		driver.setContext(jsonObj.getString("name"));
-		utils.postRequest(DriverCommand.CONTEXT.replace(":sessionId", driver.getSessionId()), jsonObj);
+	public void setContext(JSONObject jsonObject) throws Exception {
+		jsonObject.put("sessionId", driver.getSessionId());
+		driver.setContext(jsonObject.getString("name"));
+		utils.request("POST", DriverCommand.CONTEXT, jsonObject);
 	}
 
 }

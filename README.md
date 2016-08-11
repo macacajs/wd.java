@@ -1,4 +1,12 @@
-# wd.java [Beta]
+# wd.java
+
+Java Client binding for Macaca
+
+## Doc
+
+[javadoc](//macacajs.github.io/macacajs/wd.java/doc/)
+
+## Test
 
 ```shell
 $ mvn test
@@ -7,6 +15,10 @@ $ mvn test
 ## TODO
 
 - log4j
-- javadoc
 - maven center jar
 - testcase
+- ci
+
+## License
+
+The MIT License (MIT)

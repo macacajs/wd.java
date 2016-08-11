@@ -6,18 +6,19 @@ import macaca.client.common.DriverCommand;
 import macaca.client.common.MacacaDriver;
 import macaca.client.common.Utils;
 
-public class ScreenShot {
+public class Title {
 
 	private MacacaDriver driver;
 	private Utils utils = new Utils();
-
-	public ScreenShot(MacacaDriver driver) {
+	
+	public Title(MacacaDriver driver) {
 		this.driver = driver;
 	}
-
-	public void takeScreenshot() throws Exception {
+	
+	public String title() throws Exception {
 		JSONObject jsonObject = new JSONObject();
 		jsonObject.put("sessionId", driver.getSessionId());
-		utils.request("GET", DriverCommand.SCREENSHOT, jsonObject);
+		String title = (String) utils.request("GET", DriverCommand.GET_TITLE, jsonObject);
+		return title;
 	}
 }

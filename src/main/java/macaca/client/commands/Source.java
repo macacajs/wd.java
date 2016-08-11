@@ -1,7 +1,9 @@
 package macaca.client.commands;
 
-import macaca.client.MacacaDriver;
+import com.alibaba.fastjson.JSONObject;
+
 import macaca.client.common.DriverCommand;
+import macaca.client.common.MacacaDriver;
 import macaca.client.common.Utils;
 
 public class Source {
@@ -14,6 +16,8 @@ public class Source {
 	}
 
 	public String getSource() throws Exception {
-		return utils.getRequest(DriverCommand.GET_SOURCE.replace(":sessionId", driver.getSessionId())).toString();
+		JSONObject jsonObject = new JSONObject();
+		jsonObject.put("sessionId", driver.getSessionId());
+		return utils.request("GET", DriverCommand.GET_SOURCE, jsonObject).toString();
 	}
 }

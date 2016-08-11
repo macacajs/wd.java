@@ -2,8 +2,8 @@ package macaca.client.commands;
 
 import com.alibaba.fastjson.JSONObject;
 
-import macaca.client.MacacaDriver;
 import macaca.client.common.DriverCommand;
+import macaca.client.common.MacacaDriver;
 import macaca.client.common.Utils;
 
 public class Url {
@@ -15,23 +15,29 @@ public class Url {
 		this.driver = driver;
 	}
 
-	public void url(JSONObject jsonObj) throws Exception {
-		utils.postRequest(DriverCommand.URL.replace(":sessionId", driver.getSessionId()), jsonObj);
+	public void url() throws Exception {
+		JSONObject jsonObject = new JSONObject();
+		jsonObject.put("sessionId", driver.getSessionId());
+		utils.request("GET", DriverCommand.URL, jsonObject);
 	}
 
-	public void getUrl(JSONObject jsonObj) throws Exception {
-		utils.postRequest(DriverCommand.URL.replace(":sessionId", driver.getSessionId()), jsonObj);
+	public void getUrl(JSONObject jsonObject) throws Exception {
+		jsonObject.put("sessionId", driver.getSessionId());
+		utils.request("POST", DriverCommand.URL, jsonObject);
 	}
 
-	public void forward(JSONObject jsonObj) throws Exception {
-		utils.postRequest(DriverCommand.URL.replace(":sessionId", driver.getSessionId()), jsonObj);
+	public void forward(JSONObject jsonObject) throws Exception {
+		jsonObject.put("sessionId", driver.getSessionId());
+		utils.request("POST", DriverCommand.URL, jsonObject);
 	}
 
-	public void back(JSONObject jsonObj) throws Exception {
-		utils.postRequest(DriverCommand.URL.replace(":sessionId", driver.getSessionId()), jsonObj);
+	public void back(JSONObject jsonObject) throws Exception {
+		jsonObject.put("sessionId", driver.getSessionId());
+		utils.request("POST", DriverCommand.URL, jsonObject);
 	}
 
-	public void refresh(JSONObject jsonObj) throws Exception {
-		utils.postRequest(DriverCommand.URL.replace(":sessionId", driver.getSessionId()), jsonObj);
+	public void refresh(JSONObject jsonObject) throws Exception {
+		jsonObject.put("sessionId", driver.getSessionId());
+		utils.request("POST", DriverCommand.URL, jsonObject);
 	}
 }

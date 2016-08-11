@@ -3,8 +3,6 @@ package macaca.client.common;
 import java.io.IOException;
 import java.util.Map;
 
-import macaca.client.model.JsonwireErrors;
-
 import org.apache.http.HttpEntity;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.methods.CloseableHttpResponse;
@@ -19,6 +17,8 @@ import org.apache.http.util.EntityUtils;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 
+import macaca.client.model.JsonwireErrors;
+
 public class Utils {
 
 	private HttpGet httpget = null;
@@ -31,7 +31,12 @@ public class Utils {
 	private JSONObject jsonResponse = null;
 	private String stringResponse = "";
 
-	public Object getRequest(String method) throws Exception {
+	public Object getRequest(String method, JSONObject jsonBody) throws Exception {
+
+		for (String key : jsonBody.keySet()) {
+			String value = jsonBody.get(key).toString();
+			method = method.replace(":" + key, value);
+		}
 
 		try {
 			String url = Constants.SUFFIX + method;
@@ -55,12 +60,21 @@ public class Utils {
 	}
 
 	public Object postRequest(String method, JSONObject jsonBody) throws Exception {
+		JSONObject tempObj = new JSONObject();
+		for (String key : jsonBody.keySet()) {
+			String value = jsonBody.get(key).toString();
+			if (method.contains(":" + key)) {
+				method = method.replace(":" + key, value);
+			} else {
+				tempObj.put(key, jsonBody.get(key));
+			}
+		}
 
 		try {
 			String url = Constants.SUFFIX + method;
 			httppost = new HttpPost(url);
 			if (jsonBody != null) {
-				stringEntity = new StringEntity(jsonBody.toString(), "utf-8");
+				stringEntity = new StringEntity(tempObj.toString(), "utf-8");
 				stringEntity.setContentEncoding("utf-8");
 				stringEntity.setContentType("application/json");
 				httppost.setEntity(stringEntity);
@@ -84,7 +98,13 @@ public class Utils {
 		return null;
 	}
 
-	public Object deleteRequest(String method) throws Exception {
+	public Object deleteRequest(String method, JSONObject jsonBody) throws Exception {
+
+		for (String key : jsonBody.keySet()) {
+			String value = jsonBody.get(key).toString();
+			method = method.replace(":" + key, value);
+		}
+
 		String url = Constants.SUFFIX + method;
 		httpdelete = new HttpDelete(url);
 		response = httpclient.execute(httpdelete);
@@ -97,6 +117,19 @@ public class Utils {
 			handleStatus(jsonResponse.getInteger("status"));
 			return jsonResponse;
 		}
+		return null;
+	}
+
+	public Object request(String method, String url, JSONObject jsonObj) throws Exception {
+
+		if (method.toUpperCase() == "GET") {
+			return getRequest(url, jsonObj);
+		} else if (method.toUpperCase() == "POST") {
+			return postRequest(url, jsonObj);
+		} else if (method.toUpperCase() == "DELETE") {
+			return deleteRequest(url, jsonObj);
+		}
+
 		return null;
 	}
 

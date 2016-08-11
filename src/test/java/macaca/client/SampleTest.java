@@ -21,7 +21,7 @@ public class SampleTest {
 		porps.put("deviceName", "iPhone 5s");
 		porps.put("platformName", "iOS");
 		//porps.put("reuse", 2);
-		porps.put("app", "xxxxxxxxx");
+		porps.put("app", "/Users/julia/macaca-test-sample/app/ios-app-bootstrap.zip");
 		JSONObject desiredCapabilities = new JSONObject();
 		desiredCapabilities.put("desiredCapabilities", porps);
 		driver.initDriver(desiredCapabilities);

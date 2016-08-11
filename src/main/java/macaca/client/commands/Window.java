@@ -1,10 +1,10 @@
 package macaca.client.commands;
 
-import macaca.client.MacacaDriver;
-import macaca.client.common.DriverCommand;
-import macaca.client.common.Utils;
-
 import com.alibaba.fastjson.JSONObject;
+
+import macaca.client.common.DriverCommand;
+import macaca.client.common.MacacaDriver;
+import macaca.client.common.Utils;
 
 public class Window {
 
@@ -16,36 +16,52 @@ public class Window {
 	}
 
 	public void getWindow() throws Exception {
-		String windowHandle = (String) utils
-				.getRequest(DriverCommand.WINDOW_HANDLE.replace(":sessionId", driver.getSessionId()));
+		JSONObject jsonObject = new JSONObject();
+		jsonObject.put("sessionId", driver.getSessionId());
+		String windowHandle = (String) utils.request("GET", DriverCommand.WINDOW_HANDLE, jsonObject);
 		driver.setWindowHandle(windowHandle);
 	}
 
 	public void getWindows() throws Exception {
-
+		JSONObject jsonObject = new JSONObject();
+		jsonObject.put("sessionId", driver.getSessionId());
+		utils.request("GET", DriverCommand.WINDOW_HANDLES, jsonObject);
 	}
 
-	public void getWindowSize() throws Exception {
-		utils.getRequest(DriverCommand.WINDOW_SIZE.replace(":sessionId", driver.getSessionId()));
+	public String getWindowSize() throws Exception {
+		JSONObject jsonObject = new JSONObject();
+		jsonObject.put("sessionId", driver.getSessionId());
+		jsonObject.put("windowHandle", "current");
+		return (String) utils.request("GET", DriverCommand.WINDOW_SIZE, jsonObject);
 	}
 
-	public void setWindowSize(JSONObject jsonObj) throws Exception {
-		utils.postRequest(DriverCommand.WINDOW_SIZE.replace(":sessionId", driver.getSessionId()), jsonObj);
+	public void setWindowSize(JSONObject jsonObject) throws Exception {
+		jsonObject.put("sessionId", driver.getSessionId());
+		jsonObject.put("windowHandle", "current");
+		utils.request("POST", DriverCommand.WINDOW_SIZE, jsonObject);
 	}
 
-	public String maximize() {
-		return "";
+	public void maximize() throws Exception {
+		JSONObject jsonObject = new JSONObject();
+		jsonObject.put("sessionId", driver.getSessionId());
+		jsonObject.put("windowHandle", "current");
+		utils.request("GET", DriverCommand.MAXIMIZE_WINDOW, jsonObject);
 	}
 
-	public String setWindow() {
-		return "";
+	public String setWindow(JSONObject jsonObject) throws Exception {
+		jsonObject.put("sessionId", driver.getSessionId());
+		String name = (String) utils.request("POST", DriverCommand.WINDOW, jsonObject);
+		return name;
 	}
 
-	public String deleteWindow() {
-		return "";
+	public void deleteWindow() throws Exception {
+		JSONObject jsonObject = new JSONObject();
+		jsonObject.put("sessionId", driver.getSessionId());
+		utils.request("DELETE", DriverCommand.WINDOW, jsonObject);
 	}
 
-	public String setFrame() {
-		return "";
+	public void setFrame(JSONObject jsonObject) throws Exception {
+		jsonObject.put("sessionId", driver.getSessionId());
+		String name = (String) utils.request("POST", DriverCommand.FRAME, jsonObject);
 	}
 }
