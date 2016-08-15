@@ -3,6 +3,10 @@ package macaca.client.common;
 import java.io.IOException;
 import java.util.Map;
 
+import macaca.client.model.JsonwireErrors;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.apache.http.HttpEntity;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.methods.CloseableHttpResponse;
@@ -17,10 +21,10 @@ import org.apache.http.util.EntityUtils;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 
-import macaca.client.model.JsonwireErrors;
-
 public class Utils {
 
+	private final Log log = LogFactory.getLog(getClass());
+	
 	private HttpGet httpget = null;
 	private HttpPost httppost = null;
 	private HttpDelete httpdelete = null;
@@ -43,7 +47,7 @@ public class Utils {
 			httpget = new HttpGet(url);
 			response = httpclient.execute(httpget);
 			entity = response.getEntity();
-			System.out.println(response.getStatusLine().getStatusCode());
+			//System.out.println(response.getStatusLine().getStatusCode());
 			if (entity != null) {
 				stringResponse = EntityUtils.toString(entity);
 				System.out.println("Response content:" + stringResponse);

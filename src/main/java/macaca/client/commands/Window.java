@@ -28,11 +28,11 @@ public class Window {
 		utils.request("GET", DriverCommand.WINDOW_HANDLES, jsonObject);
 	}
 
-	public String getWindowSize() throws Exception {
+	public JSONObject getWindowSize() throws Exception {
 		JSONObject jsonObject = new JSONObject();
 		jsonObject.put("sessionId", driver.getSessionId());
 		jsonObject.put("windowHandle", "current");
-		return (String) utils.request("GET", DriverCommand.WINDOW_SIZE, jsonObject);
+		return (JSONObject) utils.request("GET", DriverCommand.WINDOW_SIZE, jsonObject);
 	}
 
 	public void setWindowSize(JSONObject jsonObject) throws Exception {
