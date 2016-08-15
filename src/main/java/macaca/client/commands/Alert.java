@@ -34,9 +34,7 @@ public class Alert {
 		return alert;
 	}
 
-	public void alertKeys(String keys) throws Exception {
-		JSONObject jsonObject = new JSONObject();
-		jsonObject.put("keys", keys);
+	public void alertKeys(JSONObject jsonObject) throws Exception {
 		jsonObject.put("sessionId", driver.getSessionId());
 		utils.request("POST", DriverCommand.ALERT_TEXT, jsonObject);
 	}
