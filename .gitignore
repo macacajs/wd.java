@@ -10,4 +10,3 @@ local.properties
 *.un~
 target
 .settings
-doc/
