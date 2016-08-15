@@ -6,6 +6,11 @@ Java Client binding for Macaca
 
 [javadoc](//macacajs.github.io/wd.java/doc/)
 
+```shell
+$ git checkout gh-pages
+$ git checkout master doc
+```
+
 ## Test
 
 ```shell
