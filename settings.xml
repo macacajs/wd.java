@@ -4,7 +4,7 @@
 	xmlns='http://maven.apache.org/SETTINGS/1.0.0' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'>
 	<servers>
 		<server>
-			<id>macacaclient</id>
+			<id>central</id>
 			<username>xudafeng</username>
 			<password>c6241b67968ab0db335777325322b2e21bab4c4f</password>
 		</server>

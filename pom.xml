@@ -4,7 +4,7 @@
 	<groupId>macaca.webdriver.client</groupId>
 	<artifactId>macacaclient</artifactId>
 	<packaging>jar</packaging>
-	<version>1.0-SNAPSHOT</version>
+	<version>1.0.0</version>
 	<name>macacaclient</name>
 	<url>http://maven.apache.org</url>
 	<dependencies>
@@ -36,4 +36,10 @@
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
+	<distributionManagement>
+	  <repository>
+	      <id>central</id>
+	      <url>https://api.bintray.com/maven/xudafeng/maven/macacaclient/;publish=1</url>
+	  </repository>
+	</distributionManagement>
 </project>
