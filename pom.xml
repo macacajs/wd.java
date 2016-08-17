@@ -39,7 +39,7 @@
 	<distributionManagement>
 	  <repository>
 	      <id>central</id>
-	      <url>https://api.bintray.com/maven/xudafeng/maven/macacaclient/;publish=1</url>
+	      <url>https://api.bintray.com/maven/xudafeng/maven/macacaclient/;publish=1;override=1;</url>
 	  </repository>
 	</distributionManagement>
 </project>
