@@ -1,0 +1,6 @@
+language: java
+script: mvn -s settings.xml clean deploy
+jdk:
+  - openjdk7
+  - oraclejdk7
+  - oraclejdk8
