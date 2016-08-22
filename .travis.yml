@@ -1,5 +1,5 @@
 language: java
-script: mvn -s settings.xml clean deploy
+script: mvn -s settings.xml clean source:jar deploy
 jdk:
   - openjdk7
   - oraclejdk7
