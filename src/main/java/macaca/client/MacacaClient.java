@@ -296,7 +296,7 @@ public class MacacaClient {
 	//saveScreenShot
 	
 	/**
-	 * Save screenshot of the current page.
+	 * Save screenshot of the current page. you can set a jpg or png image file which you like
 	 * @param fileName The absolute path of the image filename
 	 * @return The currently instance of MacacaClient
 	 * @throws Exception
