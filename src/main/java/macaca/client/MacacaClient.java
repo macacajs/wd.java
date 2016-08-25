@@ -297,8 +297,8 @@ public class MacacaClient {
 	
 	/**
 	 * Save screenshot of the current page.
-	 * @param fileName
-	 * @return
+	 * @param fileName The absolute path of the image filename
+	 * @return The currently instance of MacacaClient
 	 * @throws Exception
 	 */
 	public MacacaClient saveScreenshot(String fileName) throws Exception {
