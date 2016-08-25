@@ -15,9 +15,34 @@ public class ScreenShot {
 		this.driver = driver;
 	}
 
-	public void takeScreenshot() throws Exception {
+	public Object takeScreenshot() throws Exception {
 		JSONObject jsonObject = new JSONObject();
 		jsonObject.put("sessionId", driver.getSessionId());
-		utils.request("GET", DriverCommand.SCREENSHOT, jsonObject);
+		return utils.request("GET", DriverCommand.SCREENSHOT, jsonObject);
+	}
+	
+	/**
+	 * Save screenshot of the current page.
+	 * @param filename
+	 * @throws Exception
+	 */
+	public void saveScreenshot(String filename) throws Exception {
+		BASE64Decoder decoder = new BASE64Decoder();
+		try {
+			// Base64解码
+			byte[] b = decoder.decodeBuffer(takeScreenshot().toString());
+			for (int i = 0; i < b.length; ++i) {
+				if (b[i] < 0) {// 调整异常数据
+					b[i] += 256;
+				}
+			}
+			// 生成图片
+			OutputStream out = new FileOutputStream(filename);
+			out.write(b);
+			out.flush();
+			out.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 }
