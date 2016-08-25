@@ -292,6 +292,19 @@ public class MacacaClient {
 		screenshot.takeScreenshot();
 		return this;
 	}
+	
+	//saveScreenShot
+	
+	/**
+	 * Save screenshot of the current page.
+	 * @param fileName The absolute path of the image filename
+	 * @return The currently instance of MacacaClient
+	 * @throws Exception
+	 */
+	public MacacaClient saveScreenshot(String fileName) throws Exception {
+		screenshot.saveScreenshot(fileName);
+		return this;
+	}
 
 	// Session
 
