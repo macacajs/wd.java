@@ -25,13 +25,6 @@ public class ScreenShot {
 		return utils.request("GET", DriverCommand.SCREENSHOT, jsonObject);
 	}
 
-	/**
-	 * Save screenshot of the current page from base64 decoder.
-	 * 
-	 * @param fileName The absolute path of the image filename
-	 * @return The currently instance of MacacaClient
-	 * @throws Exception
-	 */
 	public void saveScreenshot(String filename) throws Exception {
 		BASE64Decoder decoder = new BASE64Decoder();
 		try {
