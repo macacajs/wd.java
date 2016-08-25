@@ -78,7 +78,7 @@ public class Element {
 		JSONObject jsonObject = new JSONObject();
 		jsonObject.put("sessionId", driver.getSessionId());
 		jsonObject.put("elementId", driver.getElementId());
-		jsonObject.put(":name", name);
+		jsonObject.put("name", name);
 		String attribute = (String) utils.request("GET", DriverCommand.GET_ELEMENT_ATTRIBUTE, jsonObject);
 		return attribute;
 	}
@@ -87,7 +87,7 @@ public class Element {
 		JSONObject jsonObject = new JSONObject();
 		jsonObject.put("sessionId", driver.getSessionId());
 		jsonObject.put("elementId", driver.getElementId());
-		jsonObject.put(":name", name);
+		jsonObject.put("name", name);
 		String property = (String) utils.request("GET", DriverCommand.GET_ELEMENT_ATTRIBUTE, jsonObject);
 		return property;
 	}
@@ -96,7 +96,7 @@ public class Element {
 		JSONObject jsonObject = new JSONObject();
 		jsonObject.put("sessionId", driver.getSessionId());
 		jsonObject.put("elementId", driver.getElementId());
-		jsonObject.put(":propertyName", propertyName);
+		jsonObject.put("propertyName", propertyName);
 		String computedCss = (String) utils.request("GET", DriverCommand.GET_ELEMENT_VALUE_OF_CSS_PROPERTY, jsonObject);
 		return computedCss;
 	}
