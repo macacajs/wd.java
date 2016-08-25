@@ -5,6 +5,9 @@ import com.alibaba.fastjson.JSONObject;
 import macaca.client.common.DriverCommand;
 import macaca.client.common.MacacaDriver;
 import macaca.client.common.Utils;
+import java.io.FileOutputStream;
+import java.io.OutputStream;
+import sun.misc.BASE64Decoder;
 
 public class ScreenShot {
 
@@ -22,21 +25,22 @@ public class ScreenShot {
 	}
 	
 	/**
-	 * Save screenshot of the current page.
-	 * @param filename
+	 * Save screenshot of the current page from base64 decoder.
+	 * @param fileName The absolute path of the image filename
+	 * @return The currently instance of MacacaClient
 	 * @throws Exception
 	 */
 	public void saveScreenshot(String filename) throws Exception {
 		BASE64Decoder decoder = new BASE64Decoder();
 		try {
-			// Base64解码
+			// Decode Base64
 			byte[] b = decoder.decodeBuffer(takeScreenshot().toString());
 			for (int i = 0; i < b.length; ++i) {
-				if (b[i] < 0) {// 调整异常数据
+				if (b[i] < 0) {
 					b[i] += 256;
 				}
 			}
-			// 生成图片
+			// generate the image file
 			OutputStream out = new FileOutputStream(filename);
 			out.write(b);
 			out.flush();
