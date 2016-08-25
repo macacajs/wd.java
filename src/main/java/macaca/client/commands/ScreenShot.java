@@ -1,12 +1,13 @@
 package macaca.client.commands;
 
+import java.io.FileOutputStream;
+import java.io.OutputStream;
+
 import com.alibaba.fastjson.JSONObject;
 
 import macaca.client.common.DriverCommand;
 import macaca.client.common.MacacaDriver;
 import macaca.client.common.Utils;
-import java.io.FileOutputStream;
-import java.io.OutputStream;
 import sun.misc.BASE64Decoder;
 
 public class ScreenShot {
@@ -23,9 +24,10 @@ public class ScreenShot {
 		jsonObject.put("sessionId", driver.getSessionId());
 		return utils.request("GET", DriverCommand.SCREENSHOT, jsonObject);
 	}
-	
+
 	/**
 	 * Save screenshot of the current page from base64 decoder.
+	 * 
 	 * @param fileName The absolute path of the image filename
 	 * @return The currently instance of MacacaClient
 	 * @throws Exception
