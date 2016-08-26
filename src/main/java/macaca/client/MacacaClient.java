@@ -27,6 +27,34 @@ public class MacacaClient {
 	private Url _url = new Url(driver);
 
 	private Window window = new Window(driver);
+	
+	/**
+	 * timeout for waitForElement
+	 */
+	public int waitElementTimeout = 1000;
+	
+	/**
+	 * interval for waitForElement
+	 */
+	public int waitElementTimeInterval = 200;
+
+	// Alert
+
+	public int getWaitElementTimeout() {
+		return waitElementTimeout;
+	}
+
+	public void setWaitElementTimeout(int waitElementTimeout) {
+		this.waitElementTimeout = waitElementTimeout;
+	}
+
+	public int getWaitElementTimeInterval() {
+		return waitElementTimeInterval;
+	}
+
+	public void setWaitElementTimeInterval(int waitElementTimeInterval) {
+		this.waitElementTimeInterval = waitElementTimeInterval;
+	}
 
 	// Alert
 
@@ -191,6 +219,115 @@ public class MacacaClient {
 		jsonObject.put("using", "name");
 		element.findElements(jsonObject);
 		return this;
+	}
+	
+	/**
+	 * Search for element at specific interval during given time 
+	 * @param using The way for find an element,eg:"name","xpath","css","id"
+	 * @param value The value for the specific way
+	 * @param timeout Total time for searching
+	 * @param interval Time interval between searching
+	 * @return The currently instance of MacacaClient
+	 * @throws Exception
+	 */
+	public MacacaClient waitForElement(String using,String value,int timeout,int interval) throws Exception {
+		JSONObject jsonObject = new JSONObject();
+		jsonObject.put("value", value);
+		jsonObject.put("using", using);		
+		
+		int timeLeft = timeout;
+		boolean satisfied = false;
+		while (timeLeft > 0) {
+			boolean elementExist = element.hasElement(jsonObject);
+			if(!elementExist) {
+				// not find element ,keep searching
+				timeLeft -= interval;
+			} else {
+				// finded , break
+				satisfied = true;
+				element.findElement(jsonObject);
+				break;
+			}
+		}
+		
+		if(satisfied == false) System.out.println("没有找到对应的element: "+using+":"+value);
+		
+		return this;
+	}
+
+	/**
+	 * Search for element at specific interval during given time 
+	 * @param using The way for find an element,eg:"name","xpath","css","id"
+	 * @param value The value for the specific way
+	 * @return
+	 * @throws Exception
+	 */
+	public MacacaClient waitForElement(String using,String value) throws Exception {
+		// default timeout:2000, default interval:200
+		waitForElement(using, value, waitElementTimeout, waitElementTimeInterval);
+		return this;
+	}
+	
+	/**
+	 * Search for an element on the page, starting from the document root.
+	 * @param elementId The ID attribute of element
+	 * @return The currently instance of MacacaClient
+	 * @throws Exception
+	 */
+	public MacacaClient waitForElementById(String elementId) throws Exception {
+		waitForElement("id",elementId);
+		return this;
+	}
+	
+	/**
+	 * Search for an element on the page, starting from the document root.
+	 * @param selector The css selector of element
+	 * @returnThe currently instance of MacacaClient
+	 * @throws Exception
+	 */
+	public MacacaClient waitForElementByCss(String selector) throws Exception {
+		waitForElement("css",selector);
+		return this;
+	}
+
+	/**
+	 * Search for an element on the page, starting from the document root.
+	 * @param xpath The XPath expression of element
+	 * @return The currently instance of MacacaClient
+	 * @throws Exception
+	 */
+	public MacacaClient waitForElementByXPath(String xpath) throws Exception {
+		waitForElement("xpath",xpath);
+		return this;
+	}
+
+	/**
+	 * Search for an element on the page, starting from the document root.
+	 * @param name The name attribute of element
+	 * @return The currently instance of MacacaClient
+	 * @throws Exception
+	 */
+	public MacacaClient waitForElementByName(String name) throws Exception {
+		waitForElement("name",name);
+		return this;
+	}
+
+
+	
+	/**
+	 * check if target element exist
+	 * @param using The way for find an element,eg:"name","xpath","css","id"
+	 * @param value The value for the specific way
+	 * @return true-exist ; false-do not exist
+	 * @throws Exception
+	 */
+	public boolean isElementExist(String using,String value) throws Exception {
+		
+		JSONObject jsonObject = new JSONObject();
+		jsonObject.put("value", value);
+		jsonObject.put("using", using);
+		
+		return element.hasElement(jsonObject);
 	}
 
 	/**
