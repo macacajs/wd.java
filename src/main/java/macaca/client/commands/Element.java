@@ -29,6 +29,15 @@ public class Element {
 		utils.request("POST", DriverCommand.CLICK_ELEMENT, jsonObject);
 	}
 
+	public boolean hasElement(JSONObject jsonObject) throws Exception {
+		jsonObject.put("sessionId", driver.getSessionId());
+		JSONObject response = (JSONObject) utils.request("POST", DriverCommand.FIND_ELEMENT, jsonObject);
+		JSONObject element = (JSONObject) response.get("value");
+		Object elementId = (Object) element.get("ELEMENT");
+		
+		return elementId != null;
+	}
+	
 	public void findElement(JSONObject jsonObject) throws Exception {
 		jsonObject.put("sessionId", driver.getSessionId());
 		JSONObject response = (JSONObject) utils.request("POST", DriverCommand.FIND_ELEMENT, jsonObject);
