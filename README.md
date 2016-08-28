@@ -5,6 +5,11 @@
 
 Java Client binding for Macaca
 
+## Intro
+
+WD.java is a Java WebDriver client implemented most of the APIs in the [WebDriver Protocol](https://www.w3.org/TR/webdriver/).
+It was originally designed for [Macaca](http://macacajs.github.io/macaca/) (A Node.js powered WebDriver server), but also available for any other implementation of WebDriver server such as Selenium, Appium and etc.
+
 ## Doc
 
 [javadoc](//macacajs.github.io/wd.java/doc/)
@@ -14,17 +19,13 @@ $ git checkout gh-pages
 $ git checkout master doc
 ```
 
+## Sample
+
 [macaca-test-sample-java](//github.com/macacajs/macaca-test-sample-java)
 
-## Test
+## ChangeLog
 
-```shell
-$ mvn test
-```
-
-## TODO
-
-- unit test
+Details changes for each release are documented in the [HISTORY.md](HISTORY.md).
 
 ## License
 
