@@ -304,8 +304,6 @@ public class MacacaClient {
 		return new ElementSelector(driver, this, jsonArray);
 	}
 	
-
-	
 	/**
 	 * Search for multiple elements on the page, starting from the document root.
 	 * @param css The selector selector of elements
