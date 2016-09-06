@@ -191,6 +191,62 @@ public class MacacaClient {
 		element.findElement(jsonObject);
 		return this;
 	}
+	
+	/**
+	 * Search for an element on the page, starting from the document root.
+	 * @param className The className attribute of element
+	 * @return The currently instance of MacacaClient
+	 * @throws Exception
+	 */
+	public MacacaClient elementByClassName(String className) throws Exception {
+		JSONObject jsonObject = new JSONObject();
+		jsonObject.put("value", className);
+		jsonObject.put("using", "class name");
+		element.findElement(jsonObject);
+		return this;
+	}
+	
+	/**
+	 * Search for an element on the page, starting from the document root.
+	 * @param linkText The linkText attribute of element
+	 * @return The currently instance of MacacaClient
+	 * @throws Exception
+	 */
+	public MacacaClient elementByLinkText(String linkText) throws Exception {
+		JSONObject jsonObject = new JSONObject();
+		jsonObject.put("value", linkText);
+		jsonObject.put("using", "link text");
+		element.findElement(jsonObject);
+		return this;
+	}
+	
+	/**
+	 * Search for an element on the page, starting from the document root.
+	 * @param tagName The tag name attribute of element
+	 * @return The currently instance of MacacaClient
+	 * @throws Exception
+	 */
+	public MacacaClient elementByTagName(String tagName) throws Exception {
+		JSONObject jsonObject = new JSONObject();
+		jsonObject.put("value", tagName);
+		jsonObject.put("using", "tag name");
+		element.findElement(jsonObject);
+		return this;
+	}
+	
+	/**
+	 * Search for an element on the page, starting from the document root.
+	 * @param partialLinkText The partial link text attribute of element
+	 * @return The currently instance of MacacaClient
+	 * @throws Exception
+	 */
+	public MacacaClient elementByPartialLinkText(String partialLinkText) throws Exception {
+		JSONObject jsonObject = new JSONObject();
+		jsonObject.put("value", partialLinkText);
+		jsonObject.put("using", "partial link text");
+		element.findElement(jsonObject);
+		return this;
+	}
 
 	/**
 	 * Search for multiple elements on the page, starting from the document root.
@@ -203,7 +259,6 @@ public class MacacaClient {
 		jsonObject.put("value", xpath);
 		jsonObject.put("using", "xpath");
 		JSONArray jsonArray = element.findElements(jsonObject);
-
 		return new ElementSelector(driver, this, jsonArray);
 	}
 
@@ -213,12 +268,98 @@ public class MacacaClient {
 	 * @return The currently instance of MacacaClient
 	 * @throws Exception
 	 */
-	public MacacaClient elementsByName(String name) throws Exception {
+	public ElementSelector elementsByName(String name) throws Exception {
 		JSONObject jsonObject = new JSONObject();
 		jsonObject.put("value", name);
 		jsonObject.put("using", "name");
-		element.findElements(jsonObject);
-		return this;
+		JSONArray jsonArray = element.findElements(jsonObject);
+		return new ElementSelector(driver, this, jsonArray);
+	}
+	
+	/**
+	 * Search for multiple elements on the page, starting from the document root.
+	 * @param elementId The elementId attribute of elements
+	 * @return The currently instance of MacacaClient
+	 * @throws Exception
+	 */
+	public ElementSelector elementsById(String elementId) throws Exception {
+		JSONObject jsonObject = new JSONObject();
+		jsonObject.put("value", elementId);
+		jsonObject.put("using", "id");
+		JSONArray jsonArray = element.findElements(jsonObject);
+		return new ElementSelector(driver, this, jsonArray);
+	}
+	
+	/**
+	 * Search for multiple elements on the page, starting from the document root.
+	 * @param className The className attribute of elements
+	 * @return The currently instance of MacacaClient
+	 * @throws Exception
+	 */
+	public ElementSelector elementsByClassName(String className) throws Exception {
+		JSONObject jsonObject = new JSONObject();
+		jsonObject.put("value", className);
+		jsonObject.put("using", "class name");
+		JSONArray jsonArray = element.findElements(jsonObject);
+		return new ElementSelector(driver, this, jsonArray);
+	}
+	
+
+	
+	/**
+	 * Search for multiple elements on the page, starting from the document root.
+	 * @param css The selector selector of elements
+	 * @return The currently instance of MacacaClient
+	 * @throws Exception
+	 */
+	public ElementSelector elementsByCss(String css) throws Exception {
+		JSONObject jsonObject = new JSONObject();
+		jsonObject.put("value", css);
+		jsonObject.put("using", "selector");
+		JSONArray jsonArray = element.findElements(jsonObject);
+		return new ElementSelector(driver, this, jsonArray);
+	}
+	
+	/**
+	 * Search for multiple elements on the page, starting from the document root.
+	 * @param linkText The link text attribute of elements
+	 * @return The currently instance of MacacaClient
+	 * @throws Exception
+	 */
+	public ElementSelector elementsByLinkText(String linkText) throws Exception {
+		JSONObject jsonObject = new JSONObject();
+		jsonObject.put("value", linkText);
+		jsonObject.put("using", "link text");
+		JSONArray jsonArray = element.findElements(jsonObject);
+		return new ElementSelector(driver, this, jsonArray);
+	}
+	
+	/**
+	 * Search for multiple elements on the page, starting from the document root.
+	 * @param linkText The partial link text attribute of elements
+	 * @return The currently instance of MacacaClient
+	 * @throws Exception
+	 */
+	public ElementSelector elementsByPartialLinkText(String partialLinkText) throws Exception {
+		JSONObject jsonObject = new JSONObject();
+		jsonObject.put("value", partialLinkText);
+		jsonObject.put("using", "partial link text");
+		JSONArray jsonArray = element.findElements(jsonObject);
+		return new ElementSelector(driver, this, jsonArray);
+	}
+
+	/**
+	 * Search for multiple elements on the page, starting from the document root.
+	 * @param tagName The tag name attribute of elements
+	 * @return The currently instance of MacacaClient
+	 * @throws Exception
+	 */
+	public ElementSelector elementsByTagName(String tagName) throws Exception {
+		JSONObject jsonObject = new JSONObject();
+		jsonObject.put("value", tagName);
+		jsonObject.put("using", "tag name");
+		JSONArray jsonArray = element.findElements(jsonObject);
+		return new ElementSelector(driver, this, jsonArray);
 	}
 	
 	/**
@@ -354,6 +495,26 @@ public class MacacaClient {
 		element.click();
 		return this;
 	}
+	
+	/**
+	 * clear on an element.
+	 * @return The currently instance of MacacaClient
+	 * @throws Exception
+	 */
+	public MacacaClient clear() throws Exception {
+		element.clearText();
+		return this;
+	}
+	
+	/**
+	 * press back.
+	 * @return The currently instance of MacacaClient
+	 * @throws Exception
+	 */
+	public MacacaClient back() throws Exception {
+		element.back();
+		return this;
+	}
 
 
 	/**
@@ -455,6 +616,15 @@ public class MacacaClient {
 	public MacacaClient initDriver(JSONObject jsonObject) throws Exception {
 		session.createSession(jsonObject);
 		return this;
+	}
+	
+	/**
+	 * Get the current sessionId.
+	 * @return  The current sessionId.
+	 * @throws Exception
+	 */
+	public String sessionId() throws Exception {
+		return driver.getSessionId();
 	}
 
 	/**
@@ -571,6 +741,16 @@ public class MacacaClient {
 		jsonObject.put("width", width);
 		jsonObject.put("height", height);
 		window.setWindowSize(jsonObject);
+		return this;
+	}
+	
+	/**
+	 * set maximize size of the window.
+	 * @return The currently instance of MacacaClient
+	 * @throws Exception
+	 */
+	public MacacaClient maximize() throws Exception {
+		window.maximize();
 		return this;
 	}
 

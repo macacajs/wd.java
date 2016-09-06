@@ -65,6 +65,6 @@ public class DriverCommand {
 	public static final String WINDOW_HANDLES = SESSION + "/window_handles";
 	public static final String WINDOW = "/window";
 	public static final String SET_WINDOW_SIZE = SESSION + "/setWindowSize";
-	public static final String MAXIMIZE_WINDOW = SESSION + "/window/:windowHandle/maximze";
+	public static final String MAXIMIZE_WINDOW = SESSION + "/window/:windowHandle/maximize";
 	public static final String FRAME = SESSION + "/frame";
 }
