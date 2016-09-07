@@ -82,6 +82,13 @@ public class Element {
 		jsonObject.put("elementId", driver.getElementId());
 		utils.request("POST", DriverCommand.CLEAR_ELEMENT, jsonObject);
 	}
+	
+	public void back() throws Exception {
+		JSONObject jsonObject = new JSONObject();
+		jsonObject.put("sessionId", driver.getSessionId());
+		jsonObject.put("elementId", driver.getElementId());
+		utils.request("POST", DriverCommand.BACK, jsonObject);
+	}
 
 	public String getAttribute(String name) throws Exception {
 		JSONObject jsonObject = new JSONObject();
