@@ -757,7 +757,7 @@ public class MacacaClient {
 	 * @return The text of the element
 	 * @throws Exception
 	 */
-	public String getText() throws Exception {
+	public String text() throws Exception {
 		return element.getText();
 	}
 
