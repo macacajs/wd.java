@@ -1,3 +1,11 @@
+# 1.0.5 / 2016-09-07
+
+  * Add text API
+
+# 1.0.4 / 2016-09-07
+
+  * Fixed maximize API
+
 # 1.0.3 / 2016-09-07
 
   * Add a series of API
