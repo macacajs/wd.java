@@ -12,7 +12,7 @@ It was originally designed for [Macaca](http://macacajs.github.io/macaca/) (A No
 
 ## Doc
 
-[javadoc](//macacajs.github.io/wd.java/doc/)
+[javadoc](//macacajs.github.io/wd.java/)
 
 ```shell
 $ git checkout gh-pages
