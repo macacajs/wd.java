@@ -751,5 +751,14 @@ public class MacacaClient {
 		window.maximize();
 		return this;
 	}
+	
+	/**
+	 * Get text of the element
+	 * @return The text of the element
+	 * @throws Exception
+	 */
+	public String getText() throws Exception {
+		return element.getText();
+	}
 
 }
