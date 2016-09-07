@@ -45,7 +45,7 @@ public class Window {
 		JSONObject jsonObject = new JSONObject();
 		jsonObject.put("sessionId", driver.getSessionId());
 		jsonObject.put("windowHandle", "current");
-		utils.request("GET", DriverCommand.MAXIMIZE_WINDOW, jsonObject);
+		utils.request("POST", DriverCommand.MAXIMIZE_WINDOW, jsonObject);
 	}
 
 	public String setWindow(JSONObject jsonObject) throws Exception {
