@@ -1,3 +1,21 @@
+# 1.0.3 / 2016-09-07
+
+  * Add a series of API
+  * back
+  * clear
+  * maximize
+  * elementByClassName
+  * elementByLinkText
+  * elementByTagName
+  * elementByPartialLinkText
+  * elementsByName
+  * elementsById
+  * elementsByClassName
+  * elementsByCss
+  * elementsByLinkText
+  * elementsByPartialLinkText
+  * elementsByTagName
+
 # 1.0.2 / 2016-08-26
 
   * Add waitForElement API
