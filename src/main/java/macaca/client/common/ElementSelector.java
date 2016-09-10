@@ -16,6 +16,10 @@ public class ElementSelector {
 		this.driver = driver;
 		this.jsonArray = jsonArray;
 	}
+	
+	public int size() {
+		return this.jsonArray.size();
+	}
 
 	public MacacaClient getIndex(int index) {
 		setElementByIndex(index);
