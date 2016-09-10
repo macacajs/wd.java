@@ -34,7 +34,6 @@ public class Element {
 		JSONObject response = (JSONObject) utils.request("POST", DriverCommand.FIND_ELEMENT, jsonObject);
 		JSONObject element = (JSONObject) response.get("value");
 		Object elementId = (Object) element.get("ELEMENT");
-		
 		return elementId != null;
 	}
 	
@@ -48,8 +47,8 @@ public class Element {
 
 	public JSONArray findElements(JSONObject jsonObject) throws Exception {
 		jsonObject.put("sessionId", driver.getSessionId());
-		JSONArray elements = new JSONArray();
-		elements = (JSONArray) utils.request("POST", DriverCommand.FIND_ELEMENTS, jsonObject);
+		JSONObject response = (JSONObject) utils.request("POST", DriverCommand.FIND_ELEMENTS, jsonObject);
+		JSONArray elements = (JSONArray) response.get("value");
 		return elements;
 	}
 
