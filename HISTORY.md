@@ -1,3 +1,8 @@
+# 1.0.10 / 2016-09-20
+
+  * Support custom host and port
+  * Add api getProperty
+
 # 1.0.5 / 2016-09-07
 
   * Add text API
