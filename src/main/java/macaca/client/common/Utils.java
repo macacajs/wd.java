@@ -114,7 +114,7 @@ public class Utils {
 			method = method.replace(":" + key, value);
 		}
 
-		String url = Constants.SUFFIX + method;
+		String url = Constants.SUFFIX.replace("${host}", driver.getHost()).replace("${port}", driver.getPort()) + method;
 		httpdelete = new HttpDelete(url);
 		response = httpclient.execute(httpdelete);
 		entity = response.getEntity();
