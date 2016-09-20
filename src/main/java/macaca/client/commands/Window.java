@@ -9,10 +9,11 @@ import macaca.client.common.Utils;
 public class Window {
 
 	private MacacaDriver driver;
-	private Utils utils = new Utils();
+	private Utils utils;
 
 	public Window(MacacaDriver driver) {
 		this.driver = driver;
+		this.utils = new Utils(driver);
 	}
 
 	public void getWindow() throws Exception {

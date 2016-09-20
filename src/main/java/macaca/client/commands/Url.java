@@ -9,10 +9,11 @@ import macaca.client.common.Utils;
 public class Url {
 
 	private MacacaDriver driver;
-	private Utils utils = new Utils();
+	private Utils utils;
 
 	public Url(MacacaDriver driver) {
 		this.driver = driver;
+		this.utils = new Utils(driver);
 	}
 
 	public String url() throws Exception {

@@ -34,7 +34,12 @@ public class Utils {
 	private StringEntity stringEntity = null;
 	private JSONObject jsonResponse = null;
 	private String stringResponse = "";
-
+	private MacacaDriver driver;
+	
+	public Utils(MacacaDriver driver) {
+		this.driver = driver;
+	}
+	
 	public Object getRequest(String method, JSONObject jsonBody) throws Exception {
 
 		for (String key : jsonBody.keySet()) {
@@ -43,7 +48,7 @@ public class Utils {
 		}
 
 		try {
-			String url = Constants.SUFFIX + method;
+			String url = Constants.SUFFIX.replace("${host}", driver.getHost()).replace("${port}", driver.getPort()) + method;
 			httpget = new HttpGet(url);
 			response = httpclient.execute(httpget);
 			entity = response.getEntity();
@@ -75,7 +80,7 @@ public class Utils {
 		}
 
 		try {
-			String url = Constants.SUFFIX + method;
+			String url = Constants.SUFFIX.replace("${host}", driver.getHost()).replace("${port}", driver.getPort()) + method;
 			httppost = new HttpPost(url);
 			if (jsonBody != null) {
 				stringEntity = new StringEntity(tempObj.toString(), "utf-8");

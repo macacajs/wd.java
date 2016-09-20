@@ -9,10 +9,11 @@ import macaca.client.common.Utils;
 public class Execute {
 
 	private MacacaDriver driver;
-	private Utils utils = new Utils();
+	private Utils utils;
 
 	public Execute(MacacaDriver driver) {
 		this.driver = driver;
+		this.utils = new Utils(driver);
 	}
 	
 	public String execute(JSONObject jsonObject) throws Exception {

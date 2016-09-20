@@ -539,13 +539,23 @@ public class MacacaClient {
 	/**
 	 * Get the value of an web element's attribute.
 	 * @param name The attribute name of element
-	 * @return The currently instance of MacacaClient
+	 * @return The attribute
 	 * @throws Exception
 	 */
 	public String getAttribute(String name) throws Exception {
 		return element.getAttribute(name);
 	}
-
+	
+	/**
+	 * Get the result of a property of a element.
+	 * @param name The property name of element
+	 * @return The property
+	 * @throws Exception
+	 */
+	public String getProperty(String name) throws Exception {
+		return element.getProperty(name);
+	}
+	
 	// Execute
 
 	/**

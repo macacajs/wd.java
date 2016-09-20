@@ -10,10 +10,11 @@ import macaca.client.common.Utils;
 public class Context {
 
 	private MacacaDriver driver;
-	private Utils utils = new Utils();
+	private Utils utils;
 
 	public Context(MacacaDriver driver) {
 		this.driver = driver;
+		this.utils = new Utils(driver);
 	}
 
 	public String getContext() {

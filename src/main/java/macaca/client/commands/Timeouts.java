@@ -9,10 +9,11 @@ import macaca.client.common.Utils;
 public class Timeouts {
 
 	private MacacaDriver driver;
-	private Utils utils = new Utils();
+	private Utils utils;
 	
 	public Timeouts(MacacaDriver driver) {
 		this.driver = driver;
+		this.utils = new Utils(driver);
 	}
 	
 	public void implicitWait(JSONObject jsonObject) throws Exception {

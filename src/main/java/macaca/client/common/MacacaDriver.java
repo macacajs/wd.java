@@ -8,6 +8,8 @@ public class MacacaDriver {
 	private String elementId;
 	private String context;
 	private JSONObject capabilities;
+	private String host = "localhost";
+	private int port = 3456;
 
 	public String getContext() {
 		return context;
@@ -49,4 +51,16 @@ public class MacacaDriver {
 		this.capabilities = capabilities;
 	}
 
+	public void setRemote(String host, int port) {
+		this.host = host;
+		this.port = port;			
+	}
+	
+	public String getHost() {
+		return this.host;
+	}
+	
+	public String getPort() {
+		return String.valueOf(this.port);
+	}
 }

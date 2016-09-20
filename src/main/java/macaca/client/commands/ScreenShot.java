@@ -13,10 +13,11 @@ import sun.misc.BASE64Decoder;
 public class ScreenShot {
 
 	private MacacaDriver driver;
-	private Utils utils = new Utils();
+	private Utils utils;
 
 	public ScreenShot(MacacaDriver driver) {
 		this.driver = driver;
+		this.utils = new Utils(driver);
 	}
 
 	public Object takeScreenshot() throws Exception {

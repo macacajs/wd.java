@@ -10,10 +10,11 @@ import macaca.client.common.Utils;
 public class Element {
 
 	private MacacaDriver driver;
-	private Utils utils = new Utils();
+	private Utils utils;
 
 	public Element(MacacaDriver driver) {
 		this.driver = driver;
+		this.utils = new Utils(driver);
 	}
 
 	public void setValue(JSONObject jsonObject) throws Exception {
@@ -103,7 +104,7 @@ public class Element {
 		jsonObject.put("sessionId", driver.getSessionId());
 		jsonObject.put("elementId", driver.getElementId());
 		jsonObject.put("name", name);
-		String property = (String) utils.request("GET", DriverCommand.GET_ELEMENT_ATTRIBUTE, jsonObject);
+		String property = (String) utils.request("GET", DriverCommand.GET_ELEMENT_PROPERTY, jsonObject);
 		return property;
 	}
 

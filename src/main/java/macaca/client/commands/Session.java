@@ -9,18 +9,24 @@ import macaca.client.common.Utils;
 public class Session {
 
 	private MacacaDriver driver;
-	private Utils utils = new Utils();
+	private Utils utils;
 
 	public Session(MacacaDriver driver) {
 		this.driver = driver;
+		this.utils = new Utils(driver);
 	}
 
 	public void createSession(JSONObject jsonObj) throws Exception {
 		JSONObject response = (JSONObject) utils.request("POST", DriverCommand.CREATE_SESSION, jsonObj);
 		String sessionId = (String) response.get("sessionId");
 		this.driver.setSessionId(sessionId);
-		this.driver.setCapabilities(response);
 
+		if (response.get("host") != null && response.get("port") != null) {
+			String host = (String) response.get("host");
+			int port = (Integer) response.get("port");
+			this.driver.setRemote(host, port);			
+		}
+		this.driver.setCapabilities(response);
 	}
 
 	public void delSession() throws Exception {

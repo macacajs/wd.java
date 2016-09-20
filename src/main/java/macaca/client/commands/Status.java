@@ -8,10 +8,11 @@ import macaca.client.common.Utils;
 public class Status {
 
 	private MacacaDriver driver;
-	private Utils utils = new Utils();
+	private Utils utils;
 
 	public Status(MacacaDriver driver) {
 		this.driver = driver;
+		this.utils = new Utils(driver);
 	}
 	
 	public void getStatus(JSONObject jsonObj) throws Exception {

@@ -38,6 +38,7 @@ public class DriverCommand {
 	public static final String IS_ELEMENT_DISPLAYED = SESSION + "/element/:elementId/displayed";
 	public static final String CLEAR_ELEMENT = SESSION + "/element/:elementId/clear";
 	public static final String GET_ELEMENT_ATTRIBUTE = SESSION + "/element/:elementId/attribute/:name";
+	public static final String GET_ELEMENT_PROPERTY = SESSION + "/element/:elementId/property/:name";
 	public static final String GET_ELEMENT_VALUE_OF_CSS_PROPERTY = SESSION + "/element/:elementId/css/:propertyName";
 	public static final String TOUCH_CLICK = SESSION + "/touch/click";
 	public static final String TOUCH_FLICK = SESSION + "/touch/flick";

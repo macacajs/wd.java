@@ -9,10 +9,11 @@ import macaca.client.common.Utils;
 public class Alert {
 
 	private MacacaDriver driver;
-	private Utils utils = new Utils();
+	private Utils utils;
 
 	public Alert(MacacaDriver driver) {
 		this.driver = driver;
+		this.utils = new Utils(driver);
 	}
 
 	public void acceptAlert() throws Exception {
