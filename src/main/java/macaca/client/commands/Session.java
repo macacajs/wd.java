@@ -17,15 +17,15 @@ public class Session {
 	}
 
 	public void createSession(JSONObject jsonObj) throws Exception {
+		if (jsonObj.get("host") != null && jsonObj.get("port") != null) {
+			String host = (String) jsonObj.get("host");
+			int port = (Integer) jsonObj.get("port");
+			this.driver.setRemote(host, port);			
+		}
 		JSONObject response = (JSONObject) utils.request("POST", DriverCommand.CREATE_SESSION, jsonObj);
 		String sessionId = (String) response.get("sessionId");
 		this.driver.setSessionId(sessionId);
 
-		if (response.get("host") != null && response.get("port") != null) {
-			String host = (String) response.get("host");
-			int port = (Integer) response.get("port");
-			this.driver.setRemote(host, port);			
-		}
 		this.driver.setCapabilities(response);
 	}
 
