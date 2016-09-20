@@ -14,11 +14,6 @@ It was originally designed for [Macaca](http://macacajs.github.io/macaca/) (A No
 
 [javadoc](//macacajs.github.io/wd.java/)
 
-```shell
-$ git checkout gh-pages
-$ git checkout master doc
-```
-
 ## Sample
 
 [macaca-test-sample-java](//github.com/macacajs/macaca-test-sample-java)
