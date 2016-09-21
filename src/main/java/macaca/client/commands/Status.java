@@ -1,9 +1,9 @@
 package macaca.client.commands;
 
-import com.alibaba.fastjson.JSONObject;
-
+import macaca.client.common.DriverCommand;
 import macaca.client.common.MacacaDriver;
 import macaca.client.common.Utils;
+import com.alibaba.fastjson.JSONObject;
 
 public class Status {
 
@@ -15,7 +15,8 @@ public class Status {
 		this.utils = new Utils(driver);
 	}
 	
-	public void getStatus(JSONObject jsonObj) throws Exception {
-		
+	public String getStatus() throws Exception {
+		JSONObject jsonObject = new JSONObject();
+		return utils.getStatus(DriverCommand.STATUS);
 	}
 }
