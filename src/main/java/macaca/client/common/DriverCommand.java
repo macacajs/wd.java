@@ -8,7 +8,7 @@ public class DriverCommand {
 	public static final String SESSION = "session/:sessionId";
 
 	// status
-	public static final String STATUS = SESSION + "/status";
+	public static final String STATUS = "status";
 
 	// timeout
 	public static final String IMPLICITLY_WAIT = SESSION + "/timeouts/implicit_wait";

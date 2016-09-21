@@ -660,7 +660,8 @@ public class MacacaClient {
 	 * Query the server's current status.
 	 * @throws Exception
 	 */
-	public void status() throws Exception {
+	public String status() throws Exception {
+		return status.getStatus();
 	}
 
 	// Timeouts

@@ -152,4 +152,19 @@ public class Utils {
 			}
 		}
 	}
+
+	public String getStatus(String method) throws Exception {
+		try {
+			String url = Constants.SUFFIX.replace("${host}", driver.getHost()).replace("${port}", driver.getPort()) + method;
+			httpget = new HttpGet(url);
+			response = httpclient.execute(httpget);
+			entity = response.getEntity();
+			return String.valueOf(response.getStatusLine().getStatusCode());
+		} catch (ClientProtocolException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return "get server status error";
+	}
 }
