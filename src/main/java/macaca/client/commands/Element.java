@@ -99,13 +99,13 @@ public class Element {
 		return attribute;
 	}
 
-	public String getProperty(String name) throws Exception {
+	public JSONObject getProperty(String name) throws Exception {
 		JSONObject jsonObject = new JSONObject();
 		jsonObject.put("sessionId", driver.getSessionId());
 		jsonObject.put("elementId", driver.getElementId());
 		jsonObject.put("name", name);
-		String property = (String) utils.request("GET", DriverCommand.GET_ELEMENT_PROPERTY, jsonObject);
-		return property;
+		JSONObject response = (JSONObject) utils.request("GET", DriverCommand.GET_ELEMENT_PROPERTY, jsonObject);
+		return response;
 	}
 
 	public String getComputedCss(String propertyName) throws Exception {
