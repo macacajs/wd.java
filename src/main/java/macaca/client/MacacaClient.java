@@ -552,7 +552,7 @@ public class MacacaClient {
 	 * @return The property
 	 * @throws Exception
 	 */
-	public String getProperty(String name) throws Exception {
+	public JSONObject getProperty(String name) throws Exception {
 		return element.getProperty(name);
 	}
 	
