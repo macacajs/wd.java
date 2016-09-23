@@ -1,3 +1,7 @@
+# 1.0.13 / 2016-09-23
+
+  * Fix isElementExist() function bug by replace hasElement() to isDisplayed()
+
 # 1.0.10 / 2016-09-20
 
   * Support custom host and port
