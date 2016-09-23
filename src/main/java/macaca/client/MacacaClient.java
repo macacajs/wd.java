@@ -465,7 +465,7 @@ public class MacacaClient {
 		JSONObject jsonObject = new JSONObject();
 		jsonObject.put("value", value);
 		jsonObject.put("using", using);
-		element.setValue(jsonObject);
+		element.findElement(jsonObject);
 		
 		return element.isDisplayed();
 	}
