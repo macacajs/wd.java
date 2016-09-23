@@ -121,8 +121,8 @@ public class Element {
 		JSONObject jsonObject = new JSONObject();
 		jsonObject.put("sessionId", driver.getSessionId());
 		jsonObject.put("elementId", driver.getElementId());
-		boolean displayed = Boolean
-				.parseBoolean((String) utils.request("GET", DriverCommand.IS_ELEMENT_DISPLAYED, jsonObject));
+		JSONObject response = (JSONObject)utils.request("GET", DriverCommand.IS_ELEMENT_DISPLAYED, jsonObject);
+		boolean displayed =  response.getBoolean("value");
 		return displayed;
 	}
 
