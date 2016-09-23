@@ -1,4 +1,7 @@
 language: java
+branches:
+  only:
+  - master
 script: mvn -s settings.xml clean source:jar deploy
 jdk:
   - openjdk7
