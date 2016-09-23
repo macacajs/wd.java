@@ -1,7 +1,14 @@
+# 1.0.15 / 2016-09-23
+
+  * Fix isDisplayed() function bug:java.lang.Boolean cannot be cast to com.alibaba.fastjson.JSONObject
+
+# 1.0.14 / 2016-09-23
+
+  * Fix isDisplayed() function bug:java.lang.Boolean cannot be cast to java.lang.String
+
 # 1.0.13 / 2016-09-23
 
   * Fix isElementExist() function bug by replace hasElement() to isDisplayed()
-  * Fix isDisplayed() function bug:java.lang.Boolean cannot be cast to java.lang.String
 
 # 1.0.10 / 2016-09-20
 
