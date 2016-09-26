@@ -793,9 +793,7 @@ public class MacacaClient {
 	 * @throws Exception
 	 */
 	public MacacaClient sleep(int ms) throws Exception {
-		JSONObject jsonObject = new JSONObject();
-		jsonObject.put("ms", ms);
-		timeouts.implicitWait(jsonObject);
+		Thread.sleep(ms);
 		return this;
 	}
 
