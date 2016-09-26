@@ -55,6 +55,7 @@ public class Element {
 
 	public void swipe(JSONObject jsonObject) throws Exception {
 		jsonObject.put("sessionId", driver.getSessionId());
+		jsonObject.put("elementId", driver.getElementId());
 		utils.request("POST", DriverCommand.SWIPE, jsonObject);
 	}
 

@@ -1,3 +1,7 @@
+# 1.0.18 / 2016-09-26
+
+  * Fix swipe
+
 # 1.0.16 / 2016-09-23
 
   * Fix isElementExist() function bug:replace setValue() to findElement()
