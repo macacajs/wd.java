@@ -142,12 +142,16 @@ public class Utils {
 		return null;
 	}
 
-	public void handleStatus(int statusCode) {
+	public void handleStatus(int statusCode) throws ClientProtocolException {
 		JsonwireErrors jsonwireErrors = new JsonwireErrors();
 		Map<Integer, String> map = jsonwireErrors.getStatusMap();
 		for (Map.Entry<Integer, String> entry : map.entrySet()) {
 			if (entry.getKey() == statusCode) {
 				System.out.println(entry.getValue());
+				if (statusCode != 0) {
+					throw new ClientProtocolException(entry.getValue());
+				}
+
 				break;
 			}
 		}
