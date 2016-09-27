@@ -30,10 +30,11 @@ public class Element {
 		jsonObject.put("sessionId", driver.getSessionId());
 		if (!globalTap) {
 			jsonObject.put("elementId", driver.getElementId());
+			utils.request("POST", DriverCommand.CLICK_ELEMENT, jsonObject);
 		} else {
+			utils.request("POST", DriverCommand.CLICK, jsonObject);
 			globalTap = false;
 		}
-		utils.request("POST", DriverCommand.CLICK_ELEMENT, jsonObject);
 	}
 
 	public boolean hasElement(JSONObject jsonObject) throws Exception {
