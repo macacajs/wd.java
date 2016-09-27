@@ -1,10 +1,8 @@
 package macaca.client.common;
 
-import java.io.IOException;
-import java.util.Map;
-
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import macaca.client.model.JsonwireErrors;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.http.HttpEntity;
@@ -18,8 +16,8 @@ import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
 
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
+import java.io.IOException;
+import java.util.Map;
 
 public class Utils {
 
@@ -142,14 +140,14 @@ public class Utils {
 		return null;
 	}
 
-	public void handleStatus(int statusCode) throws ClientProtocolException {
+	public void handleStatus(int statusCode) throws Exception {
 		JsonwireErrors jsonwireErrors = new JsonwireErrors();
 		Map<Integer, String> map = jsonwireErrors.getStatusMap();
 		for (Map.Entry<Integer, String> entry : map.entrySet()) {
 			if (entry.getKey() == statusCode) {
 				System.out.println(entry.getValue());
 				if (statusCode != 0) {
-					throw new ClientProtocolException(entry.getValue());
+					throw new Exception(entry.getValue());
 				}
 
 				break;
