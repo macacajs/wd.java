@@ -11,9 +11,11 @@ public class Element {
 
 	private MacacaDriver driver;
 	private Utils utils;
+	private Boolean globalTap;
 
 	public Element(MacacaDriver driver) {
 		this.driver = driver;
+		this.globalTap = false;
 		this.utils = new Utils(driver);
 	}
 
@@ -26,7 +28,11 @@ public class Element {
 	public void click() throws Exception {
 		JSONObject jsonObject = new JSONObject();
 		jsonObject.put("sessionId", driver.getSessionId());
-		jsonObject.put("elementId", driver.getElementId());
+		if (!globalTap) {
+			jsonObject.put("elementId", driver.getElementId());
+		} else {
+			globalTap = false;
+		}
 		utils.request("POST", DriverCommand.CLICK_ELEMENT, jsonObject);
 	}
 
@@ -132,6 +138,7 @@ public class Element {
 		jsonObject.put("xoffset", xoffset);
 		jsonObject.put("yoffset", yoffset);
 		utils.request("POST", DriverCommand.MOVE_TO, jsonObject);
+		globalTap = true;
 	}
 
 }

@@ -4,7 +4,7 @@
 	<groupId>macaca.webdriver.client</groupId>
 	<artifactId>macacaclient</artifactId>
 	<packaging>jar</packaging>
-	<version>1.0.23</version>
+	<version>1.0.24</version>
 	<name>macacaclient</name>
 	<url>http://maven.apache.org</url>
 	<dependencies>
