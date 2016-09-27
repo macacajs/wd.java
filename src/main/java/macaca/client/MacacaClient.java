@@ -423,15 +423,20 @@ public class MacacaClient {
 	 * @return The currently instance of MacacaClient
 	 * @throws Exception
 	 */
-	public MacacaClient waitForElement(String using, String value, int timeout, int interval) throws Exception {
+	public MacacaClient waitForElement(String using,String value,int timeout,int interval) throws Exception {
 		JSONObject jsonObject = new JSONObject();
 		jsonObject.put("value", value);
 		jsonObject.put("using", using);
-
+		int count = 0;
 		int timeLeft = timeout;
 		boolean satisfied = false;
 		while (timeLeft > 0) {
-			boolean elementExist = element.hasElement(jsonObject);
+			boolean elementExist = false;
+			try {
+				elementExist = element.hasElement(jsonObject);
+			} catch (Exception e) {
+				System.out.println(String.format("第%d次尝试找元素", count++));
+			}
 			if (!elementExist) {
 				// not find element ,keep searching
 				timeLeft -= interval;
@@ -442,11 +447,10 @@ public class MacacaClient {
 				break;
 			}
 		}
-
 		if (satisfied == false) {
-			System.out.println("element not found: " + using + ":" + value);
+			System.out.println("没有找到对应的element: " + using + ":" + value);
+			throw new Exception();
 		}
-
 		return this;
 	}
 
