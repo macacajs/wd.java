@@ -37,7 +37,7 @@ public class Element {
 		Object elementId = (Object) element.get("ELEMENT");
 		return elementId != null;
 	}
-	
+
 	public void findElement(JSONObject jsonObject) throws Exception {
 		jsonObject.put("sessionId", driver.getSessionId());
 		JSONObject response = (JSONObject) utils.request("POST", DriverCommand.FIND_ELEMENT, jsonObject);
@@ -83,7 +83,7 @@ public class Element {
 		jsonObject.put("elementId", driver.getElementId());
 		utils.request("POST", DriverCommand.CLEAR_ELEMENT, jsonObject);
 	}
-	
+
 	public void back() throws Exception {
 		JSONObject jsonObject = new JSONObject();
 		jsonObject.put("sessionId", driver.getSessionId());
@@ -122,12 +122,15 @@ public class Element {
 		JSONObject jsonObject = new JSONObject();
 		jsonObject.put("sessionId", driver.getSessionId());
 		jsonObject.put("elementId", driver.getElementId());
-		boolean displayed = (Boolean)utils.request("GET", DriverCommand.IS_ELEMENT_DISPLAYED, jsonObject);
+		boolean displayed = (Boolean) utils.request("GET", DriverCommand.IS_ELEMENT_DISPLAYED, jsonObject);
 		return displayed;
 	}
 
-	public void moveTo(JSONObject jsonObject) throws Exception {
+	public void moveTo(int xoffset, int yoffset) throws Exception {
+		JSONObject jsonObject = new JSONObject();
 		jsonObject.put("sessionId", driver.getSessionId());
+		jsonObject.put("xoffset", xoffset);
+		jsonObject.put("yoffset", yoffset);
 		utils.request("POST", DriverCommand.MOVE_TO, jsonObject);
 	}
 

@@ -554,6 +554,22 @@ public class MacacaClient {
 		element.setValue(jsonObject);
 		return this;
 	}
+	
+	/**
+	 * Move the mouse by an offset of the specificed element.
+	 * @param xoffset X offset to move to, relative to the top-left corner of the element. If not specified, the mouse will move to the middle of the element.
+	 * @param yoffset Y offset to move to, relative to the top-left corner of the element. If not specified, the mouse will move to the middle of the element.
+	 * @return The currently instance of MacacaClient
+	 * @throws Exception
+	 */
+	
+	public MacacaClient moveTo(int xoffset, int yoffset) throws Exception {
+		JSONObject jsonObject = new JSONObject();
+		jsonObject.put("xoffset", xoffset);
+		jsonObject.put("yoffset", yoffset);
+		element.moveTo(xoffset, yoffset);
+		return this;
+	}
 
 	/**
 	 * Click on an element.
