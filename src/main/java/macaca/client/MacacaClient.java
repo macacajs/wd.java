@@ -427,18 +427,16 @@ public class MacacaClient {
 		JSONObject jsonObject = new JSONObject();
 		jsonObject.put("value", value);
 		jsonObject.put("using", using);
-		int count = 0;
+		int count = 1;
 		int timeLeft = timeout;
 		boolean satisfied = false;
 		while (timeLeft > 0) {
 			boolean elementExist = false;
-			try {
-				elementExist = element.hasElement(jsonObject);
-			} catch (Exception e) {
-				System.out.println(String.format("第%d次尝试找元素", count++));
-			}
+			System.out.println(String.format("attempt to search the element for %d times", count++));
+			elementExist = this.isElementExist(using, value);
 			if (!elementExist) {
 				// not find element ,keep searching
+				this.sleep(interval);
 				timeLeft -= interval;
 			} else {
 				// finded , break
@@ -448,7 +446,7 @@ public class MacacaClient {
 			}
 		}
 		if (satisfied == false) {
-			System.out.println("没有找到对应的element: " + using + ":" + value);
+			System.out.println("can't find the element: " + using + ":" + value);
 			throw new Exception();
 		}
 		return this;
@@ -537,7 +535,11 @@ public class MacacaClient {
 		JSONObject jsonObject = new JSONObject();
 		jsonObject.put("value", value);
 		jsonObject.put("using", using);
-		element.findElement(jsonObject);
+		try {
+			element.findElement(jsonObject);
+		} catch(Exception e) {
+			return false;
+		}
 
 		return element.isDisplayed();
 	}
