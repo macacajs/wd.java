@@ -423,17 +423,20 @@ public class MacacaClient {
 	 * @return The currently instance of MacacaClient
 	 * @throws Exception
 	 */
-	public MacacaClient waitForElement(String using, String value, int timeout, int interval) throws Exception {
+	public MacacaClient waitForElement(String using,String value,int timeout,int interval) throws Exception {
 		JSONObject jsonObject = new JSONObject();
 		jsonObject.put("value", value);
 		jsonObject.put("using", using);
-
+		int count = 1;
 		int timeLeft = timeout;
 		boolean satisfied = false;
 		while (timeLeft > 0) {
-			boolean elementExist = element.hasElement(jsonObject);
+			boolean elementExist = false;
+			System.out.println(String.format("attempt to search the element for %d times", count++));
+			elementExist = this.isElementExist(using, value);
 			if (!elementExist) {
 				// not find element ,keep searching
+				this.sleep(interval);
 				timeLeft -= interval;
 			} else {
 				// finded , break
@@ -442,11 +445,10 @@ public class MacacaClient {
 				break;
 			}
 		}
-
 		if (satisfied == false) {
-			System.out.println("element not found: " + using + ":" + value);
+			System.out.println("can't find the element: " + using + ":" + value);
+			throw new Exception();
 		}
-
 		return this;
 	}
 
@@ -533,7 +535,11 @@ public class MacacaClient {
 		JSONObject jsonObject = new JSONObject();
 		jsonObject.put("value", value);
 		jsonObject.put("using", using);
-		element.findElement(jsonObject);
+		try {
+			element.findElement(jsonObject);
+		} catch(Exception e) {
+			return false;
+		}
 
 		return element.isDisplayed();
 	}
@@ -809,9 +815,7 @@ public class MacacaClient {
 	 * @throws Exception
 	 */
 	public MacacaClient sleep(int ms) throws Exception {
-		JSONObject jsonObject = new JSONObject();
-		jsonObject.put("ms", ms);
-		timeouts.implicitWait(jsonObject);
+		Thread.sleep(ms);
 		return this;
 	}
 
