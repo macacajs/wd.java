@@ -432,7 +432,7 @@ public class MacacaClient {
 		boolean satisfied = false;
 		while (timeLeft > 0) {
 			boolean elementExist = false;
-			System.out.println(String.format("第%d次尝试找元素", count++));
+			System.out.println(String.format("attempt to search the element for %d times", count++));
 			elementExist = this.isElementExist(using, value);
 			if (!elementExist) {
 				// not find element ,keep searching
@@ -446,7 +446,7 @@ public class MacacaClient {
 			}
 		}
 		if (satisfied == false) {
-			System.out.println("没有找到对应的element: " + using + ":" + value);
+			System.out.println("can't find the element: " + using + ":" + value);
 			throw new Exception();
 		}
 		return this;
