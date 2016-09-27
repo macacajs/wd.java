@@ -696,7 +696,7 @@ public class MacacaClient {
 		JSONObject jsonObject = new JSONObject();
 		ArrayList<String> values = new ArrayList<String>();
 		values.add(keys);
-		jsonObject.put("value", keys);
+		jsonObject.put("value", values);
 		_keys.keys(jsonObject);
 		return this;
 	}
