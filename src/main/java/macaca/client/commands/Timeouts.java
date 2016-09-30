@@ -10,12 +10,12 @@ public class Timeouts {
 
 	private MacacaDriver driver;
 	private Utils utils;
-	
+
 	public Timeouts(MacacaDriver driver) {
 		this.driver = driver;
 		this.utils = new Utils(driver);
 	}
-	
+
 	public void implicitWait(JSONObject jsonObject) throws Exception {
 		jsonObject.put("sessionId", driver.getSessionId());
 		utils.request("POST", DriverCommand.IMPLICITLY_WAIT, jsonObject);

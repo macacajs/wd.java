@@ -15,7 +15,7 @@ public class Keys {
 		this.driver = driver;
 		this.utils = new Utils(driver);
 	}
-	
+
 	public void keys(JSONObject jsonObject) throws Exception {
 		jsonObject.put("sessionId", driver.getSessionId());
 		utils.request("POST", DriverCommand.KEYS, jsonObject);
