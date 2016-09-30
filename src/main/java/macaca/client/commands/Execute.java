@@ -15,7 +15,7 @@ public class Execute {
 		this.driver = driver;
 		this.utils = new Utils(driver);
 	}
-	
+
 	public String execute(JSONObject jsonObject) throws Exception {
 		jsonObject.put("sessionId", driver.getSessionId());
 		String result = (String) utils.request("POST", DriverCommand.EXECUTE_SCRIPT, jsonObject);

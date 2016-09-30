@@ -60,7 +60,7 @@ public class MacacaClient {
 
 	/**
 	 * Accepts the currently displayed alert dialog.
-	 * 
+	 *
 	 * @return The currently instance of MacacaClient
 	 * @throws Exception
 	 */
@@ -71,7 +71,7 @@ public class MacacaClient {
 
 	/**
 	 * Dismisses the currently displayed alert dialog.
-	 * 
+	 *
 	 * @return The currently instance of MacacaClient
 	 * @throws Exception
 	 */
@@ -83,7 +83,7 @@ public class MacacaClient {
 	/**
 	 * Gets the text of the currently displayed JavaScript alert(), confirm(),
 	 * or prompt() dialog.
-	 * 
+	 *
 	 * @return The text of the currently displayed alert.
 	 * @throws Exception
 	 */
@@ -93,7 +93,7 @@ public class MacacaClient {
 
 	/**
 	 * Sends keystrokes to a JavaScript prompt() dialog.
-	 * 
+	 *
 	 * @param keys
 	 *            Keystrokes to send to the prompt() dialog.
 	 * @return The currently instance of MacacaClient
@@ -110,7 +110,7 @@ public class MacacaClient {
 
 	/**
 	 * Get a list of the available contexts.
-	 * 
+	 *
 	 * @return The currently available contexts
 	 * @throws Exception
 	 */
@@ -120,7 +120,7 @@ public class MacacaClient {
 
 	/**
 	 * Set the current context.
-	 * 
+	 *
 	 * @param contextRef
 	 *            context reference from contexts
 	 * @return The currently instance of MacacaClient
@@ -135,7 +135,7 @@ public class MacacaClient {
 
 	/**
 	 * Get the current context.
-	 * 
+	 *
 	 * @return The currently context
 	 * @throws Exception
 	 */
@@ -147,7 +147,7 @@ public class MacacaClient {
 
 	/**
 	 * Search for an element on the page, starting from the document root.
-	 * 
+	 *
 	 * @param elementId
 	 *            The ID attribute of element
 	 * @return The currently instance of MacacaClient
@@ -163,7 +163,7 @@ public class MacacaClient {
 
 	/**
 	 * Search for an element on the page, starting from the document root.
-	 * 
+	 *
 	 * @param selector
 	 *            The css selector of element
 	 * @returnThe currently instance of MacacaClient
@@ -179,7 +179,7 @@ public class MacacaClient {
 
 	/**
 	 * Search for an element on the page, starting from the document root.
-	 * 
+	 *
 	 * @param xpath
 	 *            The XPath expression of element
 	 * @return The currently instance of MacacaClient
@@ -195,7 +195,7 @@ public class MacacaClient {
 
 	/**
 	 * Search for an element on the page, starting from the document root.
-	 * 
+	 *
 	 * @param name
 	 *            The name attribute of element
 	 * @return The currently instance of MacacaClient
@@ -211,7 +211,7 @@ public class MacacaClient {
 
 	/**
 	 * Search for an element on the page, starting from the document root.
-	 * 
+	 *
 	 * @param className
 	 *            The className attribute of element
 	 * @return The currently instance of MacacaClient
@@ -227,7 +227,7 @@ public class MacacaClient {
 
 	/**
 	 * Search for an element on the page, starting from the document root.
-	 * 
+	 *
 	 * @param linkText
 	 *            The linkText attribute of element
 	 * @return The currently instance of MacacaClient
@@ -243,7 +243,7 @@ public class MacacaClient {
 
 	/**
 	 * Search for an element on the page, starting from the document root.
-	 * 
+	 *
 	 * @param tagName
 	 *            The tag name attribute of element
 	 * @return The currently instance of MacacaClient
@@ -259,7 +259,7 @@ public class MacacaClient {
 
 	/**
 	 * Search for an element on the page, starting from the document root.
-	 * 
+	 *
 	 * @param partialLinkText
 	 *            The partial link text attribute of element
 	 * @return The currently instance of MacacaClient
@@ -276,7 +276,7 @@ public class MacacaClient {
 	/**
 	 * Search for multiple elements on the page, starting from the document
 	 * root.
-	 * 
+	 *
 	 * @param xpath
 	 *            The XPath expression of elements
 	 * @return The instance of ElementSelector for index
@@ -293,7 +293,7 @@ public class MacacaClient {
 	/**
 	 * Search for multiple elements on the page, starting from the document
 	 * root.
-	 * 
+	 *
 	 * @param name
 	 *            The name attribute of elements
 	 * @return The currently instance of MacacaClient
@@ -310,7 +310,7 @@ public class MacacaClient {
 	/**
 	 * Search for multiple elements on the page, starting from the document
 	 * root.
-	 * 
+	 *
 	 * @param elementId
 	 *            The elementId attribute of elements
 	 * @return The currently instance of MacacaClient
@@ -327,7 +327,7 @@ public class MacacaClient {
 	/**
 	 * Search for multiple elements on the page, starting from the document
 	 * root.
-	 * 
+	 *
 	 * @param className
 	 *            The className attribute of elements
 	 * @return The currently instance of MacacaClient
@@ -344,7 +344,7 @@ public class MacacaClient {
 	/**
 	 * Search for multiple elements on the page, starting from the document
 	 * root.
-	 * 
+	 *
 	 * @param css
 	 *            The selector selector of elements
 	 * @return The currently instance of MacacaClient
@@ -361,7 +361,7 @@ public class MacacaClient {
 	/**
 	 * Search for multiple elements on the page, starting from the document
 	 * root.
-	 * 
+	 *
 	 * @param linkText
 	 *            The link text attribute of elements
 	 * @return The currently instance of MacacaClient
@@ -378,7 +378,7 @@ public class MacacaClient {
 	/**
 	 * Search for multiple elements on the page, starting from the document
 	 * root.
-	 * 
+	 *
 	 * @param linkText
 	 *            The partial link text attribute of elements
 	 * @return The currently instance of MacacaClient
@@ -395,7 +395,7 @@ public class MacacaClient {
 	/**
 	 * Search for multiple elements on the page, starting from the document
 	 * root.
-	 * 
+	 *
 	 * @param tagName
 	 *            The tag name attribute of elements
 	 * @return The currently instance of MacacaClient
@@ -411,7 +411,7 @@ public class MacacaClient {
 
 	/**
 	 * Search for element at specific interval during given time
-	 * 
+	 *
 	 * @param using
 	 *            The way for find an element,eg:"name","xpath","css","id"
 	 * @param value
@@ -454,7 +454,7 @@ public class MacacaClient {
 
 	/**
 	 * Search for element at specific interval during given time
-	 * 
+	 *
 	 * @param using
 	 *            The way for find an element,eg:"name","xpath","css","id"
 	 * @param value
@@ -470,7 +470,7 @@ public class MacacaClient {
 
 	/**
 	 * Search for an element on the page, starting from the document root.
-	 * 
+	 *
 	 * @param elementId
 	 *            The ID attribute of element
 	 * @return The currently instance of MacacaClient
@@ -483,7 +483,7 @@ public class MacacaClient {
 
 	/**
 	 * Search for an element on the page, starting from the document root.
-	 * 
+	 *
 	 * @param selector
 	 *            The css selector of element
 	 * @returnThe currently instance of MacacaClient
@@ -496,7 +496,7 @@ public class MacacaClient {
 
 	/**
 	 * Search for an element on the page, starting from the document root.
-	 * 
+	 *
 	 * @param xpath
 	 *            The XPath expression of element
 	 * @return The currently instance of MacacaClient
@@ -509,7 +509,7 @@ public class MacacaClient {
 
 	/**
 	 * Search for an element on the page, starting from the document root.
-	 * 
+	 *
 	 * @param name
 	 *            The name attribute of element
 	 * @return The currently instance of MacacaClient
@@ -521,8 +521,34 @@ public class MacacaClient {
 	}
 
 	/**
+	 * Search for an element on the page, starting from the document root.
+	 *
+	 * @param text
+	 *            The visible text of element
+	 * @return The currently instance of MacacaClient
+	 * @throws Exception
+	 */
+	public MacacaClient waitForElementByLinkText(String text) throws Exception {
+		waitForElement("link text", text);
+		return this;
+	}
+
+	/**
+	 * Search for an element on the page, starting from the document root.
+	 *
+	 * @param text
+	 *            The visible text of element
+	 * @return The currently instance of MacacaClient
+	 * @throws Exception
+	 */
+	public MacacaClient waitForElementByPartialLinkText(String text) throws Exception {
+		waitForElement("partial link text", text);
+		return this;
+	}
+
+	/**
 	 * check if target element exist
-	 * 
+	 *
 	 * @param using
 	 *            The way for find an element,eg:"name","xpath","css","id"
 	 * @param value
@@ -546,7 +572,7 @@ public class MacacaClient {
 
 	/**
 	 * Send a sequence of key strokes to the active element.
-	 * 
+	 *
 	 * @param keys
 	 *            The keys sequence to be sent.
 	 * @return The currently instance of MacacaClient
@@ -560,7 +586,7 @@ public class MacacaClient {
 		element.setValue(jsonObject);
 		return this;
 	}
-	
+
 	/**
 	 * Move the mouse by an offset of the specificed element.
 	 * @param xoffset X offset to move to, relative to the top-left corner of the element. If not specified, the mouse will move to the middle of the element.
@@ -568,7 +594,7 @@ public class MacacaClient {
 	 * @return The currently instance of MacacaClient
 	 * @throws Exception
 	 */
-	
+
 	public MacacaClient moveTo(int xoffset, int yoffset) throws Exception {
 		JSONObject jsonObject = new JSONObject();
 		jsonObject.put("xoffset", xoffset);
@@ -579,7 +605,7 @@ public class MacacaClient {
 
 	/**
 	 * Click on an element.
-	 * 
+	 *
 	 * @return The currently instance of MacacaClient
 	 * @throws Exception
 	 */
@@ -590,7 +616,7 @@ public class MacacaClient {
 
 	/**
 	 * clear on an element.
-	 * 
+	 *
 	 * @return The currently instance of MacacaClient
 	 * @throws Exception
 	 */
@@ -601,7 +627,7 @@ public class MacacaClient {
 
 	/**
 	 * press back.
-	 * 
+	 *
 	 * @return The currently instance of MacacaClient
 	 * @throws Exception
 	 */
@@ -612,7 +638,7 @@ public class MacacaClient {
 
 	/**
 	 * Swipe on the touch screen using finger motion events.
-	 * 
+	 *
 	 * @param startX
 	 *            The X coordinate to position the window at, relative to the
 	 *            upper left corner of the screen
@@ -643,7 +669,7 @@ public class MacacaClient {
 
 	/**
 	 * Get the value of an web element's attribute.
-	 * 
+	 *
 	 * @param name
 	 *            The attribute name of element
 	 * @return The attribute
@@ -655,7 +681,7 @@ public class MacacaClient {
 
 	/**
 	 * Get the result of a property of a element.
-	 * 
+	 *
 	 * @param name
 	 *            The property name of element
 	 * @return The property
@@ -670,7 +696,7 @@ public class MacacaClient {
 	/**
 	 * Inject a snippet of JavaScript into the page for execution in the context
 	 * of the currently selected frame.
-	 * 
+	 *
 	 * @param code
 	 *            The script to execute
 	 * @return The results of execution
@@ -686,7 +712,7 @@ public class MacacaClient {
 
 	/**
 	 * Send a sequence of key strokes to the active window.
-	 * 
+	 *
 	 * @param keys
 	 *            The keys sequence to be sent.
 	 * @return The currently instance of MacacaClient
@@ -705,7 +731,7 @@ public class MacacaClient {
 
 	/**
 	 * Take a screenshot of the current page.
-	 * 
+	 *
 	 * @return The currently instance of MacacaClient
 	 * @throws Exception
 	 */
@@ -718,7 +744,7 @@ public class MacacaClient {
 
 	/**
 	 * Save screenshot of the current page.
-	 * 
+	 *
 	 * @param fileName
 	 *            The absolute path of the image filename
 	 * @return The currently instance of MacacaClient
@@ -733,7 +759,7 @@ public class MacacaClient {
 
 	/**
 	 * Initial webdriver client and create a session.
-	 * 
+	 *
 	 * @param jsonObject
 	 *            The capabilities of session
 	 * @return The currently instance of MacacaClient
@@ -746,7 +772,7 @@ public class MacacaClient {
 
 	/**
 	 * Get the current sessionId.
-	 * 
+	 *
 	 * @return The current sessionId.
 	 * @throws Exception
 	 */
@@ -756,7 +782,7 @@ public class MacacaClient {
 
 	/**
 	 * Delete session.
-	 * 
+	 *
 	 * @throws Exception
 	 */
 	public void quit() throws Exception {
@@ -767,7 +793,7 @@ public class MacacaClient {
 
 	/**
 	 * Get the current page source.
-	 * 
+	 *
 	 * @return The current page source.
 	 * @throws Exception
 	 */
@@ -779,7 +805,7 @@ public class MacacaClient {
 
 	/**
 	 * Query the server's current status.
-	 * 
+	 *
 	 * @throws Exception
 	 */
 	public String status() throws Exception {
@@ -791,7 +817,7 @@ public class MacacaClient {
 	/**
 	 * Set the amount of time the driver should wait when searching for
 	 * elements.
-	 * 
+	 *
 	 * @param ms
 	 *            The amount of time to wait, in milliseconds. This value has a
 	 *            lower bound of 0.
@@ -807,7 +833,7 @@ public class MacacaClient {
 
 	/**
 	 * Set the amount of time the driver should wait.
-	 * 
+	 *
 	 * @param ms
 	 *            The amount of sleep time, in milliseconds. This value has a
 	 *            lower bound of 0.
@@ -823,7 +849,7 @@ public class MacacaClient {
 
 	/**
 	 * Get the current page title.
-	 * 
+	 *
 	 * @return The current page title.
 	 * @throws Exception
 	 */
@@ -835,7 +861,7 @@ public class MacacaClient {
 
 	/**
 	 * Retrieve the URL of the current page.
-	 * 
+	 *
 	 * @return The current URL.
 	 * @throws Exception
 	 */
@@ -845,7 +871,7 @@ public class MacacaClient {
 
 	/**
 	 * Navigate to a new URL.
-	 * 
+	 *
 	 * @param url
 	 * @return The currently instance of MacacaClient
 	 * @throws Exception
@@ -861,7 +887,7 @@ public class MacacaClient {
 
 	/**
 	 * Get the size of the specified window.
-	 * 
+	 *
 	 * @return {width: number, height: number} The size of the window.
 	 * @throws Exception
 	 */
@@ -871,7 +897,7 @@ public class MacacaClient {
 
 	/**
 	 * Change the size of the specified window.
-	 * 
+	 *
 	 * @param width
 	 *            The new window width.
 	 * @param height
@@ -889,7 +915,7 @@ public class MacacaClient {
 
 	/**
 	 * set maximize size of the window.
-	 * 
+	 *
 	 * @return The currently instance of MacacaClient
 	 * @throws Exception
 	 */
@@ -900,7 +926,7 @@ public class MacacaClient {
 
 	/**
 	 * Get text of the element
-	 * 
+	 *
 	 * @return The text of the element
 	 * @throws Exception
 	 */

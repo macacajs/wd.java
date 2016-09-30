@@ -1,3 +1,7 @@
+# 1.0.26 / 2016-09-30
+
+  * Add waitForElementByLinkText() and waitForElementByPartialLinkText() function.
+
 # 1.0.18 / 2016-09-26
 
   * Fix swipe

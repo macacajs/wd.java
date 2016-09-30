@@ -20,7 +20,7 @@ public class Session {
 		if (jsonObj.get("host") != null && jsonObj.get("port") != null) {
 			String host = (String) jsonObj.get("host");
 			int port = (Integer) jsonObj.get("port");
-			this.driver.setRemote(host, port);			
+			this.driver.setRemote(host, port);
 		}
 		JSONObject response = (JSONObject) utils.request("POST", DriverCommand.CREATE_SESSION, jsonObj);
 		String sessionId = (String) response.get("sessionId");
