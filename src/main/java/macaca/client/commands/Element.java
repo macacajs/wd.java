@@ -71,7 +71,8 @@ public class Element {
 		utils.request("POST", DriverCommand.TOUCH_FLICK, jsonObject);
 	}
 
-	public void tap(JSONObject jsonObject) throws Exception {
+	public void tap() throws Exception {
+		JSONObject jsonObject = new JSONObject();
 		jsonObject.put("sessionId", driver.getSessionId());
 		jsonObject.put("elementId", driver.getElementId());
 		utils.request("POST", DriverCommand.TOUCH_CLICK, jsonObject);
