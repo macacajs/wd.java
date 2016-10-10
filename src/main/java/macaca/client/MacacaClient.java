@@ -615,6 +615,18 @@ public class MacacaClient {
 	}
 
 	/**
+	 * Touch click on an element.
+	 *
+	 * @return The currently instance of MacacaClient
+	 * @throws Exception
+	 */
+	public MacacaClient tap() throws Exception {
+		element.tap();
+		return this;
+	}
+
+
+	/**
 	 * clear on an element.
 	 *
 	 * @return The currently instance of MacacaClient
