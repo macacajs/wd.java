@@ -22,6 +22,15 @@ public class Session {
 			int port = (Integer) jsonObj.get("port");
 			this.driver.setRemote(host, port);
 		}
+		
+		if (System.getenv("MACACA_UDID") != null) {
+			jsonObj.put("udid", System.getenv("MACACA_UDID"));
+		}
+		
+		if (System.getenv("MACACA_APP_NAME") != null) {
+			jsonObj.put("package", System.getenv("MACACA_APP_NAME"));
+		}
+		
 		JSONObject response = (JSONObject) utils.request("POST", DriverCommand.CREATE_SESSION, jsonObj);
 		String sessionId = (String) response.get("sessionId");
 		this.driver.setSessionId(sessionId);

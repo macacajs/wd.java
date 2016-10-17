@@ -10,3 +10,4 @@ local.properties
 *.un~
 target
 .settings
+*.idea/
