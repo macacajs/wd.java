@@ -24,11 +24,17 @@ public class Session {
 		}
 		
 		if (System.getenv("MACACA_UDID") != null) {
+			System.out.println("环境变量MACACA_UDID传入："+System.getenv("MACACA_UDID") );
 			jsonObj.put("udid", System.getenv("MACACA_UDID"));
+		} else {
+			System.out.println("环境变量MACACA_UDID为null");
 		}
 		
 		if (System.getenv("MACACA_APP_NAME") != null) {
+			System.out.println("环境变量MACACA_APP_NAME传入："+System.getenv("MACACA_APP_NAME") );
 			jsonObj.put("package", System.getenv("MACACA_APP_NAME"));
+		} else {
+			System.out.println("环境变量MACACA_APP_NAME为null");
 		}
 		
 		JSONObject response = (JSONObject) utils.request("POST", DriverCommand.CREATE_SESSION, jsonObj);
