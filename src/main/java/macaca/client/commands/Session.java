@@ -31,6 +31,7 @@ public class Session {
 			jsonObj.put("package", System.getenv("MACACA_APP_NAME"));
 		}
 		
+		System.out.print(jsonObj.toString());
 		JSONObject response = (JSONObject) utils.request("POST", DriverCommand.CREATE_SESSION, jsonObj);
 		String sessionId = (String) response.get("sessionId");
 		this.driver.setSessionId(sessionId);
