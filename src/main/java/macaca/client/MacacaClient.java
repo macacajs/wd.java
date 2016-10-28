@@ -262,8 +262,10 @@ public class MacacaClient {
 	
 	/**
 	 * Search for an element on the page, starting from the document root.
-	 * @param wayToFind
-	 * @param value
+	 * @param wayToFind 
+	 * 			the way to find an element,for example:ID,CSS,XPATH...
+	 * @param value  
+	 * 			the value for target element,paired with wayToFind
 	 * @throws Exception
 	 */
 	public MacacaClient getElement(GetElementWay wayToFind,String value) throws Exception{
@@ -300,10 +302,13 @@ public class MacacaClient {
 	}
 	
 	/**
-	 * 
-	 * @param wayToFind
-	 * @param value
+	 * find target element,if it doesn't exist,keep finding during given time (property:waitElementTimeout)
+	 * @param wayToFind 
+	 * 			the way to find an element,for example:ID,CSS,XPATH...
+	 * @param value  
+	 * 			the value for target element,paired with wayToFind
 	 * @param index
+	 * 			the index for target element
 	 * @throws Exception
 	 */
 	public MacacaClient waitForElement(GetElementWay wayToFind,String value,int index) throws Exception{
@@ -333,9 +338,11 @@ public class MacacaClient {
 	}
 	
 	/**
-	 * 
-	 * @param wayToFind
-	 * @param value
+	 * find target element,if it doesn't exist,keep finding during given time (property:waitElementTimeout)
+	 * @param wayToFind 
+	 * 			the way to find an element,for example:ID,CSS,XPATH...
+	 * @param value  
+	 * 			the value for target element,paired with wayToFind
 	 * @throws Exception
 	 */
 	public MacacaClient waitForElement(GetElementWay wayToFind,String value) throws Exception{
