@@ -252,7 +252,9 @@ public class MacacaClient {
 		
 		if (elementSelector != null) {
 			elementSelector.getIndex(index);
-		} 
+		} else {
+			System.out.println("can't find the element:"+value+"["+index+"]");
+		}
 		
 		return this;
 	}
@@ -325,7 +327,6 @@ public class MacacaClient {
 		}
 		if (satisfied == false) {
 			System.out.println("can't find the element:" + value);
-			throw new Exception();
 		}
 		return this;
 	}
@@ -357,7 +358,6 @@ public class MacacaClient {
 		}
 		if (satisfied == false) {
 			System.out.println("can't find the element:" + value);
-			throw new Exception();
 		}
 		return this;
 	}
