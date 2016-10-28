@@ -1,5 +1,6 @@
 package macaca.client;
 
+import java.lang.annotation.Retention;
 import java.util.ArrayList;
 
 import com.alibaba.fastjson.JSONArray;
@@ -7,6 +8,7 @@ import com.alibaba.fastjson.JSONObject;
 
 import macaca.client.commands.*;
 import macaca.client.common.ElementSelector;
+import macaca.client.common.GetElementWay;
 import macaca.client.common.MacacaDriver;
 
 public class MacacaClient {
@@ -206,6 +208,166 @@ public class MacacaClient {
 		jsonObject.put("value", name);
 		jsonObject.put("using", "name");
 		element.findElement(jsonObject);
+		return this;
+	}
+	
+	/**
+	 * Search for an element on the page, starting from the document root.
+	 * @param wayToFind way to find an element 
+	 * @param value target value for element,paired with wayToFind
+	 * @param index index for target element 
+	 */
+	public MacacaClient getElement(GetElementWay wayToFind,String value,int index) throws Exception {
+		ElementSelector elementSelector;
+		switch (wayToFind) {
+		case ID:
+			elementSelector=elementsById(value);
+			break;
+		case CSS:
+			elementSelector=elementsByCss(value);
+			break;
+		case NAME:
+			elementSelector=elementsByName(value);
+			break;
+		case XPATH:
+			elementSelector=elementsByXPath(value);
+			break;
+		case CLASS_NAME:
+			elementSelector=elementsByClassName(value);
+			break;
+		case LINK_TEXT:
+			elementSelector=elementsByLinkText(value);
+			break;
+		case PARTIAL_LINK_TEXT:
+			elementSelector=elementsByPartialLinkText(value);
+			break;
+		case TAG_NAME:
+			elementSelector=elementsByTagName(value);
+			break;
+
+		default:
+			elementSelector = null;
+			break;
+		}
+		
+		if (elementSelector != null) {
+			elementSelector.getIndex(index);
+		} else {
+			System.out.println("can't find the element:"+value+"["+index+"]");
+			throw new Exception();
+		}
+		
+		return this;
+	}
+	
+	/**
+	 * Search for an element on the page, starting from the document root.
+	 * @param wayToFind 
+	 * 			the way to find an element,for example:ID,CSS,XPATH...
+	 * @param value  
+	 * 			the value for target element,paired with wayToFind
+	 * @throws Exception
+	 */
+	public MacacaClient getElement(GetElementWay wayToFind,String value) throws Exception{
+		switch (wayToFind) {
+		case ID:
+			elementById(value);
+			break;
+		case CSS:
+			elementByCss(value);
+			break;
+		case NAME:
+			elementByName(value);
+			break;
+		case XPATH:
+			elementByXPath(value);
+			break;
+		case CLASS_NAME:
+			elementByClassName(value);
+			break;
+		case LINK_TEXT:
+			elementByLinkText(value);
+			break;
+		case PARTIAL_LINK_TEXT:
+			elementByPartialLinkText(value);
+			break;
+		case TAG_NAME:
+			elementByTagName(value);
+			break;
+		default:
+			throw new Exception();
+		}
+		
+		return this;
+	}
+	
+	/**
+	 * find target element,if it doesn't exist,keep finding during given time (property:waitElementTimeout)
+	 * @param wayToFind 
+	 * 			the way to find an element,for example:ID,CSS,XPATH...
+	 * @param value  
+	 * 			the value for target element,paired with wayToFind
+	 * @param index
+	 * 			the index for target element
+	 * @throws Exception
+	 */
+	public MacacaClient waitForElement(GetElementWay wayToFind,String value,int index) throws Exception{
+		int count = 0;
+		int timeLeft = waitElementTimeout;
+		boolean satisfied = false;
+		while (timeLeft > 0) {
+			boolean elementExist = false;
+			System.out.println(String.format("attempt to search the element for %d times", count++));
+			elementExist = isElementExist(wayToFind, value, index);
+			if (!elementExist) {
+				// not find element ,keep searching
+				this.sleep(waitElementTimeInterval);
+				timeLeft -= waitElementTimeInterval;
+			} else {
+				// finded , break
+				satisfied = true;
+				getElement(wayToFind, value, index);
+				break;
+			}
+		}
+		if (satisfied == false) {
+			System.out.println("can't find the element:" + value);
+			throw new Exception();
+		}
+		return this;
+	}
+	
+	/**
+	 * find target element,if it doesn't exist,keep finding during given time (property:waitElementTimeout)
+	 * @param wayToFind 
+	 * 			the way to find an element,for example:ID,CSS,XPATH...
+	 * @param value  
+	 * 			the value for target element,paired with wayToFind
+	 * @throws Exception
+	 */
+	public MacacaClient waitForElement(GetElementWay wayToFind,String value) throws Exception{
+		int count = 0;
+		int timeLeft = waitElementTimeout;
+		boolean satisfied = false;
+		while (timeLeft > 0) {
+			boolean elementExist = false;
+			System.out.println(String.format("attempt to search the element for %d times", count++));
+			elementExist = isElementExist(wayToFind, value);
+			if (!elementExist) {
+				// not find element ,keep searching
+				this.sleep(waitElementTimeInterval);
+				timeLeft -= waitElementTimeInterval;
+			} else {
+				// finded , break
+				satisfied = true;
+				getElement(wayToFind, value);
+				break;
+			}
+		}
+		if (satisfied == false) {
+			System.out.println("can't find the element:" + value);
+			throw new Exception();
+		}
 		return this;
 	}
 
@@ -451,6 +613,7 @@ public class MacacaClient {
 		}
 		return this;
 	}
+	
 
 	/**
 	 * Search for element at specific interval during given time
@@ -467,6 +630,7 @@ public class MacacaClient {
 		waitForElement(using, value, waitElementTimeout, waitElementTimeInterval);
 		return this;
 	}
+	
 
 	/**
 	 * Search for an element on the page, starting from the document root.
@@ -569,6 +733,37 @@ public class MacacaClient {
 
 		return element.isDisplayed();
 	}
+	
+	/**
+	 * check if target element exist
+	 * @param wayToFind
+	 * 			The way to find an element
+	 * @param value
+	 * 			 The value for the specific way
+	 * @param index
+	 * 			The index of the target element
+	 * @return
+	 * @throws Exception
+	 */
+	public boolean isElementExist(GetElementWay wayToFind, String value,int index) throws Exception {
+		getElement(wayToFind, value, index);
+		return element.isDisplayed();
+	}
+	
+	/**
+	 * check if target element exist
+	 * @param wayToFind
+	 * 			The way to find an element
+	 * @param value
+	 * 			 The value for the specific way
+	 * @return boolean exist-true ; not exist-false
+	 * @throws Exception
+	 */
+	public boolean isElementExist(GetElementWay wayToFind, String value) throws Exception {
+		getElement(wayToFind, value);
+		return element.isDisplayed();
+	}
+	
 
 	/**
 	 * Send a sequence of key strokes to the active element.
