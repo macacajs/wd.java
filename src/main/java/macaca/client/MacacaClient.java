@@ -254,6 +254,7 @@ public class MacacaClient {
 			elementSelector.getIndex(index);
 		} else {
 			System.out.println("can't find the element:"+value+"["+index+"]");
+			throw new Exception();
 		}
 		
 		return this;
@@ -291,9 +292,8 @@ public class MacacaClient {
 		case TAG_NAME:
 			elementByTagName(value);
 			break;
-
 		default:
-			break;
+			throw new Exception();
 		}
 		
 		return this;
@@ -327,6 +327,7 @@ public class MacacaClient {
 		}
 		if (satisfied == false) {
 			System.out.println("can't find the element:" + value);
+			throw new Exception();
 		}
 		return this;
 	}
@@ -358,6 +359,7 @@ public class MacacaClient {
 		}
 		if (satisfied == false) {
 			System.out.println("can't find the element:" + value);
+			throw new Exception();
 		}
 		return this;
 	}
