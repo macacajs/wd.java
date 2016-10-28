@@ -168,7 +168,7 @@ public class MacacaClient {
 	 *
 	 * @param selector
 	 *            The css selector of element
-	 * @returnThe currently instance of MacacaClient
+	 * @return The currently instance of MacacaClient
 	 * @throws Exception
 	 */
 	public MacacaClient elementByCss(String selector) throws Exception {
@@ -213,9 +213,12 @@ public class MacacaClient {
 	
 	/**
 	 * Search for an element on the page, starting from the document root.
-	 * @param wayToFind way to find an element 
-	 * @param value target value for element,paired with wayToFind
-	 * @param index index for target element 
+	 * @param wayToFind 
+	 * 			way to find an element 
+	 * @param value
+	 * 			target value for element,paired with wayToFind
+	 * @param index 
+	 * 			index for target element 
 	 */
 	public MacacaClient getElement(GetElementWay wayToFind,String value,int index) throws Exception {
 		ElementSelector elementSelector;
