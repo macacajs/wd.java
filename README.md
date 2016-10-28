@@ -22,6 +22,12 @@ It was originally designed for [Macaca](http://macacajs.github.io/macaca/) (A No
 
 Details changes for each release are documented in the [HISTORY.md](HISTORY.md).
 
+## Deploy
+
+```shell
+$ mvn -s settings.xml clean source:jar deploy
+```
+
 ## License
 
 The MIT License (MIT)

@@ -1,8 +1,5 @@
 language: java
-branches:
-  only:
-  - master
-script: mvn -s settings.xml clean source:jar deploy
+script: mvn clean install
 jdk:
   - openjdk7
   - oraclejdk7
