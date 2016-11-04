@@ -878,7 +878,9 @@ public class MacacaClient {
 	 * Get the value of an web element's attribute.
 	 *
 	 * @param name
-	 *            The attribute name of element
+	 *            The attribute name of element.
+	 *            iOS support: size, origin.
+	 *            Android support: size, origin, text, description
 	 * @return The attribute
 	 * @throws Exception
 	 */
