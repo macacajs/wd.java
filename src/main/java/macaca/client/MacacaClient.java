@@ -302,6 +302,60 @@ public class MacacaClient {
 	}
 	
 	/**
+	 * get count of elements when there exist multiple elements
+	 * @param wayToFind 
+	 * 			the way to find an element,for example:ID,CSS,XPATH...
+	 * @param value
+	 * 			the value for target element,paired with wayToFind
+	 * @return count of target element
+	 * @throws Exception
+	 */
+	public int countOfElements(GetElementWay wayToFind,String value) throws Exception{
+		
+		ElementSelector elementSelector = getElementSelector(wayToFind, value);
+		if (elementSelector != null) {
+			return elementSelector.size();
+		}
+		
+		return 0;
+	}
+	
+	private ElementSelector getElementSelector(GetElementWay wayToFind,String value) throws Exception {
+		ElementSelector elementSelector;
+		switch (wayToFind) {
+		case ID:
+			elementSelector=elementsById(value);
+			break;
+		case CSS:
+			elementSelector=elementsByCss(value);
+			break;
+		case NAME:
+			elementSelector=elementsByName(value);
+			break;
+		case XPATH:
+			elementSelector=elementsByXPath(value);
+			break;
+		case CLASS_NAME:
+			elementSelector=elementsByClassName(value);
+			break;
+		case LINK_TEXT:
+			elementSelector=elementsByLinkText(value);
+			break;
+		case PARTIAL_LINK_TEXT:
+			elementSelector=elementsByPartialLinkText(value);
+			break;
+		case TAG_NAME:
+			elementSelector=elementsByTagName(value);
+			break;
+
+		default:
+			elementSelector = null;
+			break;
+		}
+		
+		return elementSelector;
+	}
+	/**
 	 * find target element,if it doesn't exist,keep finding during given time (property:waitElementTimeout)
 	 * @param wayToFind 
 	 * 			the way to find an element,for example:ID,CSS,XPATH...
@@ -806,6 +860,20 @@ public class MacacaClient {
 	 */
 	public MacacaClient click() throws Exception {
 		element.click();
+		return this;
+	}
+	
+
+	/**
+	 * click at specific point ,absolutely  coordinate
+	 * @param x  x-coordinate
+	 * @param y  y-coordinate
+	 * @return
+	 * @throws Exception
+	 */
+	public MacacaClient clickPoint(int x,int y) throws Exception {
+		moveTo(x, y);
+		click();
 		return this;
 	}
 
