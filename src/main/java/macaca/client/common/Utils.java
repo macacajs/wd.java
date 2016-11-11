@@ -91,7 +91,11 @@ public class Utils {
 			System.out.println(response.getStatusLine().getStatusCode());
 			if (entity != null) {
 				stringResponse = EntityUtils.toString(entity);
-				System.out.println("Response content:" + stringResponse);
+				if (stringResponse.length() > 400) {
+					System.out.println("Response content:" + stringResponse.substring(0, 400)+"...");
+				} else {
+					System.out.println("Response content:" + stringResponse);
+				}
 				jsonResponse = JSON.parseObject(stringResponse);
 				handleStatus(jsonResponse.getInteger("status"));
 				return jsonResponse;
