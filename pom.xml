@@ -30,6 +30,11 @@
 			<version>1.2</version>
 			<scope>test</scope>
 		</dependency>
+		<dependency>
+			<groupId>com.github.tomakehurst</groupId>
+			<artifactId>wiremock</artifactId>
+			<version>2.3.1</version>
+		</dependency>
 	</dependencies>
 	<distributionManagement>
 	  <repository>
