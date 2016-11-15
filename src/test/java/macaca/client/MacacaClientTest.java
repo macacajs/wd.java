@@ -44,19 +44,14 @@ public class MacacaClientTest {
 
 	@Test
 	public void test_case_1() throws Exception {
-		wireMockRule.resetAll();
-
 		// test url
 		String url = "https://macacajs.github.io";
 		JSONObject jsonObj = new JSONObject();
 		jsonObj.put("url", url);
 
-		// set the check rules
+		// set the request router
 		stubFor(
-			// check the url
 			post(urlPathMatching("/wd/hub.*/url"))
-				// check the request body
-				.withRequestBody(equalToJson(jsonObj.toString()))
 				//	mock the response using the default mock data
 				.willReturn(
 					aResponse()
@@ -67,6 +62,13 @@ public class MacacaClientTest {
 
 		// begin to test the api
 		driver.get(url);
+
+		verify(
+			// check the url
+			anyRequestedFor(urlPathMatching("/wd/hub.*/url"))
+			// check the request body
+			.withRequestBody(equalToJson(jsonObj.toString()))
+		);
 	}
 
 
