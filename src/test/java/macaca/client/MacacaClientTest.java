@@ -9,7 +9,7 @@ import org.junit.Test;
 
 import static com.github.tomakehurst.wiremock.client.WireMock.*;
 
-public class SampleTest {
+public class MacacaClientTest {
 
 	MacacaClient driver = new MacacaClient();
 
