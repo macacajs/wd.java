@@ -46,8 +46,10 @@ public class SampleTest {
 	public void test_case_1() throws Exception {
 		wireMockRule.resetAll();
 
+		// test url
+		String url = "https://macacajs.github.io";
 		JSONObject jsonObj = new JSONObject();
-		jsonObj.put("url", "http://www.baidu.com");
+		jsonObj.put("url", url);
 
 		// set the check rules
 		stubFor(
@@ -64,7 +66,7 @@ public class SampleTest {
 				));
 
 		// begin to test the api
-		driver.get("http://www.baidu.com");
+		driver.get(url);
 	}
 
 
