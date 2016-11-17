@@ -386,7 +386,6 @@ public class MacacaClient {
 		}
 		if (satisfied == false) {
 			System.out.println("can't find the element:" + value);
-			throw new Exception();
 		}
 		return this;
 	}
@@ -420,7 +419,6 @@ public class MacacaClient {
 		}
 		if (satisfied == false) {
 			System.out.println("can't find the element:" + value);
-			throw new Exception();
 		}
 		return this;
 	}
@@ -663,7 +661,6 @@ public class MacacaClient {
 		}
 		if (satisfied == false) {
 			System.out.println("can't find the element: " + using + ":" + value);
-			throw new Exception();
 		}
 		return this;
 	}
@@ -800,7 +797,13 @@ public class MacacaClient {
 	 * @throws Exception
 	 */
 	public boolean isElementExist(GetElementWay wayToFind, String value,int index) throws Exception {
-		getElement(wayToFind, value, index);
+		try {
+			getElement(wayToFind, value, index);
+		} catch (Exception e) {
+			// TODO: handle exception
+			return false;
+		}
+		
 		return element.isDisplayed();
 	}
 	
@@ -814,7 +817,13 @@ public class MacacaClient {
 	 * @throws Exception
 	 */
 	public boolean isElementExist(GetElementWay wayToFind, String value) throws Exception {
-		getElement(wayToFind, value);
+		try {
+			getElement(wayToFind, value);
+		} catch (Exception e) {
+			// TODO: handle exception
+			return false;
+		}
+		
 		return element.isDisplayed();
 	}
 	
