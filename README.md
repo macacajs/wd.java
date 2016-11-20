@@ -28,6 +28,12 @@ Details changes for each release are documented in the [HISTORY.md](HISTORY.md).
 $ mvn -s settings.xml clean source:jar deploy
 ```
 
+## Generate Log
+
+```shell
+$ javadoc -d ./docs sourcepath ./src/main/java/macaca/client/MacacaClient.java
+```
+
 ## License
 
 The MIT License (MIT)

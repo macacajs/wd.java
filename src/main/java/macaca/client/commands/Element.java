@@ -100,15 +100,6 @@ public class Element {
 		utils.request("POST", DriverCommand.BACK, jsonObject);
 	}
 
-	public String getAttribute(String name) throws Exception {
-		JSONObject jsonObject = new JSONObject();
-		jsonObject.put("sessionId", driver.getSessionId());
-		jsonObject.put("elementId", driver.getElementId());
-		jsonObject.put("name", name);
-		String attribute = (String) utils.request("GET", DriverCommand.GET_ELEMENT_ATTRIBUTE, jsonObject);
-		return attribute;
-	}
-
 	public JSONObject getProperty(String name) throws Exception {
 		JSONObject jsonObject = new JSONObject();
 		jsonObject.put("sessionId", driver.getSessionId());
