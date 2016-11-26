@@ -60,8 +60,9 @@ public class MacacaClient {
 	// Alert
 
 	/**
-	 * <p>Accepts the currently displayed alert dialog.<br>
-   * Support: iOS
+	 * <p>
+	 * Accepts the currently displayed alert dialog.<br>
+	 * Support: iOS
 	 *
 	 * @return The currently instance of MacacaClient
 	 * @throws Exception
@@ -72,8 +73,9 @@ public class MacacaClient {
 	}
 
 	/**
-	 * <p>Dismisses the currently displayed alert dialog.<br>
-   * Support: iOS
+	 * <p>
+	 * Dismisses the currently displayed alert dialog.<br>
+	 * Support: iOS
 	 *
 	 * @return The currently instance of MacacaClient
 	 * @throws Exception
@@ -84,9 +86,10 @@ public class MacacaClient {
 	}
 
 	/**
-	 * <p>Gets the text of the currently displayed JavaScript alert(), confirm(),
+	 * <p>
+	 * Gets the text of the currently displayed JavaScript alert(), confirm(),
 	 * or prompt() dialog.<br>
-   * Support: iOS
+	 * Support: iOS
 	 *
 	 * @return The text of the currently displayed alert.
 	 * @throws Exception
@@ -96,8 +99,9 @@ public class MacacaClient {
 	}
 
 	/**
-	 * <p>Sends keystrokes to a JavaScript prompt() dialog.<br>
-   * Support: iOS
+	 * <p>
+	 * Sends keystrokes to a JavaScript prompt() dialog.<br>
+	 * Support: iOS
 	 *
 	 * @param keys
 	 *            Keystrokes to send to the prompt() dialog.
@@ -114,8 +118,9 @@ public class MacacaClient {
 	// Context
 
 	/**
-	 * <p>Get a list of the available contexts.<br>
-   * Support: Android iOS
+	 * <p>
+	 * Get a list of the available contexts.<br>
+	 * Support: Android iOS
 	 *
 	 * @return The currently available contexts
 	 * @throws Exception
@@ -125,8 +130,9 @@ public class MacacaClient {
 	}
 
 	/**
-	 * <p>Set the current context.<br>
-   * Support: Android iOS
+	 * <p>
+	 * Set the current context.<br>
+	 * Support: Android iOS
 	 *
 	 * @param contextRef
 	 *            context reference from contexts
@@ -141,8 +147,9 @@ public class MacacaClient {
 	}
 
 	/**
-	 * <p>Get the current context.<br>
-   * Support: Android iOS
+	 * <p>
+	 * Get the current context.<br>
+	 * Support: Android iOS
 	 *
 	 * @return The currently context
 	 * @throws Exception
@@ -154,8 +161,9 @@ public class MacacaClient {
 	// Element
 
 	/**
-	 * <p>Search for an element on the page, starting from the document root.<br>
-   * Support: Android iOS Web(WebView)
+	 * <p>
+	 * Search for an element on the page, starting from the document root.<br>
+	 * Support: Android iOS Web(WebView)
 	 *
 	 * @param elementId
 	 *            The ID attribute of element
@@ -171,8 +179,9 @@ public class MacacaClient {
 	}
 
 	/**
-	 * <p>Search for an element on the page, starting from the document root.<br>
-   * Support: Web(WebView)
+	 * <p>
+	 * Search for an element on the page, starting from the document root.<br>
+	 * Support: Web(WebView)
 	 *
 	 * @param selector
 	 *            The css selector of element
@@ -188,8 +197,9 @@ public class MacacaClient {
 	}
 
 	/**
-	 * <p>Search for an element on the page, starting from the document root.<br>
-   * Support: Android iOS Web(WebView)
+	 * <p>
+	 * Search for an element on the page, starting from the document root.<br>
+	 * Support: Android iOS Web(WebView)
 	 *
 	 * @param xpath
 	 *            The XPath expression of element
@@ -205,8 +215,9 @@ public class MacacaClient {
 	}
 
 	/**
-	 * <p>Search for an element on the page, starting from the document root.<br>
-   * Support: Android iOS Web(WebView)
+	 * <p>
+	 * Search for an element on the page, starting from the document root.<br>
+	 * Support: Android iOS Web(WebView)
 	 *
 	 * @param name
 	 *            The name attribute of element
@@ -220,69 +231,74 @@ public class MacacaClient {
 		element.findElement(jsonObject);
 		return this;
 	}
-	
+
 	/**
-	 * <p>Search for an element on the page, starting from the document root.<br>
-   * Support: Android iOS Web(WebView)
-   *
-	 * @param wayToFind way to find an element 
-	 * @param value target value for element,paired with wayToFind
-	 * @param index index for target element 
+	 * <p>
+	 * Search for an element on the page, starting from the document root.<br>
+	 * Support: Android iOS Web(WebView)
+	 *
+	 * @param wayToFind
+	 *            way to find an element
+	 * @param value
+	 *            target value for element,paired with wayToFind
+	 * @param index
+	 *            index for target element
 	 */
-	public MacacaClient getElement(GetElementWay wayToFind,String value,int index) throws Exception {
+	public MacacaClient getElement(GetElementWay wayToFind, String value, int index) throws Exception {
 		ElementSelector elementSelector;
 		switch (wayToFind) {
 		case ID:
-			elementSelector=elementsById(value);
+			elementSelector = elementsById(value);
 			break;
 		case CSS:
-			elementSelector=elementsByCss(value);
+			elementSelector = elementsByCss(value);
 			break;
 		case NAME:
-			elementSelector=elementsByName(value);
+			elementSelector = elementsByName(value);
 			break;
 		case XPATH:
-			elementSelector=elementsByXPath(value);
+			elementSelector = elementsByXPath(value);
 			break;
 		case CLASS_NAME:
-			elementSelector=elementsByClassName(value);
+			elementSelector = elementsByClassName(value);
 			break;
 		case LINK_TEXT:
-			elementSelector=elementsByLinkText(value);
+			elementSelector = elementsByLinkText(value);
 			break;
 		case PARTIAL_LINK_TEXT:
-			elementSelector=elementsByPartialLinkText(value);
+			elementSelector = elementsByPartialLinkText(value);
 			break;
 		case TAG_NAME:
-			elementSelector=elementsByTagName(value);
+			elementSelector = elementsByTagName(value);
 			break;
 
 		default:
 			elementSelector = null;
 			break;
 		}
-		
+
 		if (elementSelector != null) {
 			elementSelector.getIndex(index);
 		} else {
-			System.out.println("can't find the element:"+value+"["+index+"]");
+			System.out.println("can't find the element:" + value + "[" + index + "]");
 			throw new Exception();
 		}
-		
+
 		return this;
 	}
-	
+
 	/**
-	 * <p>Search for an element on the page, starting from the document root.<br>
-   * Support: Android iOS Web(WebView)
-   * 
+	 * <p>
+	 * Search for an element on the page, starting from the document root.<br>
+	 * Support: Android iOS Web(WebView)
+	 * 
 	 * @param wayToFind
-	 * 			the way to find an element,for example:ID,CSS,XPATH...
+	 *            the way to find an element,for example:ID,CSS,XPATH...
 	 * @param value
-	 * 			the value for target element,paired with wayToFind
+	 *            the value for target element,paired with wayToFind
 	 * @throws Exception
 	 */
-	public MacacaClient getElement(GetElementWay wayToFind,String value) throws Exception{
+	public MacacaClient getElement(GetElementWay wayToFind, String value) throws Exception {
 		switch (wayToFind) {
 		case ID:
 			elementById(value);
@@ -311,79 +327,83 @@ public class MacacaClient {
 		default:
 			throw new Exception();
 		}
-		
+
 		return this;
 	}
-	
+
 	/**
-	 * <p>get count of elements when there exist multiple elements<br>
-   * Support: Android iOS Web(WebView)
-   *
+	 * <p>
+	 * get count of elements when there exist multiple elements<br>
+	 * Support: Android iOS Web(WebView)
+	 *
 	 * @param wayToFind
-	 * 			the way to find an element,for example:ID,CSS,XPATH...
+	 *            the way to find an element,for example:ID,CSS,XPATH...
 	 * @param value
-	 * 			the value for target element,paired with wayToFind
+	 *            the value for target element,paired with wayToFind
 	 * @return count of target element
 	 * @throws Exception
 	 */
-	public int countOfElements(GetElementWay wayToFind,String value) throws Exception{
-		
+	public int countOfElements(GetElementWay wayToFind, String value) throws Exception {
+
 		ElementSelector elementSelector = getElementSelector(wayToFind, value);
 		if (elementSelector != null) {
 			return elementSelector.size();
 		}
-		
+
 		return 0;
 	}
-	
-	private ElementSelector getElementSelector(GetElementWay wayToFind,String value) throws Exception {
+
+	private ElementSelector getElementSelector(GetElementWay wayToFind, String value) throws Exception {
 		ElementSelector elementSelector;
 		switch (wayToFind) {
 		case ID:
-			elementSelector=elementsById(value);
+			elementSelector = elementsById(value);
 			break;
 		case CSS:
-			elementSelector=elementsByCss(value);
+			elementSelector = elementsByCss(value);
 			break;
 		case NAME:
-			elementSelector=elementsByName(value);
+			elementSelector = elementsByName(value);
 			break;
 		case XPATH:
-			elementSelector=elementsByXPath(value);
+			elementSelector = elementsByXPath(value);
 			break;
 		case CLASS_NAME:
-			elementSelector=elementsByClassName(value);
+			elementSelector = elementsByClassName(value);
 			break;
 		case LINK_TEXT:
-			elementSelector=elementsByLinkText(value);
+			elementSelector = elementsByLinkText(value);
 			break;
 		case PARTIAL_LINK_TEXT:
-			elementSelector=elementsByPartialLinkText(value);
+			elementSelector = elementsByPartialLinkText(value);
 			break;
 		case TAG_NAME:
-			elementSelector=elementsByTagName(value);
+			elementSelector = elementsByTagName(value);
 			break;
 
 		default:
 			elementSelector = null;
 			break;
 		}
-		
+
 		return elementSelector;
 	}
+
 	/**
-	 * <p>find target element,if it doesn't exist,keep finding during given time (property:waitElementTimeout)<br>
-   * Support: Android iOS Web(WebView)
-   * 
-	 * @param wayToFind 
-	 * 			the way to find an element,for example:ID,CSS,XPATH...
-	 * @param value  
-	 * 			the value for target element,paired with wayToFind
+	 * <p>
+	 * find target element,if it doesn't exist,keep finding during given time
+	 * (property:waitElementTimeout)<br>
+	 * Support: Android iOS Web(WebView)
+	 * 
+	 * @param wayToFind
+	 *            the way to find an element,for example:ID,CSS,XPATH...
+	 * @param value
+	 *            the value for target element,paired with wayToFind
 	 * @param index
-	 * 			the index for target element
+	 *            the index for target element
 	 * @throws Exception
 	 */
-	public MacacaClient waitForElement(GetElementWay wayToFind,String value,int index) throws Exception{
+	public MacacaClient waitForElement(GetElementWay wayToFind, String value, int index) throws Exception {
 		int count = 0;
 		int timeLeft = waitElementTimeout;
 		boolean satisfied = false;
@@ -407,18 +427,20 @@ public class MacacaClient {
 		}
 		return this;
 	}
-	
+
 	/**
-	 * <p>find target element,if it doesn't exist,keep finding during given time (property:waitElementTimeout)<br>
-   * Support: Android iOS Web(WebView)
-   *
-	 * @param wayToFind 
-	 * 			the way to find an element,for example:ID,CSS,XPATH...
-	 * @param value  
-	 * 			the value for target element,paired with wayToFind
+	 * <p>
+	 * find target element,if it doesn't exist,keep finding during given time
+	 * (property:waitElementTimeout)<br>
+	 * Support: Android iOS Web(WebView)
+	 *
+	 * @param wayToFind
+	 *            the way to find an element,for example:ID,CSS,XPATH...
+	 * @param value
+	 *            the value for target element,paired with wayToFind
 	 * @throws Exception
 	 */
-	public MacacaClient waitForElement(GetElementWay wayToFind,String value) throws Exception{
+	public MacacaClient waitForElement(GetElementWay wayToFind, String value) throws Exception {
 		int count = 0;
 		int timeLeft = waitElementTimeout;
 		boolean satisfied = false;
@@ -444,8 +466,9 @@ public class MacacaClient {
 	}
 
 	/**
-	 * <p>Search for an element on the page, starting from the document root.<br>
-   * Support: Android iOS Web(WebView)
+	 * <p>
+	 * Search for an element on the page, starting from the document root.<br>
+	 * Support: Android iOS Web(WebView)
 	 *
 	 * @param className
 	 *            The className attribute of element
@@ -461,8 +484,9 @@ public class MacacaClient {
 	}
 
 	/**
-	 * <p>Search for an element on the page, starting from the document root.<br>
-   * Support: Android iOS Web(WebView)
+	 * <p>
+	 * Search for an element on the page, starting from the document root.<br>
+	 * Support: Android iOS Web(WebView)
 	 *
 	 * @param linkText
 	 *            The linkText attribute of element
@@ -478,8 +502,9 @@ public class MacacaClient {
 	}
 
 	/**
-	 * <p>Search for an element on the page, starting from the document root.<br>
-   * Support: Android iOS Web(WebView)
+	 * <p>
+	 * Search for an element on the page, starting from the document root.<br>
+	 * Support: Android iOS Web(WebView)
 	 *
 	 * @param tagName
 	 *            The tag name attribute of element
@@ -495,8 +520,9 @@ public class MacacaClient {
 	}
 
 	/**
-	 * <p>Search for an element on the page, starting from the document root.<br>
-   * Support: Android iOS Web(WebView)
+	 * <p>
+	 * Search for an element on the page, starting from the document root.<br>
+	 * Support: Android iOS Web(WebView)
 	 *
 	 * @param partialLinkText
 	 *            The partial link text attribute of element
@@ -512,9 +538,10 @@ public class MacacaClient {
 	}
 
 	/**
-	 * <p>Search for multiple elements on the page, starting from the document
+	 * <p>
+	 * Search for multiple elements on the page, starting from the document
 	 * root.<br>
-   * Support: Android iOS Web(WebView)
+	 * Support: Android iOS Web(WebView)
 	 *
 	 * @param xpath
 	 *            The XPath expression of elements
@@ -530,9 +557,10 @@ public class MacacaClient {
 	}
 
 	/**
-	 * <p>Search for multiple elements on the page, starting from the document
+	 * <p>
+	 * Search for multiple elements on the page, starting from the document
 	 * root.<br>
-   * Support: Android iOS Web(WebView)
+	 * Support: Android iOS Web(WebView)
 	 *
 	 * @param name
 	 *            The name attribute of elements
@@ -548,9 +576,10 @@ public class MacacaClient {
 	}
 
 	/**
-	 * <p>Search for multiple elements on the page, starting from the document
+	 * <p>
+	 * Search for multiple elements on the page, starting from the document
 	 * root.<br>
-   * Support: Android iOS Web(WebView)
+	 * Support: Android iOS Web(WebView)
 	 *
 	 * @param elementId
 	 *            The elementId attribute of elements
@@ -566,9 +595,10 @@ public class MacacaClient {
 	}
 
 	/**
-	 * <p>Search for multiple elements on the page, starting from the document
+	 * <p>
+	 * Search for multiple elements on the page, starting from the document
 	 * root.<br>
-   * Support: Android iOS Web(WebView)
+	 * Support: Android iOS Web(WebView)
 	 *
 	 * @param className
 	 *            The className attribute of elements
@@ -584,9 +614,10 @@ public class MacacaClient {
 	}
 
 	/**
-	 * <p>Search for multiple elements on the page, starting from the document
+	 * <p>
+	 * Search for multiple elements on the page, starting from the document
 	 * root.<br>
-   * Support: Web(WebView)
+	 * Support: Web(WebView)
 	 *
 	 * @param css
 	 *            The selector selector of elements
@@ -602,9 +633,10 @@ public class MacacaClient {
 	}
 
 	/**
-	 * <p>Search for multiple elements on the page, starting from the document
+	 * <p>
+	 * Search for multiple elements on the page, starting from the document
 	 * root.<br>
-   * Support: Android iOS Web(WebView)
+	 * Support: Android iOS Web(WebView)
 	 *
 	 * @param linkText
 	 *            The link text attribute of elements
@@ -620,9 +652,10 @@ public class MacacaClient {
 	}
 
 	/**
-	 * <p>Search for multiple elements on the page, starting from the document
+	 * <p>
+	 * Search for multiple elements on the page, starting from the document
 	 * root.<br>
-   * Support: Android iOS Web(WebView)
+	 * Support: Android iOS Web(WebView)
 	 *
 	 * @param linkText
 	 *            The partial link text attribute of elements
@@ -638,9 +671,10 @@ public class MacacaClient {
 	}
 
 	/**
-	 * <p>Search for multiple elements on the page, starting from the document
+	 * <p>
+	 * Search for multiple elements on the page, starting from the document
 	 * root.<br>
-   * Support: Android iOS Web(WebView)
+	 * Support: Android iOS Web(WebView)
 	 *
 	 * @param tagName
 	 *            The tag name attribute of elements
@@ -656,8 +690,9 @@ public class MacacaClient {
 	}
 
 	/**
-	 * <p>Search for element at specific interval during given time<br>
-   * Support: Android iOS Web(WebView)
+	 * <p>
+	 * Search for element at specific interval during given time<br>
+	 * Support: Android iOS Web(WebView)
 	 *
 	 * @param using
 	 *            The way for find an element,eg:"name","xpath","css","id"
@@ -670,7 +705,7 @@ public class MacacaClient {
 	 * @return The currently instance of MacacaClient
 	 * @throws Exception
 	 */
-	public MacacaClient waitForElement(String using,String value,int timeout,int interval) throws Exception {
+	public MacacaClient waitForElement(String using, String value, int timeout, int interval) throws Exception {
 		JSONObject jsonObject = new JSONObject();
 		jsonObject.put("value", value);
 		jsonObject.put("using", using);
@@ -697,11 +732,11 @@ public class MacacaClient {
 		}
 		return this;
 	}
-	
 
 	/**
-	 * <p>Search for element at specific interval during given time<br>
-   * Support: Android iOS Web(WebView)
+	 * <p>
+	 * Search for element at specific interval during given time<br>
+	 * Support: Android iOS Web(WebView)
 	 *
 	 * @param using
 	 *            The way for find an element,eg:"name","xpath","css","id"
@@ -715,11 +750,11 @@ public class MacacaClient {
 		waitForElement(using, value, waitElementTimeout, waitElementTimeInterval);
 		return this;
 	}
-	
 
 	/**
-	 * <p>Search for an element on the page, starting from the document root.<br>
-   * Support: Android iOS Web(WebView)
+	 * <p>
+	 * Search for an element on the page, starting from the document root.<br>
+	 * Support: Android iOS Web(WebView)
 	 *
 	 * @param elementId
 	 *            The ID attribute of element
@@ -732,8 +767,9 @@ public class MacacaClient {
 	}
 
 	/**
-	 * <p>Search for an element on the page, starting from the document root.<br>
-   * Support: Web(WebView)
+	 * <p>
+	 * Search for an element on the page, starting from the document root.<br>
+	 * Support: Web(WebView)
 	 *
 	 * @param selector
 	 *            The css selector of element
@@ -746,8 +782,9 @@ public class MacacaClient {
 	}
 
 	/**
-	 * <p>Search for an element on the page, starting from the document root.<br>
-   * Support: Android iOS Web(WebView)
+	 * <p>
+	 * Search for an element on the page, starting from the document root.<br>
+	 * Support: Android iOS Web(WebView)
 	 *
 	 * @param xpath
 	 *            The XPath expression of element
@@ -760,8 +797,9 @@ public class MacacaClient {
 	}
 
 	/**
-	 * <p>Search for an element on the page, starting from the document root.<br>
-   * Support: Android iOS Web(WebView)
+	 * <p>
+	 * Search for an element on the page, starting from the document root.<br>
+	 * Support: Android iOS Web(WebView)
 	 *
 	 * @param name
 	 *            The name attribute of element
@@ -774,8 +812,9 @@ public class MacacaClient {
 	}
 
 	/**
-	 * <p>Search for an element on the page, starting from the document root.<br>
-   * Support: Android iOS Web(WebView)
+	 * <p>
+	 * Search for an element on the page, starting from the document root.<br>
+	 * Support: Android iOS Web(WebView)
 	 *
 	 * @param text
 	 *            The visible text of element
@@ -788,8 +827,9 @@ public class MacacaClient {
 	}
 
 	/**
-	 * <p>Search for an element on the page, starting from the document root.<br>
-   * Support: Android iOS Web(WebView)
+	 * <p>
+	 * Search for an element on the page, starting from the document root.<br>
+	 * Support: Android iOS Web(WebView)
 	 *
 	 * @param text
 	 *            The visible text of element
@@ -802,8 +842,9 @@ public class MacacaClient {
 	}
 
 	/**
-	 * <p>check if target element exist<br>
-   * Support: Android iOS Web(WebView)
+	 * <p>
+	 * check if target element exist<br>
+	 * Support: Android iOS Web(WebView)
 	 *
 	 * @param using
 	 *            The way for find an element,eg:"name","xpath","css","id"
@@ -819,45 +860,47 @@ public class MacacaClient {
 		jsonObject.put("using", using);
 		try {
 			element.findElement(jsonObject);
-		} catch(Exception e) {
+		} catch (Exception e) {
 			return false;
 		}
 
 		return element.isDisplayed();
 	}
-	
+
 	/**
-	 * <p>check if target element exist<br>
-   * Support: Android iOS Web(WebView)
-   * 
+	 * <p>
+	 * check if target element exist<br>
+	 * Support: Android iOS Web(WebView)
+	 * 
 	 * @param wayToFind
-	 * 			The way to find an element
+	 *            The way to find an element
 	 * @param value
-	 * 			 The value for the specific way
+	 *            The value for the specific way
 	 * @param index
-	 * 			The index of the target element
+	 *            The index of the target element
 	 * @return
 	 * @throws Exception
 	 */
-	public boolean isElementExist(GetElementWay wayToFind, String value,int index) throws Exception {
+	public boolean isElementExist(GetElementWay wayToFind, String value, int index) throws Exception {
 		try {
 			getElement(wayToFind, value, index);
 		} catch (Exception e) {
 			// TODO: handle exception
 			return false;
 		}
-		
+
 		return element.isDisplayed();
 	}
-	
+
 	/**
-	 * <p>check if target element exist<br>
-   * Support: Android iOS Web(WebView)
-   * 
+	 * <p>
+	 * check if target element exist<br>
+	 * Support: Android iOS Web(WebView)
+	 * 
 	 * @param wayToFind
-	 * 			The way to find an element
+	 *            The way to find an element
 	 * @param value
-	 * 			 The value for the specific way
+	 *            The value for the specific way
 	 * @return boolean exist-true ; not exist-false
 	 * @throws Exception
 	 */
@@ -868,14 +911,14 @@ public class MacacaClient {
 			// TODO: handle exception
 			return false;
 		}
-		
+
 		return element.isDisplayed();
 	}
-	
 
 	/**
-	 * <p>Send a sequence of key strokes to the active element.<br>
-   *Support: Android iOS Web(WebView)
+	 * <p>
+	 * Send a sequence of key strokes to the active element.<br>
+	 * Support: Android iOS Web(WebView)
 	 *
 	 * @param keys
 	 *            The keys sequence to be sent.
@@ -892,11 +935,18 @@ public class MacacaClient {
 	}
 
 	/**
-	 * <p>Move the mouse by an offset of the specificed element.<br>
-   * Support: Android
-   * 
-	 * @param xoffset X offset to move to, relative to the top-left corner of the element. If not specified, the mouse will move to the middle of the element.
-	 * @param yoffset Y offset to move to, relative to the top-left corner of the element. If not specified, the mouse will move to the middle of the element.
+	 * <p>
+	 * Move the mouse by an offset of the specificed element.<br>
+	 * Support: Android
+	 * 
+	 * @param xoffset
+	 *            X offset to move to, relative to the top-left corner of the
+	 *            element. If not specified, the mouse will move to the middle
+	 *            of the element.
+	 * @param yoffset
+	 *            Y offset to move to, relative to the top-left corner of the
+	 *            element. If not specified, the mouse will move to the middle
+	 *            of the element.
 	 * @return The currently instance of MacacaClient
 	 * @throws Exception
 	 */
@@ -910,8 +960,9 @@ public class MacacaClient {
 	}
 
 	/**
-	 * <p>Click on an element.<br>
-   * Support: Android iOS Web(WebView)
+	 * <p>
+	 * Click on an element.<br>
+	 * Support: Android iOS Web(WebView)
 	 *
 	 * @return The currently instance of MacacaClient
 	 * @throws Exception
@@ -920,26 +971,29 @@ public class MacacaClient {
 		element.click();
 		return this;
 	}
-	
 
 	/**
-	 * <p>click at specific point ,absolutely  coordinate<br>
-   * Support: Android
-   *
-	 * @param x  x-coordinate
-	 * @param y  y-coordinate
+	 * <p>
+	 * click at specific point ,absolutely coordinate<br>
+	 * Support: Android
+	 *
+	 * @param x
+	 *            x-coordinate
+	 * @param y
+	 *            y-coordinate
 	 * @return
 	 * @throws Exception
 	 */
-	public MacacaClient clickPoint(int x,int y) throws Exception {
+	public MacacaClient clickPoint(int x, int y) throws Exception {
 		moveTo(x, y);
 		click();
 		return this;
 	}
 
 	/**
-	 * <p>Touch click on an element.<br>
-   * Support: Android iOS
+	 * <p>
+	 * Touch click on an element.<br>
+	 * Support: Android iOS
 	 *
 	 * @return The currently instance of MacacaClient
 	 * @throws Exception
@@ -949,10 +1003,10 @@ public class MacacaClient {
 		return this;
 	}
 
-
 	/**
-	 * <p>clear on an element.<br>
-   * Support: Android iOS Web(WebView)
+	 * <p>
+	 * clear on an element.<br>
+	 * Support: Android iOS Web(WebView)
 	 *
 	 * @return The currently instance of MacacaClient
 	 * @throws Exception
@@ -963,8 +1017,9 @@ public class MacacaClient {
 	}
 
 	/**
-	 * <p>press back.<br>
-   * Support: Web(WebView)
+	 * <p>
+	 * press back.<br>
+	 * Support: Web(WebView)
 	 *
 	 * @return The currently instance of MacacaClient
 	 * @throws Exception
@@ -975,8 +1030,9 @@ public class MacacaClient {
 	}
 
 	/**
-	 * <p>Swipe on the touch screen using finger motion events.<br>
-   * Support: Android iOS
+	 * <p>
+	 * Swipe on the touch screen using finger motion events.<br>
+	 * Support: Android iOS
 	 *
 	 * @param startX
 	 *            The X coordinate to position the window at, relative to the
@@ -1007,8 +1063,10 @@ public class MacacaClient {
 	}
 
 	/**
-	 * <p>Get the result of a property of a element.<br>
-   * Support: Android iOS Web(WebView)
+	 * <p>
+	 * Get the result of a property of a element.<br>
+	 * Support: Android iOS Web(WebView), Android iOS can only get `origin`
+	 * `size`
 	 *
 	 * @param name
 	 *            The property name of element
@@ -1022,9 +1080,10 @@ public class MacacaClient {
 	// Execute
 
 	/**
-	 * <p>Inject a snippet of JavaScript into the page for execution in the context
+	 * <p>
+	 * Inject a snippet of JavaScript into the page for execution in the context
 	 * of the currently selected frame.<br>
-   * Support: Web(WebView)
+	 * Support: Web(WebView)
 	 *
 	 * @param code
 	 *            The script to execute
@@ -1040,9 +1099,10 @@ public class MacacaClient {
 	// Keys
 
 	/**
-	 * <p>Send a sequence of key strokes to the active window.<br>
+	 * <p>
+	 * Send a sequence of key strokes to the active window.<br>
 	 * Support: Android Web(WebView)
-   *
+	 *
 	 * @param keys
 	 *            The keys sequence to be sent.
 	 * @return The currently instance of MacacaClient
@@ -1060,10 +1120,11 @@ public class MacacaClient {
 	// ScreenShot
 
 	/**
-	 * <p>Take a screenshot of the current page.<br>
-   * Support: Android iOS Web(WebView)
-
+	 * <p>
+	 * Take a screenshot of the current page.<br>
+	 * Support: Android iOS Web(WebView)
 	 *
+	 * 
 	 * @return The currently instance of MacacaClient
 	 * @throws Exception
 	 */
@@ -1075,8 +1136,9 @@ public class MacacaClient {
 	// saveScreenShot
 
 	/**
-	 * <p>Save screenshot of the current page.<br>
-   * Support: Android iOS Web(WebView)
+	 * <p>
+	 * Save screenshot of the current page.<br>
+	 * Support: Android iOS Web(WebView)
 	 *
 	 * @param fileName
 	 *            The absolute path of the image filename
@@ -1091,8 +1153,9 @@ public class MacacaClient {
 	// Session
 
 	/**
-	 * <p>Initial webdriver client and create a session.<br>
-   * Support: Android iOS Web(WebView)
+	 * <p>
+	 * Initial webdriver client and create a session.<br>
+	 * Support: Android iOS Web(WebView)
 	 *
 	 * @param jsonObject
 	 *            The capabilities of session
@@ -1105,8 +1168,9 @@ public class MacacaClient {
 	}
 
 	/**
-	 * <p>Get the current sessionId.<br>
-   * Support: Android iOS Web(WebView)
+	 * <p>
+	 * Get the current sessionId.<br>
+	 * Support: Android iOS Web(WebView)
 	 *
 	 * @return The current sessionId.
 	 * @throws Exception
@@ -1116,8 +1180,9 @@ public class MacacaClient {
 	}
 
 	/**
-	 * <p>Delete session.<br>
-   * Support: Android iOS Web(WebView)
+	 * <p>
+	 * Delete session.<br>
+	 * Support: Android iOS Web(WebView)
 	 *
 	 * @throws Exception
 	 */
@@ -1128,8 +1193,9 @@ public class MacacaClient {
 	// Source
 
 	/**
-	 * <p>Get the current page source.<br>
-   * Support: Android iOS Web(WebView)
+	 * <p>
+	 * Get the current page source.<br>
+	 * Support: Android iOS Web(WebView)
 	 *
 	 * @return The current page source.
 	 * @throws Exception
@@ -1141,8 +1207,9 @@ public class MacacaClient {
 	// Status
 
 	/**
-	 * <p>Query the server's current status.<br>
-   * Support: Android iOS Web(WebView)
+	 * <p>
+	 * Query the server's current status.<br>
+	 * Support: Android iOS Web(WebView)
 	 *
 	 * @throws Exception
 	 */
@@ -1151,8 +1218,9 @@ public class MacacaClient {
 	}
 
 	/**
-	 * <p>Set the amount of time the driver should wait.<br>
-   * Support: Android iOS Web(WebView)
+	 * <p>
+	 * Set the amount of time the driver should wait.<br>
+	 * Support: Android iOS Web(WebView)
 	 *
 	 * @param ms
 	 *            The amount of sleep time, in milliseconds. This value has a
@@ -1168,8 +1236,9 @@ public class MacacaClient {
 	// Title
 
 	/**
-	 * <p>Get the current page title.<br>
-   * Support: Web(WebView)
+	 * <p>
+	 * Get the current page title.<br>
+	 * Support: Web(WebView)
 	 *
 	 * @return The current page title.
 	 * @throws Exception
@@ -1181,8 +1250,9 @@ public class MacacaClient {
 	// Url
 
 	/**
-	 * <p>Retrieve the URL of the current page.<br>
-   * Support: Web(WebView)
+	 * <p>
+	 * Retrieve the URL of the current page.<br>
+	 * Support: Web(WebView)
 	 *
 	 * @return The current URL.
 	 * @throws Exception
@@ -1192,8 +1262,9 @@ public class MacacaClient {
 	}
 
 	/**
-	 * <p>Navigate to a new URL.<br>
-   * Support: Web(WebView)
+	 * <p>
+	 * Navigate to a new URL.<br>
+	 * Support: Web(WebView)
 	 *
 	 * @param url
 	 * @return The currently instance of MacacaClient
@@ -1209,8 +1280,9 @@ public class MacacaClient {
 	// Window
 
 	/**
-	 * <p>Get the size of the specified window.<br>
-   * Support: Android iOS Web(WebView)
+	 * <p>
+	 * Get the size of the specified window.<br>
+	 * Support: Android iOS Web(WebView)
 	 *
 	 * @return {width: number, height: number} The size of the window.
 	 * @throws Exception
@@ -1220,8 +1292,9 @@ public class MacacaClient {
 	}
 
 	/**
-	 * <p>Change the size of the specified window.<br>
-   * Support: Web(WebView)
+	 * <p>
+	 * Change the size of the specified window.<br>
+	 * Support: Web(WebView)
 	 *
 	 * @param width
 	 *            The new window width.
@@ -1239,8 +1312,9 @@ public class MacacaClient {
 	}
 
 	/**
-	 * <p>set maximize size of the window.<br>
-   * Support: Web(WebView)
+	 * <p>
+	 * set maximize size of the window.<br>
+	 * Support: Web(WebView)
 	 *
 	 * @return The currently instance of MacacaClient
 	 * @throws Exception
@@ -1251,8 +1325,9 @@ public class MacacaClient {
 	}
 
 	/**
-	 * <p>Get text of the element<br>
-   * Support: Android iOS Web(WebView)
+	 * <p>
+	 * Get text of the element<br>
+	 * Support: Android iOS Web(WebView)
 	 *
 	 * @return The text of the element
 	 * @throws Exception
