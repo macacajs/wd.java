@@ -8,7 +8,7 @@ Java Client binding for Macaca
 ## Intro
 
 WD.java is a Java WebDriver client implemented most of the APIs in the [WebDriver Protocol](https://www.w3.org/TR/webdriver/).
-It was originally designed for [Macaca](http://macacajs.github.io/macaca/) (A Node.js powered WebDriver server), but also available for any other implementation of WebDriver server such as Selenium, Appium and etc.
+It was originally designed for [Macaca](//macacajs.github.io) (A Node.js powered WebDriver server), but also available for any other implementation of WebDriver server such as Selenium, Appium and etc.
 
 ## Document
 
