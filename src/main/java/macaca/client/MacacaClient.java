@@ -1347,10 +1347,7 @@ public class MacacaClient {
 	 * @throws Exception
 	 */
 	public MacacaClient touch(String action, JSONObject args) throws Exception {
-		JSONObject jsonObject = new JSONObject();
-		jsonObject.put("action", action);
-		jsonObject.put("args", args);
-		element.touch(jsonObject);
+		element.touch(action, args);
 		return this;
 	}
 
