@@ -25,23 +25,20 @@ public class DriverCommand {
 
 	// element
 	public static final String CLICK = SESSION + "/click";
-	public static final String MOVE_TO = SESSION + "/moveTo";
 	public static final String KEYS = SESSION + "/keys";
+	public static final String ACTIONS = SESSION + "/actions";
 	public static final String FIND_CHILD_ELEMENT = SESSION + "/element/:elementId/element";
 	public static final String FIND_CHILD_ELEMENTS = SESSION + "/element/:elementId/elements";
 	public static final String FIND_ELEMENT = SESSION + "/element";
 	public static final String FIND_ELEMENTS = SESSION + "/elements";
 	public static final String ELEMENT_VALUE = SESSION + "/element/:elementId/value";
 	public static final String CLICK_ELEMENT = SESSION + "/element/:elementId/click";
-	public static final String SWIPE = SESSION + "/element/:elementId/swipe";
 	public static final String GET_ELEMENT_TEXT = SESSION + "/element/:elementId/text";
 	public static final String IS_ELEMENT_DISPLAYED = SESSION + "/element/:elementId/displayed";
 	public static final String CLEAR_ELEMENT = SESSION + "/element/:elementId/clear";
 	public static final String GET_ELEMENT_ATTRIBUTE = SESSION + "/element/:elementId/attribute/:name";
 	public static final String GET_ELEMENT_PROPERTY = SESSION + "/element/:elementId/property/:name";
 	public static final String GET_ELEMENT_VALUE_OF_CSS_PROPERTY = SESSION + "/element/:elementId/css/:propertyName";
-	public static final String TOUCH_CLICK = SESSION + "/touch/click";
-	public static final String TOUCH_FLICK = SESSION + "/touch/flick";
 
 	// execute
 	public static final String EXECUTE_SCRIPT = SESSION + "/execute";
@@ -68,4 +65,10 @@ public class DriverCommand {
 	public static final String SET_WINDOW_SIZE = SESSION + "/setWindowSize";
 	public static final String MAXIMIZE_WINDOW = SESSION + "/window/:windowHandle/maximize"; 
 	public static final String FRAME = SESSION + "/frame";
+	
+	// DEPRECATED
+	public static final String MOVE_TO = SESSION + "/moveTo";
+	public static final String SWIPE = SESSION + "/element/:elementId/swipe";
+	public static final String TOUCH_CLICK = SESSION + "/touch/click";
+	public static final String TOUCH_FLICK = SESSION + "/touch/flick";
 }

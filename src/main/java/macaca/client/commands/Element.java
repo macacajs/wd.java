@@ -134,5 +134,21 @@ public class Element {
 		utils.request("POST", DriverCommand.MOVE_TO, jsonObject);
 		globalTap = true;
 	}
+	
+	public void touch(String action, JSONObject args) throws Exception {
+		JSONObject jsonObject = new JSONObject();
+		jsonObject.put("sessionId", driver.getSessionId());
+		JSONArray array = new JSONArray();
+		JSONObject actionObject = new JSONObject();
+		actionObject.put("element", driver.getElementId());
+		actionObject.put("type", action);
+		for (String key : args.keySet()) {
+			String value = args.getString(key);
+			actionObject.put(key , value);
+		}
+		array.add(actionObject);
+		jsonObject.put("actions", array);
+		utils.request("POST", DriverCommand.ACTIONS, jsonObject);
+	}
 
 }
