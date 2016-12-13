@@ -16,7 +16,7 @@ It was originally designed for [Macaca](//macacajs.github.io) (A Node.js powered
 
 ## Sample
 
-[macaca-test-sample-java](//github.com/macacajs/macaca-test-sample-java)
+[macaca-test-sample-java](//github.com/macaca-sample/macaca-test-sample-java)
 
 ## ChangeLog
 
