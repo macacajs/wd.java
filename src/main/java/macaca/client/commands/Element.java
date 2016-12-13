@@ -140,6 +140,7 @@ public class Element {
 		jsonObject.put("sessionId", driver.getSessionId());
 		JSONArray array = new JSONArray();
 		JSONObject actionObject = new JSONObject();
+		actionObject.put("element", driver.getElementId());
 		actionObject.put("type", action);
 		for (String key : args.keySet()) {
 			String value = args.getString(key);
