@@ -26,6 +26,7 @@ public class DriverCommand {
 	// element
 	public static final String CLICK = SESSION + "/click";
 	public static final String KEYS = SESSION + "/keys";
+	public static final String ACTIONS = SESSION + "/actions";
 	public static final String FIND_CHILD_ELEMENT = SESSION + "/element/:elementId/element";
 	public static final String FIND_CHILD_ELEMENTS = SESSION + "/element/:elementId/elements";
 	public static final String FIND_ELEMENT = SESSION + "/element";

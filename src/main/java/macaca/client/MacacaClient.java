@@ -1335,5 +1335,23 @@ public class MacacaClient {
 	public String text() throws Exception {
 		return element.getText();
 	}
+	
+	/**
+	 * <p>
+	 * Apply touch actions on devices. Such as, tap/doubleTap/press/pinch/rotate/drag.<br>
+	 * Support: Support: iOS
+	 *
+	 * @param action The new window width
+	 * @param args Parameters of the action
+	 * @return The currently instance of MacacaClient
+	 * @throws Exception
+	 */
+	public MacacaClient touch(String action, JSONObject args) throws Exception {
+		JSONObject jsonObject = new JSONObject();
+		jsonObject.put("action", action);
+		jsonObject.put("args", args);
+		element.touch(jsonObject);
+		return this;
+	}
 
 }
