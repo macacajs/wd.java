@@ -291,7 +291,7 @@ public class MacacaClient {
 	 * <p>
 	 * Search for an element on the page, starting from the document root.<br>
 	 * Support: Android iOS Web(WebView)
-	 * 
+	 *
 	 * @param wayToFind
 	 *            the way to find an element,for example:ID,CSS,XPATH...
 	 * @param value
@@ -394,7 +394,7 @@ public class MacacaClient {
 	 * find target element,if it doesn't exist,keep finding during given time
 	 * (property:waitElementTimeout)<br>
 	 * Support: Android iOS Web(WebView)
-	 * 
+	 *
 	 * @param wayToFind
 	 *            the way to find an element,for example:ID,CSS,XPATH...
 	 * @param value
@@ -871,7 +871,7 @@ public class MacacaClient {
 	 * <p>
 	 * check if target element exist<br>
 	 * Support: Android iOS Web(WebView)
-	 * 
+	 *
 	 * @param wayToFind
 	 *            The way to find an element
 	 * @param value
@@ -896,7 +896,7 @@ public class MacacaClient {
 	 * <p>
 	 * check if target element exist<br>
 	 * Support: Android iOS Web(WebView)
-	 * 
+	 *
 	 * @param wayToFind
 	 *            The way to find an element
 	 * @param value
@@ -938,7 +938,7 @@ public class MacacaClient {
 	 * <p>
 	 * Move the mouse by an offset of the specificed element.<br>
 	 * Support: Android
-	 * 
+	 *
 	 * @param xoffset
 	 *            X offset to move to, relative to the top-left corner of the
 	 *            element. If not specified, the mouse will move to the middle
@@ -957,6 +957,62 @@ public class MacacaClient {
 		jsonObject.put("yoffset", yoffset);
 		element.moveTo(xoffset, yoffset);
 		return this;
+	}
+
+	/**
+	 * scroll to given element,if find the element ,return true,then return false
+	 * Support: Android iOS Web(WebView)
+	 * @param wayToFind
+	 * 			way to find the given element
+	 * @param value
+	 * 			value for given element
+	 * @return
+	 * 			true:find the element
+	 * 		    false:the element doesn't exist
+	 */
+	public boolean scrollTo(GetElementWay wayToFind, String value){
+
+		JSONObject windowSize;
+		try {
+			windowSize = getWindowSize();
+			int windowWidth = windowSize.getIntValue("width");
+			int windowHeight = windowSize.getIntValue("height");
+
+			int startX = windowWidth-20;
+			int endX = startX;
+			int startY = windowHeight*3/5;
+			int endY = windowHeight*2/5;
+
+			String beforeScreenShot = null ;
+			String afterScreenShot = null;
+			while (!isElementExist(wayToFind, value)) {
+
+				if (beforeScreenShot != null &&
+					beforeScreenShot.length() > 0) {
+					if (beforeScreenShot.equals(afterScreenShot)) {
+						// the same screen image ,it means current view has scroll to bottom
+						System.out.println("the given element does not exist");
+						return false;
+					}
+				}
+
+				beforeScreenShot = screenshot.takeScreenshot().toString();
+				System.out.println("scroll: ("+startX+","+startY+","+endX+","+endY+")");
+				swipe(startX, startY, endX, endY, 50);
+				Thread.sleep(1000);
+				afterScreenShot = screenshot.takeScreenshot().toString();
+
+			}
+
+			return true;
+
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return false;
+
 	}
 
 	/**
@@ -1124,7 +1180,7 @@ public class MacacaClient {
 	 * Take a screenshot of the current page.<br>
 	 * Support: Android iOS Web(WebView)
 	 *
-	 * 
+	 *
 	 * @return The currently instance of MacacaClient
 	 * @throws Exception
 	 */
@@ -1335,7 +1391,7 @@ public class MacacaClient {
 	public String text() throws Exception {
 		return element.getText();
 	}
-	
+
 	/**
 	 * <p>
 	 * Apply touch actions on devices. Such as, tap/doubleTap/press/pinch/rotate/drag.<br>
