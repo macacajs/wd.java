@@ -22,7 +22,7 @@ import java.util.Map;
 public class Utils {
 
 	private final Log log = LogFactory.getLog(getClass());
-	
+
 	private HttpGet httpget = null;
 	private HttpPost httppost = null;
 	private HttpDelete httpdelete = null;
@@ -33,11 +33,19 @@ public class Utils {
 	private JSONObject jsonResponse = null;
 	private String stringResponse = "";
 	private MacacaDriver driver;
-	
+
 	public Utils(MacacaDriver driver) {
 		this.driver = driver;
 	}
-	
+
+	public void printResponse(String stringResponse) throws Exception{
+		if (stringResponse.length() > 400) {
+			System.out.println("Response content:" + stringResponse.substring(0, 400)+"...more info is ignored...");
+		} else {
+			System.out.println("Response content:" + stringResponse);
+		}
+	}
+
 	public Object getRequest(String method, JSONObject jsonBody) throws Exception {
 
 		for (String key : jsonBody.keySet()) {
@@ -53,7 +61,7 @@ public class Utils {
 			//System.out.println(response.getStatusLine().getStatusCode());
 			if (entity != null) {
 				stringResponse = EntityUtils.toString(entity);
-				System.out.println("Response content:" + stringResponse);
+				printResponse(stringResponse);
 				jsonResponse = JSON.parseObject(stringResponse);
 				handleStatus(jsonResponse.getInteger("status"));
 				return jsonResponse.get("value");
@@ -91,11 +99,7 @@ public class Utils {
 			System.out.println(response.getStatusLine().getStatusCode());
 			if (entity != null) {
 				stringResponse = EntityUtils.toString(entity);
-				if (stringResponse.length() > 400) {
-					System.out.println("Response content:" + stringResponse.substring(0, 400)+"...");
-				} else {
-					System.out.println("Response content:" + stringResponse);
-				}
+				printResponse(stringResponse);
 				jsonResponse = JSON.parseObject(stringResponse);
 				handleStatus(jsonResponse.getInteger("status"));
 				return jsonResponse;
@@ -123,7 +127,7 @@ public class Utils {
 		System.out.println(response.getStatusLine().getStatusCode());
 		if (entity != null) {
 			String stringResponse = EntityUtils.toString(entity);
-			System.out.println("Response content:" + stringResponse);
+			printResponse(stringResponse);
 			jsonResponse = JSON.parseObject(stringResponse);
 			handleStatus(jsonResponse.getInteger("status"));
 			return jsonResponse;
