@@ -291,7 +291,7 @@ public class MacacaClient {
 	 * <p>
 	 * Search for an element on the page, starting from the document root.<br>
 	 * Support: Android iOS Web(WebView)
-	 * 
+	 *
 	 * @param wayToFind
 	 *            the way to find an element,for example:ID,CSS,XPATH...
 	 * @param value
@@ -394,7 +394,7 @@ public class MacacaClient {
 	 * find target element,if it doesn't exist,keep finding during given time
 	 * (property:waitElementTimeout)<br>
 	 * Support: Android iOS Web(WebView)
-	 * 
+	 *
 	 * @param wayToFind
 	 *            the way to find an element,for example:ID,CSS,XPATH...
 	 * @param value
@@ -871,7 +871,7 @@ public class MacacaClient {
 	 * <p>
 	 * check if target element exist<br>
 	 * Support: Android iOS Web(WebView)
-	 * 
+	 *
 	 * @param wayToFind
 	 *            The way to find an element
 	 * @param value
@@ -896,7 +896,7 @@ public class MacacaClient {
 	 * <p>
 	 * check if target element exist<br>
 	 * Support: Android iOS Web(WebView)
-	 * 
+	 *
 	 * @param wayToFind
 	 *            The way to find an element
 	 * @param value
@@ -1035,7 +1035,7 @@ public class MacacaClient {
 	 * Take a screenshot of the current page.<br>
 	 * Support: Android iOS Web(WebView)
 	 *
-	 * 
+	 *
 	 * @return The currently instance of MacacaClient
 	 * @throws Exception
 	 */
@@ -1246,11 +1246,11 @@ public class MacacaClient {
 	public String text() throws Exception {
 		return element.getText();
 	}
-	
+
 	/**
 	 * <p>
 	 * Apply touch actions on devices. <br>
-	 * Support: Support: iOS
+	 * Support: Support: Android iOS
 	 *
 	 * @param action The new window width, such as, tap/doubleTap/press/pinch/rotate/drag
 	 * @param args Parameters of the action {@see <a href="https://github.com/alibaba/macaca/issues/366" target="_blank">more params</a>}
