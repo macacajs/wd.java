@@ -65,10 +65,4 @@ public class DriverCommand {
 	public static final String SET_WINDOW_SIZE = SESSION + "/setWindowSize";
 	public static final String MAXIMIZE_WINDOW = SESSION + "/window/:windowHandle/maximize"; 
 	public static final String FRAME = SESSION + "/frame";
-	
-	// DEPRECATED
-	public static final String MOVE_TO = SESSION + "/moveTo";
-	public static final String SWIPE = SESSION + "/element/:elementId/swipe";
-	public static final String TOUCH_CLICK = SESSION + "/touch/click";
-	public static final String TOUCH_FLICK = SESSION + "/touch/flick";
 }

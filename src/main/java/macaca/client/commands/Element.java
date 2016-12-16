@@ -60,24 +60,6 @@ public class Element {
 		return elements;
 	}
 
-	public void swipe(JSONObject jsonObject) throws Exception {
-		jsonObject.put("sessionId", driver.getSessionId());
-		jsonObject.put("elementId", driver.getElementId());
-		utils.request("POST", DriverCommand.SWIPE, jsonObject);
-	}
-
-	public void flick(JSONObject jsonObject) throws Exception {
-		jsonObject.put("sessionId", driver.getSessionId());
-		utils.request("POST", DriverCommand.TOUCH_FLICK, jsonObject);
-	}
-
-	public void tap() throws Exception {
-		JSONObject jsonObject = new JSONObject();
-		jsonObject.put("sessionId", driver.getSessionId());
-		jsonObject.put("element", driver.getElementId());
-		utils.request("POST", DriverCommand.TOUCH_CLICK, jsonObject);
-	}
-
 	public String getText() throws Exception {
 		JSONObject jsonObject = new JSONObject();
 		jsonObject.put("sessionId", driver.getSessionId());
@@ -100,12 +82,12 @@ public class Element {
 		utils.request("POST", DriverCommand.BACK, jsonObject);
 	}
 
-	public JSONObject getProperty(String name) throws Exception {
+	public Object getProperty(String name) throws Exception {
 		JSONObject jsonObject = new JSONObject();
 		jsonObject.put("sessionId", driver.getSessionId());
 		jsonObject.put("elementId", driver.getElementId());
 		jsonObject.put("name", name);
-		JSONObject response = (JSONObject) utils.request("GET", DriverCommand.GET_ELEMENT_PROPERTY, jsonObject);
+		Object response = (JSONObject) utils.request("GET", DriverCommand.GET_ELEMENT_PROPERTY, jsonObject);
 		return response;
 	}
 
@@ -124,15 +106,6 @@ public class Element {
 		jsonObject.put("elementId", driver.getElementId());
 		boolean displayed = (Boolean) utils.request("GET", DriverCommand.IS_ELEMENT_DISPLAYED, jsonObject);
 		return displayed;
-	}
-
-	public void moveTo(int xoffset, int yoffset) throws Exception {
-		JSONObject jsonObject = new JSONObject();
-		jsonObject.put("sessionId", driver.getSessionId());
-		jsonObject.put("xoffset", xoffset);
-		jsonObject.put("yoffset", yoffset);
-		utils.request("POST", DriverCommand.MOVE_TO, jsonObject);
-		globalTap = true;
 	}
 	
 	public void touch(String action, JSONObject args) throws Exception {

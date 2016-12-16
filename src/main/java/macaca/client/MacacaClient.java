@@ -62,7 +62,7 @@ public class MacacaClient {
 	/**
 	 * <p>
 	 * Accepts the currently displayed alert dialog.<br>
-	 * Support: iOS
+	 * Support: Android iOS
 	 *
 	 * @return The currently instance of MacacaClient
 	 * @throws Exception
@@ -75,7 +75,7 @@ public class MacacaClient {
 	/**
 	 * <p>
 	 * Dismisses the currently displayed alert dialog.<br>
-	 * Support: iOS
+	 * Support: Android iOS
 	 *
 	 * @return The currently instance of MacacaClient
 	 * @throws Exception
@@ -936,31 +936,6 @@ public class MacacaClient {
 
 	/**
 	 * <p>
-	 * Move the mouse by an offset of the specificed element.<br>
-	 * Support: Android
-	 * 
-	 * @param xoffset
-	 *            X offset to move to, relative to the top-left corner of the
-	 *            element. If not specified, the mouse will move to the middle
-	 *            of the element.
-	 * @param yoffset
-	 *            Y offset to move to, relative to the top-left corner of the
-	 *            element. If not specified, the mouse will move to the middle
-	 *            of the element.
-	 * @return The currently instance of MacacaClient
-	 * @throws Exception
-	 */
-
-	public MacacaClient moveTo(int xoffset, int yoffset) throws Exception {
-		JSONObject jsonObject = new JSONObject();
-		jsonObject.put("xoffset", xoffset);
-		jsonObject.put("yoffset", yoffset);
-		element.moveTo(xoffset, yoffset);
-		return this;
-	}
-
-	/**
-	 * <p>
 	 * Click on an element.<br>
 	 * Support: Android iOS Web(WebView)
 	 *
@@ -969,37 +944,6 @@ public class MacacaClient {
 	 */
 	public MacacaClient click() throws Exception {
 		element.click();
-		return this;
-	}
-
-	/**
-	 * <p>
-	 * click at specific point ,absolutely coordinate<br>
-	 * Support: Android
-	 *
-	 * @param x
-	 *            x-coordinate
-	 * @param y
-	 *            y-coordinate
-	 * @return
-	 * @throws Exception
-	 */
-	public MacacaClient clickPoint(int x, int y) throws Exception {
-		moveTo(x, y);
-		click();
-		return this;
-	}
-
-	/**
-	 * <p>
-	 * Touch click on an element.<br>
-	 * Support: Android iOS
-	 *
-	 * @return The currently instance of MacacaClient
-	 * @throws Exception
-	 */
-	public MacacaClient tap() throws Exception {
-		element.tap();
 		return this;
 	}
 
@@ -1019,46 +963,13 @@ public class MacacaClient {
 	/**
 	 * <p>
 	 * press back.<br>
-	 * Support: Web(WebView)
+	 * Support: Android Web(WebView)
 	 *
 	 * @return The currently instance of MacacaClient
 	 * @throws Exception
 	 */
 	public MacacaClient back() throws Exception {
 		element.back();
-		return this;
-	}
-
-	/**
-	 * <p>
-	 * Swipe on the touch screen using finger motion events.<br>
-	 * Support: Android iOS
-	 *
-	 * @param startX
-	 *            The X coordinate to position the window at, relative to the
-	 *            upper left corner of the screen
-	 * @param startY
-	 *            The Y coordinate to position the window at, relative to the
-	 *            upper left corner of the screen
-	 * @param endX
-	 *            The X coordinate to position the window at, relative to the
-	 *            upper left corner of the screen
-	 * @param endY
-	 *            The Y coordinate to position the window at, relative to the
-	 *            upper left corner of the screen
-	 * @param duration
-	 *            The duration of the swipe operation
-	 * @return The currently instance of MacacaClient
-	 * @throws Exception
-	 */
-	public MacacaClient swipe(int startX, int startY, int endX, int endY, int duration) throws Exception {
-		JSONObject jsonObject = new JSONObject();
-		jsonObject.put("startX", startX);
-		jsonObject.put("startY", startY);
-		jsonObject.put("endX", endX);
-		jsonObject.put("endY", endY);
-		jsonObject.put("duration", duration);
-		element.swipe(jsonObject);
 		return this;
 	}
 
@@ -1073,7 +984,7 @@ public class MacacaClient {
 	 * @return The property
 	 * @throws Exception
 	 */
-	public JSONObject getProperty(String name) throws Exception {
+	public Object getProperty(String name) throws Exception {
 		return element.getProperty(name);
 	}
 
@@ -1338,11 +1249,11 @@ public class MacacaClient {
 	
 	/**
 	 * <p>
-	 * Apply touch actions on devices. Such as, tap/doubleTap/press/pinch/rotate/drag.<br>
+	 * Apply touch actions on devices. <br>
 	 * Support: Support: iOS
 	 *
-	 * @param action The new window width
-	 * @param args Parameters of the action
+	 * @param action The new window width, such as, tap/doubleTap/press/pinch/rotate/drag
+	 * @param args Parameters of the action {@see <a href="https://github.com/alibaba/macaca/issues/366" target="_blank">more params</a>}
 	 * @return The currently instance of MacacaClient
 	 * @throws Exception
 	 */
