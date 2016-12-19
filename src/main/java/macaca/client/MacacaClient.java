@@ -1265,7 +1265,6 @@ public class MacacaClient {
 		jsonObject.put("sessionId", driver.getSessionId());
 		JSONArray array = new JSONArray();
 		JSONObject actionObject = new JSONObject();
-//		actionObject.put("element", driver.getElementId());
 		actionObject.put("type", action);
 		for (String key : args.keySet()) {
 			String value = args.getString(key);
@@ -1275,7 +1274,6 @@ public class MacacaClient {
 		jsonObject.put("actions", array);
 		Utils utils = new Utils(driver);
 		utils.request("POST", DriverCommand.ACTIONS, jsonObject);
-//		element.touch(action, args);
 		return this;
 	}
 
