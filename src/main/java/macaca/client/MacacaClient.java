@@ -7,9 +7,11 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 
 import macaca.client.commands.*;
+import macaca.client.common.DriverCommand;
 import macaca.client.common.ElementSelector;
 import macaca.client.common.GetElementWay;
 import macaca.client.common.MacacaDriver;
+import macaca.client.common.Utils;
 
 public class MacacaClient {
 
@@ -1258,7 +1260,22 @@ public class MacacaClient {
 	 * @throws Exception
 	 */
 	public MacacaClient touch(String action, JSONObject args) throws Exception {
-		element.touch(action, args);
+
+		JSONObject jsonObject = new JSONObject();
+		jsonObject.put("sessionId", driver.getSessionId());
+		JSONArray array = new JSONArray();
+		JSONObject actionObject = new JSONObject();
+//		actionObject.put("element", driver.getElementId());
+		actionObject.put("type", action);
+		for (String key : args.keySet()) {
+			String value = args.getString(key);
+			actionObject.put(key , value);
+		}
+		array.add(actionObject);
+		jsonObject.put("actions", array);
+		Utils utils = new Utils(driver);
+		utils.request("POST", DriverCommand.ACTIONS, jsonObject);
+//		element.touch(action, args);
 		return this;
 	}
 
