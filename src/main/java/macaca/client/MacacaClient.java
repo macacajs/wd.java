@@ -1065,8 +1065,10 @@ public class MacacaClient {
 	/**
 	 * <p>
 	 * Get the result of a property of a element.<br>
-	 * Support: Android iOS Web(WebView), Android iOS can only get `origin`
-	 * `size`
+	 * Support: Android iOS Web(WebView), iOS: `origin`, `size`
+	 * Android: `origin`, `size`, `description`, `text`, `enabled`,
+	 * `checkable`, `checked`, `clickable`, `focusable`, `focused`,
+	 * `longClickable`, `scrollable`, `selected`
 	 *
 	 * @param name
 	 *            The property name of element
