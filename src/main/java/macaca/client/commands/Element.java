@@ -21,7 +21,7 @@ public class Element {
 
 	public void setValue(JSONObject jsonObject) throws Exception {
 		jsonObject.put("sessionId", driver.getSessionId());
-		if (driver.getElementId() == null) {
+		if (driver.getElementId() == "null" || driver.getElementId() == "") {
 			utils.request("POST", DriverCommand.GLOBAL_VALUE, jsonObject);		
 		} else {
 			jsonObject.put("elementId", driver.getElementId());

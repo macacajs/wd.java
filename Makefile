@@ -4,4 +4,5 @@ all: test
 
 doc:
 	javadoc -d ./docs sourcepath ./src/main/java/macaca/client/MacacaClient.java
+
 .PHONY: test
