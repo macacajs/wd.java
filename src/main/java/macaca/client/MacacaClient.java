@@ -15,21 +15,21 @@ import macaca.client.common.Utils;
 
 public class MacacaClient {
 
-	private MacacaDriver driver = new MacacaDriver();
+	public MacacaDriver contexts = new MacacaDriver();
 
-	private Alert alert = new Alert(driver);
-	private Context context = new Context(driver);
-	private Element element = new Element(driver); // TODO
-	private Execute execute = new Execute(driver);
-	private Keys _keys = new Keys(driver);
-	private ScreenShot screenshot = new ScreenShot(driver);
-	private Session session = new Session(driver);
-	private Source source = new Source(driver);
-	private Status status = new Status(driver);
-	private Title title = new Title(driver);
-	private Url _url = new Url(driver);
+	private Alert alert = new Alert(contexts);
+	private Context context = new Context(contexts);
+	private Element element = new Element(contexts); // TODO
+	private Execute execute = new Execute(contexts);
+	private Keys _keys = new Keys(contexts);
+	private ScreenShot screenshot = new ScreenShot(contexts);
+	private Session session = new Session(contexts);
+	private Source source = new Source(contexts);
+	private Status status = new Status(contexts);
+	private Title title = new Title(contexts);
+	private Url _url = new Url(contexts);
 
-	private Window window = new Window(driver);
+	private Window window = new Window(contexts);
 
 	/**
 	 * timeout for waitForElement
@@ -555,7 +555,7 @@ public class MacacaClient {
 		jsonObject.put("value", xpath);
 		jsonObject.put("using", "xpath");
 		JSONArray jsonArray = element.findElements(jsonObject);
-		return new ElementSelector(driver, this, jsonArray);
+		return new ElementSelector(contexts, this, jsonArray);
 	}
 
 	/**
@@ -574,7 +574,7 @@ public class MacacaClient {
 		jsonObject.put("value", name);
 		jsonObject.put("using", "name");
 		JSONArray jsonArray = element.findElements(jsonObject);
-		return new ElementSelector(driver, this, jsonArray);
+		return new ElementSelector(contexts, this, jsonArray);
 	}
 
 	/**
@@ -593,7 +593,7 @@ public class MacacaClient {
 		jsonObject.put("value", elementId);
 		jsonObject.put("using", "id");
 		JSONArray jsonArray = element.findElements(jsonObject);
-		return new ElementSelector(driver, this, jsonArray);
+		return new ElementSelector(contexts, this, jsonArray);
 	}
 
 	/**
@@ -612,7 +612,7 @@ public class MacacaClient {
 		jsonObject.put("value", className);
 		jsonObject.put("using", "class name");
 		JSONArray jsonArray = element.findElements(jsonObject);
-		return new ElementSelector(driver, this, jsonArray);
+		return new ElementSelector(contexts, this, jsonArray);
 	}
 
 	/**
@@ -631,7 +631,7 @@ public class MacacaClient {
 		jsonObject.put("value", css);
 		jsonObject.put("using", "selector");
 		JSONArray jsonArray = element.findElements(jsonObject);
-		return new ElementSelector(driver, this, jsonArray);
+		return new ElementSelector(contexts, this, jsonArray);
 	}
 
 	/**
@@ -650,7 +650,7 @@ public class MacacaClient {
 		jsonObject.put("value", linkText);
 		jsonObject.put("using", "link text");
 		JSONArray jsonArray = element.findElements(jsonObject);
-		return new ElementSelector(driver, this, jsonArray);
+		return new ElementSelector(contexts, this, jsonArray);
 	}
 
 	/**
@@ -669,7 +669,7 @@ public class MacacaClient {
 		jsonObject.put("value", partialLinkText);
 		jsonObject.put("using", "partial link text");
 		JSONArray jsonArray = element.findElements(jsonObject);
-		return new ElementSelector(driver, this, jsonArray);
+		return new ElementSelector(contexts, this, jsonArray);
 	}
 
 	/**
@@ -688,7 +688,7 @@ public class MacacaClient {
 		jsonObject.put("value", tagName);
 		jsonObject.put("using", "tag name");
 		JSONArray jsonArray = element.findElements(jsonObject);
-		return new ElementSelector(driver, this, jsonArray);
+		return new ElementSelector(contexts, this, jsonArray);
 	}
 
 	/**
@@ -1088,7 +1088,7 @@ public class MacacaClient {
 	 * @throws Exception
 	 */
 	public String sessionId() throws Exception {
-		return driver.getSessionId();
+		return contexts.getSessionId();
 	}
 
 	/**
@@ -1261,7 +1261,7 @@ public class MacacaClient {
 	public MacacaClient touch(String action, JSONObject args) throws Exception {
 
 		JSONObject jsonObject = new JSONObject();
-		jsonObject.put("sessionId", driver.getSessionId());
+		jsonObject.put("sessionId", contexts.getSessionId());
 		JSONArray array = new JSONArray();
 		JSONObject actionObject = new JSONObject();
 		actionObject.put("type", action);
@@ -1271,7 +1271,7 @@ public class MacacaClient {
 		}
 		array.add(actionObject);
 		jsonObject.put("actions", array);
-		Utils utils = new Utils(driver);
+		Utils utils = new Utils(contexts);
 		utils.request("POST", DriverCommand.ACTIONS, jsonObject);
 		return this;
 	}
