@@ -32,7 +32,6 @@ public class DriverCommand {
 	public static final String FIND_ELEMENT = SESSION + "/element";
 	public static final String FIND_ELEMENTS = SESSION + "/elements";
 	public static final String ELEMENT_VALUE = SESSION + "/element/:elementId/value";
-	public static final String GLOBAL_VALUE = SESSION + "/element/value";
 	public static final String CLICK_ELEMENT = SESSION + "/element/:elementId/click";
 	public static final String GET_ELEMENT_TEXT = SESSION + "/element/:elementId/text";
 	public static final String IS_ELEMENT_DISPLAYED = SESSION + "/element/:elementId/displayed";
