@@ -21,8 +21,12 @@ public class Element {
 
 	public void setValue(JSONObject jsonObject) throws Exception {
 		jsonObject.put("sessionId", driver.getSessionId());
-		jsonObject.put("elementId", driver.getElementId());
-		utils.request("POST", DriverCommand.ELEMENT_VALUE, jsonObject);
+		if (driver.getElementId() == null) {
+			utils.request("POST", DriverCommand.GLOBAL_VALUE, jsonObject);		
+		} else {
+			jsonObject.put("elementId", driver.getElementId());
+			utils.request("POST", DriverCommand.ELEMENT_VALUE, jsonObject);			
+		}
 	}
 
 	public void click() throws Exception {
