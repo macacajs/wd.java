@@ -978,7 +978,7 @@ public class MacacaClient {
 	/**
 	 * <p>
 	 * Get the result of a property of a element.<br>
-	 * Support: Android iOS Web(WebView). iOS: `origin` `size`, Android: `origin` `size`, 'description', 'text'
+	 * Support: Android Web(WebView). Android: 'description', 'text'
 	 *
 	 * @param name
 	 *            The property name of element
