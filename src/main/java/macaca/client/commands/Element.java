@@ -90,6 +90,14 @@ public class Element {
 		Object response = (JSONObject) utils.request("GET", DriverCommand.GET_ELEMENT_PROPERTY, jsonObject);
 		return response;
 	}
+	
+	public Object getRect() throws Exception {
+		JSONObject jsonObject = new JSONObject();
+		jsonObject.put("sessionId", driver.getSessionId());
+		jsonObject.put("elementId", driver.getElementId());
+		Object response = (JSONObject) utils.request("GET", DriverCommand.GET_ELEMENT_RECT, jsonObject);
+		return response;
+	}	
 
 	public String getComputedCss(String propertyName) throws Exception {
 		JSONObject jsonObject = new JSONObject();

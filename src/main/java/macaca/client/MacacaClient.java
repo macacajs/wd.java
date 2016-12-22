@@ -988,6 +988,18 @@ public class MacacaClient {
 	public Object getProperty(String name) throws Exception {
 		return element.getProperty(name);
 	}
+	
+	/**
+	 * <p>
+	 * Get the dimensions and coordinates of the given element with a object including x/y/height/width.<br>
+	 * Support: Android iOS
+	 *
+	 * @return The rect of element
+	 * @throws Exception
+	 */
+	public Object getRect() throws Exception {
+		return element.getRect();
+	}
 
 	// Execute
 
