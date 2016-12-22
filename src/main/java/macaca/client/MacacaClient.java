@@ -167,6 +167,26 @@ public class MacacaClient {
 	 * Search for an element on the page, starting from the document root.<br>
 	 * Support: Android iOS Web(WebView)
 	 *
+	 * @param name
+	 *            The name attribute of element
+	 * @param value
+	 *            the value for target element
+	 * @return The currently instance of MacacaClient
+	 * @throws Exception
+	 */
+	public MacacaClient element(String name, String value) throws Exception {
+		JSONObject jsonObject = new JSONObject();
+		jsonObject.put("value", name);
+		jsonObject.put("using", value);
+		element.findElement(jsonObject);
+		return this;
+	}
+
+	/**
+	 * <p>
+	 * Search for an element on the page, starting from the document root.<br>
+	 * Support: Android iOS Web(WebView)
+	 *
 	 * @param elementId
 	 *            The ID attribute of element
 	 * @return The currently instance of MacacaClient
@@ -988,7 +1008,7 @@ public class MacacaClient {
 	public Object getProperty(String name) throws Exception {
 		return element.getProperty(name);
 	}
-	
+
 	/**
 	 * <p>
 	 * Get the dimensions and coordinates of the given element with a object including x/y/height/width.<br>
