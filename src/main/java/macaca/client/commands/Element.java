@@ -78,7 +78,6 @@ public class Element {
 	public void back() throws Exception {
 		JSONObject jsonObject = new JSONObject();
 		jsonObject.put("sessionId", driver.getSessionId());
-		jsonObject.put("elementId", driver.getElementId());
 		utils.request("POST", DriverCommand.BACK, jsonObject);
 	}
 
