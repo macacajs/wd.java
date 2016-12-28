@@ -22,7 +22,7 @@ public class Element {
 	public void setValue(JSONObject jsonObject) throws Exception {
 		jsonObject.put("sessionId", driver.getSessionId());
 		jsonObject.put("elementId", driver.getElementId());
-		utils.request("POST", DriverCommand.ELEMENT_VALUE, jsonObject);	
+		utils.request("POST", DriverCommand.ELEMENT_VALUE, jsonObject);
 	}
 
 	public void click() throws Exception {
@@ -45,12 +45,30 @@ public class Element {
 		return elementId != null;
 	}
 
-	public void findElement(JSONObject jsonObject) throws Exception {
+
+	/**
+	 * find an element
+	 * @param jsonObject
+	 * @return
+	 * 		true - the element exists
+	 * 		false - the element does not exist
+	 *
+	 * @throws Exception
+	 */
+	public boolean findElement(JSONObject jsonObject) throws Exception {
 		jsonObject.put("sessionId", driver.getSessionId());
 		JSONObject response = (JSONObject) utils.request("POST", DriverCommand.FIND_ELEMENT, jsonObject);
 		JSONObject element = (JSONObject) response.get("value");
 		Object elementId = (Object) element.get("ELEMENT");
-		driver.setElementId(elementId);
+		if (elementId !=  null) {
+			// the element exists
+			driver.setElementId(elementId);
+			return true;
+		} else {
+			// the element does not exist
+			return false;
+		}
+
 	}
 
 	public JSONArray findElements(JSONObject jsonObject) throws Exception {
@@ -89,14 +107,14 @@ public class Element {
 		Object response = (JSONObject) utils.request("GET", DriverCommand.GET_ELEMENT_PROPERTY, jsonObject);
 		return response;
 	}
-	
+
 	public Object getRect() throws Exception {
 		JSONObject jsonObject = new JSONObject();
 		jsonObject.put("sessionId", driver.getSessionId());
 		jsonObject.put("elementId", driver.getElementId());
 		Object response = (JSONObject) utils.request("GET", DriverCommand.GET_ELEMENT_RECT, jsonObject);
 		return response;
-	}	
+	}
 
 	public String getComputedCss(String propertyName) throws Exception {
 		JSONObject jsonObject = new JSONObject();
@@ -114,7 +132,7 @@ public class Element {
 		boolean displayed = (Boolean) utils.request("GET", DriverCommand.IS_ELEMENT_DISPLAYED, jsonObject);
 		return displayed;
 	}
-	
+
 	public void touch(String action, JSONObject args) throws Exception {
 		JSONObject jsonObject = new JSONObject();
 		jsonObject.put("sessionId", driver.getSessionId());

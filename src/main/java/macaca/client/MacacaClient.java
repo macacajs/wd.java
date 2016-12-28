@@ -171,15 +171,15 @@ public class MacacaClient {
 	 *            The name attribute of element
 	 * @param value
 	 *            the value for target element
-	 * @return The currently instance of MacacaClient
+	 * @return return the element to find if it exists,if it does not exist ,return null
 	 * @throws Exception
 	 */
-	public MacacaClient element(String name, String value) throws Exception {
+	public Element element(String name, String value) throws Exception {
 		JSONObject jsonObject = new JSONObject();
 		jsonObject.put("value", name);
 		jsonObject.put("using", value);
-		element.findElement(jsonObject);
-		return this;
+		boolean isExist = element.findElement(jsonObject);
+		return isExist ? element : null;
 	}
 
 	/**
@@ -189,15 +189,15 @@ public class MacacaClient {
 	 *
 	 * @param elementId
 	 *            The ID attribute of element
-	 * @return The currently instance of MacacaClient
+	 * @return return the element to find if it exists,if it does not exist ,return null
 	 * @throws Exception
 	 */
-	public MacacaClient elementById(String elementId) throws Exception {
+	public Element elementById(String elementId) throws Exception {
 		JSONObject jsonObject = new JSONObject();
 		jsonObject.put("value", elementId);
 		jsonObject.put("using", "id");
-		element.findElement(jsonObject);
-		return this;
+		boolean isExist = element.findElement(jsonObject);
+		return isExist ? element : null;
 	}
 
 	/**
@@ -207,15 +207,15 @@ public class MacacaClient {
 	 *
 	 * @param selector
 	 *            The css selector of element
-	 * @returnThe currently instance of MacacaClient
+	 * @return return the element to find if it exists,if it does not exist ,return null
 	 * @throws Exception
 	 */
-	public MacacaClient elementByCss(String selector) throws Exception {
+	public Element elementByCss(String selector) throws Exception {
 		JSONObject jsonObject = new JSONObject();
 		jsonObject.put("value", selector);
 		jsonObject.put("using", "css");
-		element.findElement(jsonObject);
-		return this;
+		boolean isExist = element.findElement(jsonObject);
+		return isExist ? element : null;
 	}
 
 	/**
@@ -225,15 +225,15 @@ public class MacacaClient {
 	 *
 	 * @param xpath
 	 *            The XPath expression of element
-	 * @return The currently instance of MacacaClient
+	 * @return return the element to find if it exists,if it does not exist ,return null
 	 * @throws Exception
 	 */
-	public MacacaClient elementByXPath(String xpath) throws Exception {
+	public Element elementByXPath(String xpath) throws Exception {
 		JSONObject jsonObject = new JSONObject();
 		jsonObject.put("value", xpath);
 		jsonObject.put("using", "xpath");
-		element.findElement(jsonObject);
-		return this;
+		boolean isExist = element.findElement(jsonObject);
+		return isExist ? element : null;
 	}
 
 	/**
@@ -243,15 +243,15 @@ public class MacacaClient {
 	 *
 	 * @param name
 	 *            The name attribute of element
-	 * @return The currently instance of MacacaClient
+	 * @return return the element to find if it exists,if it does not exist ,return null
 	 * @throws Exception
 	 */
-	public MacacaClient elementByName(String name) throws Exception {
+	public Element elementByName(String name) throws Exception {
 		JSONObject jsonObject = new JSONObject();
 		jsonObject.put("value", name);
 		jsonObject.put("using", "name");
-		element.findElement(jsonObject);
-		return this;
+		boolean isExist = element.findElement(jsonObject);
+		return isExist ? element : null;
 	}
 
 	/**
@@ -265,8 +265,9 @@ public class MacacaClient {
 	 *            target value for element,paired with wayToFind
 	 * @param index
 	 *            index for target element
+	 * @return return the element to find if it exists,if it does not exist ,return null
 	 */
-	public MacacaClient getElement(GetElementWay wayToFind, String value, int index) throws Exception {
+	public Element  getElement(GetElementWay wayToFind, String value, int index) throws Exception {
 		ElementSelector elementSelector;
 		switch (wayToFind) {
 		case ID:
@@ -303,10 +304,10 @@ public class MacacaClient {
 			elementSelector.getIndex(index);
 		} else {
 			System.out.println("can't find the element:" + value + "[" + index + "]");
-			throw new Exception();
+			return null;
 		}
 
-		return this;
+		return element;
 	}
 
 	/**
@@ -318,39 +319,31 @@ public class MacacaClient {
 	 *            the way to find an element,for example:ID,CSS,XPATH...
 	 * @param value
 	 *            the value for target element,paired with wayToFind
+	 * @return return the element to find if it exists,if it does not exist ,return null
 	 * @throws Exception
 	 */
-	public MacacaClient getElement(GetElementWay wayToFind, String value) throws Exception {
+	public Element getElement(GetElementWay wayToFind, String value) throws Exception {
 		switch (wayToFind) {
 		case ID:
-			elementById(value);
-			break;
+			return elementById(value);
 		case CSS:
-			elementByCss(value);
-			break;
+		    return elementByCss(value);
 		case NAME:
-			elementByName(value);
-			break;
+			return elementByName(value);
 		case XPATH:
-			elementByXPath(value);
-			break;
+			return elementByXPath(value);
 		case CLASS_NAME:
-			elementByClassName(value);
-			break;
+			return elementByClassName(value);
 		case LINK_TEXT:
-			elementByLinkText(value);
-			break;
+			return elementByLinkText(value);
 		case PARTIAL_LINK_TEXT:
-			elementByPartialLinkText(value);
-			break;
+			return elementByPartialLinkText(value);
 		case TAG_NAME:
-			elementByTagName(value);
-			break;
+			return elementByTagName(value);
 		default:
-			throw new Exception();
+			return null;
 		}
 
-		return this;
 	}
 
 	/**
@@ -423,9 +416,10 @@ public class MacacaClient {
 	 *            the value for target element,paired with wayToFind
 	 * @param index
 	 *            the index for target element
+	 * @return return the element to find if it exists,if it does not exist ,return null
 	 * @throws Exception
 	 */
-	public MacacaClient waitForElement(GetElementWay wayToFind, String value, int index) throws Exception {
+	public Element waitForElement(GetElementWay wayToFind, String value, int index) throws Exception {
 		int count = 0;
 		int timeLeft = waitElementTimeout;
 		boolean satisfied = false;
@@ -446,8 +440,9 @@ public class MacacaClient {
 		}
 		if (satisfied == false) {
 			System.out.println("can't find the element:" + value);
+			return null;
 		}
-		return this;
+		return element;
 	}
 
 	/**
@@ -460,9 +455,10 @@ public class MacacaClient {
 	 *            the way to find an element,for example:ID,CSS,XPATH...
 	 * @param value
 	 *            the value for target element,paired with wayToFind
+	 * @return return the element to find if it exist,if it does not exist ,return null
 	 * @throws Exception
 	 */
-	public MacacaClient waitForElement(GetElementWay wayToFind, String value) throws Exception {
+	public Element waitForElement(GetElementWay wayToFind, String value) throws Exception {
 		int count = 0;
 		int timeLeft = waitElementTimeout;
 		boolean satisfied = false;
@@ -483,8 +479,9 @@ public class MacacaClient {
 		}
 		if (satisfied == false) {
 			System.out.println("can't find the element:" + value);
+			return null;
 		}
-		return this;
+		return element;
 	}
 
 	/**
@@ -494,15 +491,15 @@ public class MacacaClient {
 	 *
 	 * @param className
 	 *            The className attribute of element
-	 * @return The currently instance of MacacaClient
+	 * @return return the element to find if it exist,if it does not exist ,return null
 	 * @throws Exception
 	 */
-	public MacacaClient elementByClassName(String className) throws Exception {
+	public Element elementByClassName(String className) throws Exception {
 		JSONObject jsonObject = new JSONObject();
 		jsonObject.put("value", className);
 		jsonObject.put("using", "class name");
-		element.findElement(jsonObject);
-		return this;
+		boolean isExist = element.findElement(jsonObject);
+		return isExist ? element : null;
 	}
 
 	/**
@@ -512,15 +509,15 @@ public class MacacaClient {
 	 *
 	 * @param linkText
 	 *            The linkText attribute of element
-	 * @return The currently instance of MacacaClient
+	 * @return return the element to find if it exist,if it does not exist ,return null
 	 * @throws Exception
 	 */
-	public MacacaClient elementByLinkText(String linkText) throws Exception {
+	public Element elementByLinkText(String linkText) throws Exception {
 		JSONObject jsonObject = new JSONObject();
 		jsonObject.put("value", linkText);
 		jsonObject.put("using", "link text");
-		element.findElement(jsonObject);
-		return this;
+		boolean isExist = element.findElement(jsonObject);
+		return isExist ? element : null;
 	}
 
 	/**
@@ -530,15 +527,15 @@ public class MacacaClient {
 	 *
 	 * @param tagName
 	 *            The tag name attribute of element
-	 * @return The currently instance of MacacaClient
+	 * @return return the element to find if it exist,if it does not exist ,return null
 	 * @throws Exception
 	 */
-	public MacacaClient elementByTagName(String tagName) throws Exception {
+	public Element elementByTagName(String tagName) throws Exception {
 		JSONObject jsonObject = new JSONObject();
 		jsonObject.put("value", tagName);
 		jsonObject.put("using", "tag name");
-		element.findElement(jsonObject);
-		return this;
+		boolean isExist = element.findElement(jsonObject);
+		return isExist ? element : null;
 	}
 
 	/**
@@ -548,15 +545,15 @@ public class MacacaClient {
 	 *
 	 * @param partialLinkText
 	 *            The partial link text attribute of element
-	 * @return The currently instance of MacacaClient
+	 * @return return the element to find if it exist,if it does not exist ,return null
 	 * @throws Exception
 	 */
-	public MacacaClient elementByPartialLinkText(String partialLinkText) throws Exception {
+	public Element elementByPartialLinkText(String partialLinkText) throws Exception {
 		JSONObject jsonObject = new JSONObject();
 		jsonObject.put("value", partialLinkText);
 		jsonObject.put("using", "partial link text");
-		element.findElement(jsonObject);
-		return this;
+		boolean isExist = element.findElement(jsonObject);
+		return isExist ? element : null;
 	}
 
 	/**
@@ -567,7 +564,7 @@ public class MacacaClient {
 	 *
 	 * @param xpath
 	 *            The XPath expression of elements
-	 * @return The instance of ElementSelector for index
+	 * @return ElementSelector object
 	 * @throws Exception
 	 */
 	public ElementSelector elementsByXPath(String xpath) throws Exception {
@@ -586,7 +583,7 @@ public class MacacaClient {
 	 *
 	 * @param name
 	 *            The name attribute of elements
-	 * @return The currently instance of MacacaClient
+	 * @return ElementSelector object
 	 * @throws Exception
 	 */
 	public ElementSelector elementsByName(String name) throws Exception {
@@ -605,7 +602,7 @@ public class MacacaClient {
 	 *
 	 * @param elementId
 	 *            The elementId attribute of elements
-	 * @return The currently instance of MacacaClient
+	 * @return ElementSelector object
 	 * @throws Exception
 	 */
 	public ElementSelector elementsById(String elementId) throws Exception {
@@ -624,7 +621,7 @@ public class MacacaClient {
 	 *
 	 * @param className
 	 *            The className attribute of elements
-	 * @return The currently instance of MacacaClient
+	 * @return ElementSelector object
 	 * @throws Exception
 	 */
 	public ElementSelector elementsByClassName(String className) throws Exception {
@@ -643,7 +640,7 @@ public class MacacaClient {
 	 *
 	 * @param css
 	 *            The selector selector of elements
-	 * @return The currently instance of MacacaClient
+	 * @return ElementSelector object
 	 * @throws Exception
 	 */
 	public ElementSelector elementsByCss(String css) throws Exception {
@@ -662,7 +659,7 @@ public class MacacaClient {
 	 *
 	 * @param linkText
 	 *            The link text attribute of elements
-	 * @return The currently instance of MacacaClient
+	 * @return ElementSelector object contains elements
 	 * @throws Exception
 	 */
 	public ElementSelector elementsByLinkText(String linkText) throws Exception {
@@ -681,7 +678,7 @@ public class MacacaClient {
 	 *
 	 * @param linkText
 	 *            The partial link text attribute of elements
-	 * @return The currently instance of MacacaClient
+	 * @return ElementSelector object
 	 * @throws Exception
 	 */
 	public ElementSelector elementsByPartialLinkText(String partialLinkText) throws Exception {
@@ -700,7 +697,7 @@ public class MacacaClient {
 	 *
 	 * @param tagName
 	 *            The tag name attribute of elements
-	 * @return The currently instance of MacacaClient
+	 * @return  ElementSelector object
 	 * @throws Exception
 	 */
 	public ElementSelector elementsByTagName(String tagName) throws Exception {
@@ -724,10 +721,10 @@ public class MacacaClient {
 	 *            Total time for searching
 	 * @param interval
 	 *            Time interval between searching
-	 * @return The currently instance of MacacaClient
+	 * @return return the element to find if it exist,if it does not exist ,return null
 	 * @throws Exception
 	 */
-	public MacacaClient waitForElement(String using, String value, int timeout, int interval) throws Exception {
+	public Element waitForElement(String using, String value, int timeout, int interval) throws Exception {
 		JSONObject jsonObject = new JSONObject();
 		jsonObject.put("value", value);
 		jsonObject.put("using", using);
@@ -751,8 +748,9 @@ public class MacacaClient {
 		}
 		if (satisfied == false) {
 			System.out.println("can't find the element: " + using + ":" + value);
+			return null;
 		}
-		return this;
+		return element;
 	}
 
 	/**
@@ -764,13 +762,12 @@ public class MacacaClient {
 	 *            The way for find an element,eg:"name","xpath","css","id"
 	 * @param value
 	 *            The value for the specific way
-	 * @return
+	 * @return return the element to find if it exist,if it does not exist ,return null
 	 * @throws Exception
 	 */
-	public MacacaClient waitForElement(String using, String value) throws Exception {
+	public Element waitForElement(String using, String value) throws Exception {
 		// default timeout:2000, default interval:200
-		waitForElement(using, value, waitElementTimeout, waitElementTimeInterval);
-		return this;
+		 return waitForElement(using, value, waitElementTimeout, waitElementTimeInterval);
 	}
 
 	/**
@@ -780,12 +777,11 @@ public class MacacaClient {
 	 *
 	 * @param elementId
 	 *            The ID attribute of element
-	 * @return The currently instance of MacacaClient
+	 * @return return the element to find if it exist,if it does not exist ,return null
 	 * @throws Exception
 	 */
-	public MacacaClient waitForElementById(String elementId) throws Exception {
-		waitForElement("id", elementId);
-		return this;
+	public Element waitForElementById(String elementId) throws Exception {
+		return waitForElement("id", elementId);
 	}
 
 	/**
@@ -795,12 +791,11 @@ public class MacacaClient {
 	 *
 	 * @param selector
 	 *            The css selector of element
-	 * @returnThe currently instance of MacacaClient
+	 * @returnThe return the element to find if it exist,if it does not exist ,return null
 	 * @throws Exception
 	 */
-	public MacacaClient waitForElementByCss(String selector) throws Exception {
-		waitForElement("css", selector);
-		return this;
+	public Element waitForElementByCss(String selector) throws Exception {
+		return waitForElement("css", selector);
 	}
 
 	/**
@@ -810,12 +805,11 @@ public class MacacaClient {
 	 *
 	 * @param xpath
 	 *            The XPath expression of element
-	 * @return The currently instance of MacacaClient
+	 * @return return the element to find if it exist,if it does not exist ,return null
 	 * @throws Exception
 	 */
-	public MacacaClient waitForElementByXPath(String xpath) throws Exception {
-		waitForElement("xpath", xpath);
-		return this;
+	public Element waitForElementByXPath(String xpath) throws Exception {
+		return waitForElement("xpath", xpath);
 	}
 
 	/**
@@ -825,12 +819,11 @@ public class MacacaClient {
 	 *
 	 * @param name
 	 *            The name attribute of element
-	 * @return The currently instance of MacacaClient
+	 * @return return the element to find if it exist,if it does not exist ,return null
 	 * @throws Exception
 	 */
-	public MacacaClient waitForElementByName(String name) throws Exception {
-		waitForElement("name", name);
-		return this;
+	public Element waitForElementByName(String name) throws Exception {
+		return waitForElement("name", name);
 	}
 
 	/**
@@ -840,12 +833,11 @@ public class MacacaClient {
 	 *
 	 * @param text
 	 *            The visible text of element
-	 * @return The currently instance of MacacaClient
+	 * @return return the element to find if it exist,if it does not exist ,return null
 	 * @throws Exception
 	 */
-	public MacacaClient waitForElementByLinkText(String text) throws Exception {
-		waitForElement("link text", text);
-		return this;
+	public Element waitForElementByLinkText(String text) throws Exception {
+		return waitForElement("link text", text);
 	}
 
 	/**
@@ -855,12 +847,11 @@ public class MacacaClient {
 	 *
 	 * @param text
 	 *            The visible text of element
-	 * @return The currently instance of MacacaClient
+	 * @return return the element to find if it exist,if it does not exist ,return null
 	 * @throws Exception
 	 */
-	public MacacaClient waitForElementByPartialLinkText(String text) throws Exception {
-		waitForElement("partial link text", text);
-		return this;
+	public Element waitForElementByPartialLinkText(String text) throws Exception {
+		return waitForElement("partial link text", text);
 	}
 
 	/**
