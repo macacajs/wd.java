@@ -1,3 +1,70 @@
+# 1.0.48 /2016-12-28
+
+*  Change return type for all elementBy..  APIs
+
+	before this change,all elementBy.. APIs returns the current instance of MacacaClient,that means we can not operate an element directly ,it limits our usage about elements, in this change,we change the return type for all elementBy.. method to an Element object,so we can operate our target element more flexible.
+
+	take one of these APIs as example:
+
+	before:
+	
+		// MacacaClient.java
+		/**
+		 * <p>
+	 	* Search for an element on the page, starting from the document root.<br>
+	 	* Support: Android iOS Web(WebView)
+	 	*
+		 * @param elementId
+		 *            The ID attribute of element
+	 	* @return return the current instance of MacacaClient
+	 	* @throws Exception
+	 	*/
+		public Element elementById(String elementId) throws Exception {
+			JSONObject jsonObject = new JSONObject();
+			jsonObject.put("value", elementId);
+			jsonObject.put("using", "id");
+			element.findElement(jsonObject);
+			return this;
+		}
+
+	now:
+	
+		// MacacaClient.java
+		/**
+	 	* <p>
+	 	* Search for an element on the page, starting from the document root.<br>
+	 	* Support: Android iOS Web(WebView)
+	 	*
+		 * @param elementId
+	 	*            The ID attribute of element
+	 	* @return return the element to find if it exists,if it does not exist ,return null
+		 * @throws Exception
+		 */
+		public Element elementById(String elementId) throws Exception {
+			JSONObject jsonObject = new JSONObject();
+			jsonObject.put("value", elementId);
+			jsonObject.put("using", "id");
+			boolean isExist = element.findElement(jsonObject);
+			return isExist ? element : null;
+		}
+	
+	
+
+	with this change,you can operate your element as you need, like this:
+	
+		Element element = driver.elementById("your_element_id");
+		boolean isElementDisplayed = element.isDisplayed();
+	
+	but if you use chain syntax before,this change will break your chain, because it does not 	return MacacaClient anymore, if you use like this before:
+	
+		driver.elementById("your_element_id").click();
+
+	you need to break this chain like this:
+
+		driver.elementById("your_element_id");
+		driver.click();
+	
+
 # 1.0.26 / 2016-09-30
 
   * Add waitForElementByLinkText() and waitForElementByPartialLinkText() function.
