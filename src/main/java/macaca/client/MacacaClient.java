@@ -28,6 +28,7 @@ public class MacacaClient {
 	private Status status = new Status(contexts);
 	private Title title = new Title(contexts);
 	private Url _url = new Url(contexts);
+	private Utils utils = new Utils(contexts);
 
 	private Window window = new Window(contexts);
 
@@ -982,7 +983,10 @@ public class MacacaClient {
 	 * @throws Exception
 	 */
 	public MacacaClient back() throws Exception {
-		element.back();
+
+		JSONObject jsonObject = new JSONObject();
+		jsonObject.put("sessionId",contexts.getSessionId());
+		utils.request("POST", DriverCommand.BACK, jsonObject);
 		return this;
 	}
 

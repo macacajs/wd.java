@@ -14,8 +14,8 @@
 	 	* Search for an element on the page, starting from the document root.<br>
 	 	* Support: Android iOS Web(WebView)
 	 	*
-		 * @param elementId
-		 *            The ID attribute of element
+	    * @param elementId
+	    *            The ID attribute of element
 	 	* @return return the current instance of MacacaClient
 	 	* @throws Exception
 	 	*/
@@ -35,11 +35,11 @@
 	 	* Search for an element on the page, starting from the document root.<br>
 	 	* Support: Android iOS Web(WebView)
 	 	*
-		 * @param elementId
+		* @param elementId
 	 	*            The ID attribute of element
 	 	* @return return the element to find if it exists,if it does not exist ,return null
-		 * @throws Exception
-		 */
+		* @throws Exception
+	    */
 		public Element elementById(String elementId) throws Exception {
 			JSONObject jsonObject = new JSONObject();
 			jsonObject.put("value", elementId);
