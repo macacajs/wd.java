@@ -1,5 +1,7 @@
 package macaca.client.commands;
 
+import java.util.ArrayList;
+
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 
@@ -19,12 +21,36 @@ public class Element {
 		this.utils = new Utils(driver);
 	}
 
+	/**
+	 * <p>
+	 * Send a sequence of key strokes to the active element.<br>
+	 * Support: Android iOS Web(WebView)
+	 *
+	 * @param keys
+	 *            The keys sequence to be sent.
+	 * @return The currently instance of MacacaClient
+	 * @throws Exception
+	 */
+	public void sendKeys(String keys) throws Exception {
+		JSONObject jsonObject = new JSONObject();
+		ArrayList<String> values = new ArrayList<String>();
+		values.add(keys);
+		jsonObject.put("value", values);
+		setValue(jsonObject);
+	}
+
+
 	public void setValue(JSONObject jsonObject) throws Exception {
 		jsonObject.put("sessionId", driver.getSessionId());
 		jsonObject.put("elementId", driver.getElementId());
 		utils.request("POST", DriverCommand.ELEMENT_VALUE, jsonObject);
 	}
 
+	/**
+	 * click this element
+	 * Support: Android iOS Web(WebView)
+	 * @throws Exception
+	 */
 	public void click() throws Exception {
 		JSONObject jsonObject = new JSONObject();
 		jsonObject.put("sessionId", driver.getSessionId());
@@ -46,37 +72,37 @@ public class Element {
 	}
 
 
-	/**
-	 * find an element
-	 * @param jsonObject
-	 * @return
-	 * 		true - the element exists
-	 * 		false - the element does not exist
-	 *
-	 * @throws Exception
-	 */
-	public boolean findElement(JSONObject jsonObject) throws Exception {
-		jsonObject.put("sessionId", driver.getSessionId());
-		JSONObject response = (JSONObject) utils.request("POST", DriverCommand.FIND_ELEMENT, jsonObject);
-		JSONObject element = (JSONObject) response.get("value");
-		Object elementId = (Object) element.get("ELEMENT");
-		if (elementId !=  null) {
-			// the element exists
-			driver.setElementId(elementId);
-			return true;
-		} else {
-			// the element does not exist
-			return false;
-		}
-
-	}
-
-	public JSONArray findElements(JSONObject jsonObject) throws Exception {
-		jsonObject.put("sessionId", driver.getSessionId());
-		JSONObject response = (JSONObject) utils.request("POST", DriverCommand.FIND_ELEMENTS, jsonObject);
-		JSONArray elements = (JSONArray) response.get("value");
-		return elements;
-	}
+//	/**
+//	 * find an element
+//	 * @param jsonObject
+//	 * @return
+//	 * 		true - the element exists
+//	 * 		false - the element does not exist
+//	 *
+//	 * @throws Exception
+//	 */
+//	public boolean findElement(JSONObject jsonObject) throws Exception {
+//		jsonObject.put("sessionId", driver.getSessionId());
+//		JSONObject response = (JSONObject) utils.request("POST", DriverCommand.FIND_ELEMENT, jsonObject);
+//		JSONObject element = (JSONObject) response.get("value");
+//		Object elementId = (Object) element.get("ELEMENT");
+//		if (elementId !=  null) {
+//			// the element exists
+//			driver.setElementId(elementId);
+//			return true;
+//		} else {
+//			// the element does not exist
+//			return false;
+//		}
+//
+//	}
+//
+//	public JSONArray findElements(JSONObject jsonObject) throws Exception {
+//		jsonObject.put("sessionId", driver.getSessionId());
+//		JSONObject response = (JSONObject) utils.request("POST", DriverCommand.FIND_ELEMENTS, jsonObject);
+//		JSONArray elements = (JSONArray) response.get("value");
+//		return elements;
+//	}
 
 	public String getText() throws Exception {
 		JSONObject jsonObject = new JSONObject();

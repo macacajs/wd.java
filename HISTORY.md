@@ -1,3 +1,45 @@
+# 2.0 / 2016-01-09
+## some APIs for MacacaClient.java are deprecated
+
+### List of deprecated APIs
+// MacacaClient.java
+
+*  clear()
+*  click()
+*  getProperty(String name)
+*  getRect()
+*  sendKeys(String keys)
+*  text()
+
+### why we delete these APIs
+these APIs are actions for an Element ,not for macacaClient, to define functions for Element Object and MacacaClient,we delete these APIs in MacacaClient,and the same APIs can be found in Element.java
+
+### how to adapt this change
+if you use these deprecated APIs,you need to change this action to an Element object,for example,if you want to click an element,then you might code like this:
+
+before :
+
+	driver.elementById("elementId");
+	driver.click();
+
+now,you need to code like below:
+
+	Element element = driver.elementById("elementId");
+	element.click();
+	
+
+## some touch actions are added for user's convenience
+### List of new APIs 
+
+// MacacaClient.java
+
+*  tap(double x,double y)
+*  doubleTap(double x,double y)
+*  press(double x,double y, double duration,int steps)
+*  pinch(double x,double y,double scale, double velocity,GesturePinchType direction,double percent,int steps)
+*  rotate(double rotation, double velocity)
+*  drag(double fromX, double fromY, double toX,double toY,double duration, int steps)
+
 # 1.0.48 /2016-12-28
 
 *  Change return type for all elementBy..  APIs
