@@ -1,6 +1,5 @@
 package macaca.client;
 
-import java.lang.annotation.Retention;
 import java.util.ArrayList;
 
 import com.alibaba.fastjson.JSONArray;
@@ -14,6 +13,13 @@ import macaca.client.common.MacacaDriver;
 import macaca.client.common.Utils;
 
 public class MacacaClient {
+
+
+	// GesturePinchType
+	public enum GesturePinchType {
+		PINCH_IN, //两只手指向内缩小元素
+		PINCH_OUT,// 两只手指向外放大元素
+	}
 
 	public MacacaDriver contexts = new MacacaDriver();
 
@@ -164,6 +170,41 @@ public class MacacaClient {
 	// Element
 
 	/**
+	 * find an element
+	 * @param jsonObject
+	 * 		{using:way_to_find,value:element property value for given way}
+	 *      way_to_find :name,id,css,xpath,class name,
+	 * @return
+	 * 		true - the element exists
+	 * 		false - the element does not exist
+	 *
+	 * @throws Exception
+	 */
+	private  boolean findElement(JSONObject jsonObject) throws Exception {
+		jsonObject.put("sessionId", contexts.getSessionId());
+		JSONObject response = (JSONObject) utils.request("POST", DriverCommand.FIND_ELEMENT, jsonObject);
+		JSONObject element = (JSONObject) response.get("value");
+		Object elementId = (Object) element.get("ELEMENT");
+		if (elementId !=  null) {
+			// the element exists
+			contexts.setElementId(elementId);
+			return true;
+		} else {
+			// the element does not exist
+			return false;
+		}
+
+	}
+
+	private JSONArray findElements(JSONObject jsonObject) throws Exception {
+		jsonObject.put("sessionId", contexts.getSessionId());
+		JSONObject response = (JSONObject) utils.request("POST", DriverCommand.FIND_ELEMENTS, jsonObject);
+		JSONArray elements = (JSONArray) response.get("value");
+		return elements;
+	}
+
+
+	/**
 	 * <p>
 	 * Search for an element on the page, starting from the document root.<br>
 	 * Support: Android iOS Web(WebView)
@@ -179,7 +220,7 @@ public class MacacaClient {
 		JSONObject jsonObject = new JSONObject();
 		jsonObject.put("value", name);
 		jsonObject.put("using", value);
-		boolean isExist = element.findElement(jsonObject);
+		boolean isExist = findElement(jsonObject);
 		return isExist ? element : null;
 	}
 
@@ -197,7 +238,7 @@ public class MacacaClient {
 		JSONObject jsonObject = new JSONObject();
 		jsonObject.put("value", elementId);
 		jsonObject.put("using", "id");
-		boolean isExist = element.findElement(jsonObject);
+		boolean isExist = findElement(jsonObject);
 		return isExist ? element : null;
 	}
 
@@ -215,7 +256,7 @@ public class MacacaClient {
 		JSONObject jsonObject = new JSONObject();
 		jsonObject.put("value", selector);
 		jsonObject.put("using", "css");
-		boolean isExist = element.findElement(jsonObject);
+		boolean isExist = findElement(jsonObject);
 		return isExist ? element : null;
 	}
 
@@ -233,7 +274,7 @@ public class MacacaClient {
 		JSONObject jsonObject = new JSONObject();
 		jsonObject.put("value", xpath);
 		jsonObject.put("using", "xpath");
-		boolean isExist = element.findElement(jsonObject);
+		boolean isExist = findElement(jsonObject);
 		return isExist ? element : null;
 	}
 
@@ -251,7 +292,7 @@ public class MacacaClient {
 		JSONObject jsonObject = new JSONObject();
 		jsonObject.put("value", name);
 		jsonObject.put("using", "name");
-		boolean isExist = element.findElement(jsonObject);
+		boolean isExist = findElement(jsonObject);
 		return isExist ? element : null;
 	}
 
@@ -499,7 +540,7 @@ public class MacacaClient {
 		JSONObject jsonObject = new JSONObject();
 		jsonObject.put("value", className);
 		jsonObject.put("using", "class name");
-		boolean isExist = element.findElement(jsonObject);
+		boolean isExist = findElement(jsonObject);
 		return isExist ? element : null;
 	}
 
@@ -517,7 +558,7 @@ public class MacacaClient {
 		JSONObject jsonObject = new JSONObject();
 		jsonObject.put("value", linkText);
 		jsonObject.put("using", "link text");
-		boolean isExist = element.findElement(jsonObject);
+		boolean isExist = findElement(jsonObject);
 		return isExist ? element : null;
 	}
 
@@ -535,7 +576,7 @@ public class MacacaClient {
 		JSONObject jsonObject = new JSONObject();
 		jsonObject.put("value", tagName);
 		jsonObject.put("using", "tag name");
-		boolean isExist = element.findElement(jsonObject);
+		boolean isExist = findElement(jsonObject);
 		return isExist ? element : null;
 	}
 
@@ -553,7 +594,7 @@ public class MacacaClient {
 		JSONObject jsonObject = new JSONObject();
 		jsonObject.put("value", partialLinkText);
 		jsonObject.put("using", "partial link text");
-		boolean isExist = element.findElement(jsonObject);
+		boolean isExist = findElement(jsonObject);
 		return isExist ? element : null;
 	}
 
@@ -572,7 +613,7 @@ public class MacacaClient {
 		JSONObject jsonObject = new JSONObject();
 		jsonObject.put("value", xpath);
 		jsonObject.put("using", "xpath");
-		JSONArray jsonArray = element.findElements(jsonObject);
+		JSONArray jsonArray = findElements(jsonObject);
 		return new ElementSelector(contexts, this, jsonArray);
 	}
 
@@ -591,7 +632,7 @@ public class MacacaClient {
 		JSONObject jsonObject = new JSONObject();
 		jsonObject.put("value", name);
 		jsonObject.put("using", "name");
-		JSONArray jsonArray = element.findElements(jsonObject);
+		JSONArray jsonArray = findElements(jsonObject);
 		return new ElementSelector(contexts, this, jsonArray);
 	}
 
@@ -610,7 +651,7 @@ public class MacacaClient {
 		JSONObject jsonObject = new JSONObject();
 		jsonObject.put("value", elementId);
 		jsonObject.put("using", "id");
-		JSONArray jsonArray = element.findElements(jsonObject);
+		JSONArray jsonArray = findElements(jsonObject);
 		return new ElementSelector(contexts, this, jsonArray);
 	}
 
@@ -629,7 +670,7 @@ public class MacacaClient {
 		JSONObject jsonObject = new JSONObject();
 		jsonObject.put("value", className);
 		jsonObject.put("using", "class name");
-		JSONArray jsonArray = element.findElements(jsonObject);
+		JSONArray jsonArray = findElements(jsonObject);
 		return new ElementSelector(contexts, this, jsonArray);
 	}
 
@@ -648,7 +689,7 @@ public class MacacaClient {
 		JSONObject jsonObject = new JSONObject();
 		jsonObject.put("value", css);
 		jsonObject.put("using", "selector");
-		JSONArray jsonArray = element.findElements(jsonObject);
+		JSONArray jsonArray = findElements(jsonObject);
 		return new ElementSelector(contexts, this, jsonArray);
 	}
 
@@ -667,7 +708,7 @@ public class MacacaClient {
 		JSONObject jsonObject = new JSONObject();
 		jsonObject.put("value", linkText);
 		jsonObject.put("using", "link text");
-		JSONArray jsonArray = element.findElements(jsonObject);
+		JSONArray jsonArray = findElements(jsonObject);
 		return new ElementSelector(contexts, this, jsonArray);
 	}
 
@@ -686,7 +727,7 @@ public class MacacaClient {
 		JSONObject jsonObject = new JSONObject();
 		jsonObject.put("value", partialLinkText);
 		jsonObject.put("using", "partial link text");
-		JSONArray jsonArray = element.findElements(jsonObject);
+		JSONArray jsonArray = findElements(jsonObject);
 		return new ElementSelector(contexts, this, jsonArray);
 	}
 
@@ -705,7 +746,7 @@ public class MacacaClient {
 		JSONObject jsonObject = new JSONObject();
 		jsonObject.put("value", tagName);
 		jsonObject.put("using", "tag name");
-		JSONArray jsonArray = element.findElements(jsonObject);
+		JSONArray jsonArray = findElements(jsonObject);
 		return new ElementSelector(contexts, this, jsonArray);
 	}
 
@@ -743,7 +784,7 @@ public class MacacaClient {
 			} else {
 				// finded , break
 				satisfied = true;
-				element.findElement(jsonObject);
+				findElement(jsonObject);
 				break;
 			}
 		}
@@ -782,7 +823,7 @@ public class MacacaClient {
 	 * @throws Exception
 	 */
 	public Element waitForElementById(String elementId) throws Exception {
-		return waitForElement("id", elementId);
+		return waitForElement(GetElementWay.ID, elementId);
 	}
 
 	/**
@@ -796,7 +837,7 @@ public class MacacaClient {
 	 * @throws Exception
 	 */
 	public Element waitForElementByCss(String selector) throws Exception {
-		return waitForElement("css", selector);
+		return waitForElement(GetElementWay.CSS, selector);
 	}
 
 	/**
@@ -810,9 +851,22 @@ public class MacacaClient {
 	 * @throws Exception
 	 */
 	public Element waitForElementByXPath(String xpath) throws Exception {
-		return waitForElement("xpath", xpath);
+		return waitForElement(GetElementWay.XPATH, xpath);
 	}
 
+	/**
+	 * <p>
+	 * Search for an element on the page, starting from the document root.<br>
+	 * Support: Android iOS Web(WebView)
+	 *
+	 * @param tagname
+	 *            The tagname expression of element
+	 * @return return the element to find if it exist,if it does not exist ,return null
+	 * @throws Exception
+	 */
+	public Element waitForElementByTagName(String tagname) throws Exception {
+		return waitForElement(GetElementWay.TAG_NAME, tagname);
+	}
 	/**
 	 * <p>
 	 * Search for an element on the page, starting from the document root.<br>
@@ -824,7 +878,7 @@ public class MacacaClient {
 	 * @throws Exception
 	 */
 	public Element waitForElementByName(String name) throws Exception {
-		return waitForElement("name", name);
+		return waitForElement(GetElementWay.NAME, name);
 	}
 
 	/**
@@ -838,7 +892,7 @@ public class MacacaClient {
 	 * @throws Exception
 	 */
 	public Element waitForElementByLinkText(String text) throws Exception {
-		return waitForElement("link text", text);
+		return waitForElement(GetElementWay.LINK_TEXT, text);
 	}
 
 	/**
@@ -873,7 +927,7 @@ public class MacacaClient {
 		jsonObject.put("value", value);
 		jsonObject.put("using", using);
 		try {
-			element.findElement(jsonObject);
+			findElement(jsonObject);
 		} catch (Exception e) {
 			return false;
 		}
@@ -939,6 +993,7 @@ public class MacacaClient {
 	 * @return The currently instance of MacacaClient
 	 * @throws Exception
 	 */
+	@Deprecated
 	public MacacaClient sendKeys(String keys) throws Exception {
 		JSONObject jsonObject = new JSONObject();
 		ArrayList<String> values = new ArrayList<String>();
@@ -956,6 +1011,7 @@ public class MacacaClient {
 	 * @return The currently instance of MacacaClient
 	 * @throws Exception
 	 */
+	@Deprecated
 	public MacacaClient click() throws Exception {
 		element.click();
 		return this;
@@ -969,6 +1025,7 @@ public class MacacaClient {
 	 * @return The currently instance of MacacaClient
 	 * @throws Exception
 	 */
+	@Deprecated
 	public MacacaClient clear() throws Exception {
 		element.clearText();
 		return this;
@@ -1000,6 +1057,7 @@ public class MacacaClient {
 	 * @return The property
 	 * @throws Exception
 	 */
+	@Deprecated
 	public Object getProperty(String name) throws Exception {
 		return element.getProperty(name);
 	}
@@ -1012,6 +1070,7 @@ public class MacacaClient {
 	 * @return The rect of element
 	 * @throws Exception
 	 */
+	@Deprecated
 	public Object getRect() throws Exception {
 		return element.getRect();
 	}
@@ -1097,7 +1156,7 @@ public class MacacaClient {
 	 * Support: Android iOS Web(WebView)
 	 *
 	 * @param jsonObject
-	 *            The capabilities of session
+	 *            The capabilities of session  {@see <a href="https://github.com/alibaba/macaca/issues/366" target="_blank">more params</a>}
 	 * @return The currently instance of MacacaClient
 	 * @throws Exception
 	 */
@@ -1271,6 +1330,7 @@ public class MacacaClient {
 	 * @return The text of the element
 	 * @throws Exception
 	 */
+	@Deprecated
 	public String text() throws Exception {
 		return element.getText();
 	}
@@ -1302,5 +1362,146 @@ public class MacacaClient {
 		utils.request("POST", DriverCommand.ACTIONS, jsonObject);
 		return this;
 	}
+
+	 /**
+     * tap by coordinate
+     * Support: Android iOS
+     *
+     * @param x
+     * 			coordinate - x
+     * @param y
+     * 			coordinate - y
+     * @throws Exception
+     */
+	public void tap(double x,double y) throws Exception {
+		JSONObject jsonObject = new JSONObject();
+		jsonObject.put("x", x);
+		jsonObject.put("y", y);
+		touch("tap", jsonObject);
+	}
+
+	/**
+	 * double tap by coordinate
+	 * Support: Android iOS
+	 *
+	 * @param x
+	 * 			coordinate - x
+	 * @param y
+	 * 			coordinate - y
+	 * @throws Exception
+	 */
+	public void doubleTap(double x,double y) throws Exception {
+		JSONObject jsonObject = new JSONObject();
+		jsonObject.put("x", x);
+		jsonObject.put("y", y);
+		touch("doubleTap", jsonObject);
+	}
+
+	/**
+	 * long press
+	 * Support: Android iOS
+	 *
+	 * @param x
+	 * 			coordinate - x
+	 * @param y
+	 * 			coordinate - y
+	 * @param duration(for iOS,time-unit:s)
+	 * 			time to press(valid for iOS,time-unit:s)
+	 * @param steps(for android,time-unit:step)
+	 * 			time to press（valid for Android,1 step is about 5ms）
+	 * @throws Exception
+	 */
+	public  void press(double x,double y, double duration,int steps) throws Exception{
+		JSONObject jsonObject = new JSONObject();
+		jsonObject.put("x", x);
+		jsonObject.put("y", y);
+		jsonObject.put("duration", duration);
+		jsonObject.put("steps", steps);
+		touch("press", jsonObject);
+	}
+
+	/**
+	 * pinch
+	 * Support: Android iOS
+	 *
+	 * @param x
+	 * 			coordinate -x
+	 * @param y
+	 * 			coordinate -y
+	 * @param scale
+	 *			valid for iOS, GesturePinchType.PINCH_IN: scale < 1;GesturePinchType.PINCH_OUT:scale > 1
+	 * @param velocity
+	 * 			valid for iOS
+	 * @param pinchType
+	 * 			GesturePinchType.PINCH_IN，GesturePinchType.PINCH_OUT
+	 * @param percent
+	 * 			valid for Android, percent to pinch
+	 * @param steps
+	 * 			valid for Android, unit for andriod pinch
+	 * @throws Exception
+	 */
+	public void pinch(double x,double y,double scale, double velocity,GesturePinchType direction,double percent,int steps) throws Exception{
+		JSONObject jsonObject = new JSONObject();
+		jsonObject.put("x", x);
+		jsonObject.put("y", y);
+		jsonObject.put("scale", scale);
+		jsonObject.put("velocity", velocity);
+		jsonObject.put("percent", percent);
+		jsonObject.put("steps", steps);
+		if (direction == GesturePinchType.PINCH_IN) {
+			jsonObject.put("direction", "in");
+		} else {
+			jsonObject.put("direction", "out");
+		}
+		touch("pinch", jsonObject);
+	}
+
+	/**
+	 * rotate
+	 * Support: iOS
+	 * @param rotation
+	 * 			旋转弧度
+	 * @param velocity
+	 * 			旋转速率
+	 * @throws Exception
+	 */
+	public void rotate(double rotation, double velocity) throws Exception {
+		JSONObject jsonObject = new JSONObject();
+		jsonObject.put("rotation", rotation);
+		jsonObject.put("velocity", velocity);
+		touch("rotate", jsonObject);
+	}
+
+	/**
+	 * drag
+	 * Support: Android iOS
+	 *
+	 * @param fromX
+	 * 			drag start x-coordinate
+	 * @param fromY
+	 * 			drag start y-coordinate
+	 * @param toX
+	 * 			drag end x-coordinate
+	 * @param toY
+	 * 			drag end y-coordinate
+	 * @param duration
+	 * 			drag duration (valid for iOS,time-unit:s)
+	 * @param steps
+	 * 			drag duration (valid for Android,time-unit:steps)
+	 * @throws Exception
+	 */
+	public void drag(double fromX, double fromY, double toX,double toY,double duration, int steps) throws Exception{
+
+		JSONObject jsonObject = new JSONObject();
+		jsonObject.put("fromX", fromX);
+		jsonObject.put("fromY", fromY);
+		jsonObject.put("toX", toX);
+		jsonObject.put("toY", toY);
+		jsonObject.put("duration", duration);
+		jsonObject.put("steps", steps);
+
+		touch("drag", jsonObject);
+	}
+
 
 }
