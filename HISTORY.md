@@ -32,6 +32,7 @@ now,you need to code like below:
 ### List of new APIs 
 
 // MacacaClient.java
+
 *  tap(double x,double y)
 *  doubleTap(double x,double y)
 *  press(double x,double y, double duration,int steps)
