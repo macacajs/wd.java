@@ -1,4 +1,12 @@
-# 2.0 / 2016-01-09
+# 2.0.1 / 2017-01-18
+
+## MacacaClient.java
+change "element" property to public so we can use element more conveniently
+
+## ElementSelector.java
+change return value for  "getIndex()" from "MacacaClient" to "Element" so we can use element object directly
+
+# 2.0 / 2017-01-09
 ## some APIs for MacacaClient.java are deprecated
 
 ### List of deprecated APIs
