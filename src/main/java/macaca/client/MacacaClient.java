@@ -25,7 +25,7 @@ public class MacacaClient {
 
 	private Alert alert = new Alert(contexts);
 	private Context context = new Context(contexts);
-	private Element element = new Element(contexts); // TODO
+	public  Element element = new Element(contexts); // TODO
 	private Execute execute = new Execute(contexts);
 	private Keys _keys = new Keys(contexts);
 	private ScreenShot screenshot = new ScreenShot(contexts);

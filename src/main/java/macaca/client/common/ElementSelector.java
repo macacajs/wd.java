@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 
 import macaca.client.MacacaClient;
+import macaca.client.commands.Element;
 
 public class ElementSelector {
 
@@ -17,15 +18,28 @@ public class ElementSelector {
 		this.jsonArray = jsonArray;
 	}
 
+	/**
+	 * get size for ElementSelector
+	 * @return size
+	 */
 	public int size() {
 		return this.jsonArray.size();
 	}
 
-	public MacacaClient getIndex(int index) {
+	/**
+	 * get element by index
+	 * @param index element index
+	 * @return instance for target Element
+	 */
+	public Element getIndex(int index) {
 		setElementByIndex(index);
-		return this.client;
+		return this.client.element;
 	}
 
+	/**
+	 * change active element for current macacaClient
+	 * @param index active element index
+	 */
 	private void setElementByIndex(int index) {
 		this.driver.setElementId(((JSONObject) this.jsonArray.get(index)).getString("ELEMENT"));
 	}

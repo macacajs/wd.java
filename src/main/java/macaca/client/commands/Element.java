@@ -40,6 +40,11 @@ public class Element {
 	}
 
 
+	/**
+	 * 
+	 * @param jsonObject
+	 * @throws Exception
+	 */
 	public void setValue(JSONObject jsonObject) throws Exception {
 		jsonObject.put("sessionId", driver.getSessionId());
 		jsonObject.put("elementId", driver.getElementId());
@@ -125,6 +130,17 @@ public class Element {
 		utils.request("POST", DriverCommand.BACK, jsonObject);
 	}
 
+
+	/**
+	 * <p>
+	 * Get the result of a property of a element.<br>
+	 * Support: Android iOS Web(WebView). iOS: 'isVisible', 'label', 'value', Android: 'selected', 'description', 'text'
+	 *
+	 * @param name
+	 *            The property name of element
+	 * @return The property
+	 * @throws Exception
+	 */
 	public Object getProperty(String name) throws Exception {
 		JSONObject jsonObject = new JSONObject();
 		jsonObject.put("sessionId", driver.getSessionId());
