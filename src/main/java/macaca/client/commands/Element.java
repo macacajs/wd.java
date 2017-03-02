@@ -146,7 +146,7 @@ public class Element {
 		jsonObject.put("sessionId", driver.getSessionId());
 		jsonObject.put("elementId", driver.getElementId());
 		jsonObject.put("name", name);
-		Object response = (JSONObject) utils.request("GET", DriverCommand.GET_ELEMENT_PROPERTY, jsonObject);
+		Object response =  utils.request("GET", DriverCommand.GET_ELEMENT_PROPERTY, jsonObject);
 		return response;
 	}
 

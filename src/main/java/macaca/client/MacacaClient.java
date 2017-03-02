@@ -1088,9 +1088,10 @@ public class MacacaClient {
 	 * @return The results of execution
 	 * @throws Exception
 	 */
-	public String execute(String code) throws Exception {
+	public JSONObject execute(String code) throws Exception {
 		JSONObject jsonObject = new JSONObject();
-		jsonObject.put("code", code);
+		jsonObject.put("script", code);
+		jsonObject.put("args", new JSONArray());
 		return execute.execute(jsonObject);
 	}
 

@@ -1,5 +1,6 @@
 package macaca.client.commands;
 
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 
 import macaca.client.common.DriverCommand;
@@ -16,9 +17,9 @@ public class Execute {
 		this.utils = new Utils(driver);
 	}
 
-	public String execute(JSONObject jsonObject) throws Exception {
+	public JSONObject execute(JSONObject jsonObject) throws Exception {
 		jsonObject.put("sessionId", driver.getSessionId());
-		String result = (String) utils.request("POST", DriverCommand.EXECUTE_SCRIPT, jsonObject);
+		JSONObject result = (JSONObject) utils.request("POST", DriverCommand.EXECUTE_SCRIPT, jsonObject);
 		return result;
 	}
 }
