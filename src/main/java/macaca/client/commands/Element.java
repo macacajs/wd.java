@@ -41,7 +41,7 @@ public class Element {
 
 
 	/**
-	 * 
+	 *
 	 * @param jsonObject
 	 * @throws Exception
 	 */
@@ -134,7 +134,7 @@ public class Element {
 	/**
 	 * <p>
 	 * Get the result of a property of a element.<br>
-	 * Support: Android iOS Web(WebView). iOS: 'isVisible', 'label', 'value', Android: 'selected', 'description', 'text'
+	 * Support: Android iOS Web(WebView). iOS: 'isVisible', 'isAccessible', 'isEnabled', 'type', 'label', 'name', 'value', Android: 'selected', 'description', 'text'
 	 *
 	 * @param name
 	 *            The property name of element
