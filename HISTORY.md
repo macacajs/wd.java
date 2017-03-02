@@ -1,3 +1,18 @@
+# 2.0.3 / 2017-03-02
+
+Main commit:
+[https://github.com/macacajs/wd.java/commit/12e7c5cbcbc76a65dd2a5ceb6a8fa4496cb21e0f](https://github.com/macacajs/wd.java/commit/12e7c5cbcbc76a65dd2a5ceb6a8fa4496cb21e0f
+)
+
+### fix 'getProperty' bug for iOS
+
+detail :[https://github.com/alibaba/macaca/issues/468](https://github.com/alibaba/macaca/issues/468)
+
+### fix 'excute' bug
+
+for webview test,excute js script
+
+ 
 # 2.0.1 / 2017-01-18
 
 ## MacacaClient.java
