@@ -12,7 +12,7 @@ It was originally designed for [Macaca](//macacajs.github.io) (A Node.js powered
 
 ## Document
 
-[javadoc](//macacajs.github.io/wd.java/)
+[javadoc](//macacajs.github.io/wd.java/?asdfasdfa=adsfasd)
 
 ## Sample
 
