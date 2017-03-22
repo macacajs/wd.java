@@ -99,7 +99,7 @@ public class Utils {
 
 		try {
 			String url = Constants.SUFFIX.replace("${host}", driver.getHost()).replace("${port}", driver.getPort()) + method;
-			printRequest(url);
+
 			httppost = new HttpPost(url);
 			if (jsonBody != null) {
 				stringEntity = new StringEntity(tempObj.toString(), "utf-8");
@@ -107,6 +107,8 @@ public class Utils {
 				stringEntity.setContentType("application/json");
 				httppost.setEntity(stringEntity);
 			}
+
+			printRequest(url + ":" + tempObj.toString());
 			response = httpclient.execute(httppost);
 			entity = response.getEntity();
 			if (entity != null) {
