@@ -109,7 +109,6 @@ public class Utils {
 			}
 			response = httpclient.execute(httppost);
 			entity = response.getEntity();
-//			System.out.println(response.getStatusLine().getStatusCode());
 			if (entity != null) {
 				stringResponse = EntityUtils.toString(entity);
 				printResponse(stringResponse);
@@ -166,7 +165,6 @@ public class Utils {
 		Map<Integer, String> map = jsonwireErrors.getStatusMap();
 		for (Map.Entry<Integer, String> entry : map.entrySet()) {
 			if (entry.getKey() == statusCode) {
-				System.out.println(entry.getValue());
 				if (statusCode != 0) {
 					throw new Exception(entry.getValue());
 				}
