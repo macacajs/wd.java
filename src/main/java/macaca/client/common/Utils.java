@@ -17,7 +17,11 @@ import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
 
 import java.io.IOException;
+import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.util.Map;
+
+import javax.swing.JButton;
 
 public class Utils {
 
@@ -40,11 +44,17 @@ public class Utils {
 
 
 	private void printResponse(String stringResponse) throws Exception {
+		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
 		if (stringResponse.length() > 400) {
-			System.out.println("Response content:" + stringResponse.substring(0, 400)+"...more response is ignored..");
+			System.out.println(df.format(new java.util.Date()) + " Response:" + stringResponse.substring(0, 400)+"...more response is ignored..");
 		} else {
-			System.out.println("Response content:" + stringResponse);
+			System.out.println(df.format(new java.util.Date()) + " Response:" + stringResponse);
 		}
+	}
+
+	private void printRequest(String stringRequest) throws Exception {
+		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
+		System.out.println(df.format(new java.util.Date()) + " Request:" + stringRequest);
 	}
 
 	public Object getRequest(String method, JSONObject jsonBody) throws Exception {
@@ -56,6 +66,7 @@ public class Utils {
 
 		try {
 			String url = Constants.SUFFIX.replace("${host}", driver.getHost()).replace("${port}", driver.getPort()) + method;
+			printRequest(url);
 			httpget = new HttpGet(url);
 			response = httpclient.execute(httpget);
 			entity = response.getEntity();
@@ -88,6 +99,7 @@ public class Utils {
 
 		try {
 			String url = Constants.SUFFIX.replace("${host}", driver.getHost()).replace("${port}", driver.getPort()) + method;
+			printRequest(url);
 			httppost = new HttpPost(url);
 			if (jsonBody != null) {
 				stringEntity = new StringEntity(tempObj.toString(), "utf-8");
@@ -97,7 +109,7 @@ public class Utils {
 			}
 			response = httpclient.execute(httppost);
 			entity = response.getEntity();
-			System.out.println(response.getStatusLine().getStatusCode());
+//			System.out.println(response.getStatusLine().getStatusCode());
 			if (entity != null) {
 				stringResponse = EntityUtils.toString(entity);
 				printResponse(stringResponse);
