@@ -1,5 +1,7 @@
 package macaca.client.common;
 
+// https://github.com/macacajs/webdriver-keycode/blob/master/lib/webdriver-keycode.js
+
 public enum Keycode implements CharSequence {
 
 	NULL('\uE000'),
