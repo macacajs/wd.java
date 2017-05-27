@@ -2,7 +2,7 @@ package macaca.client.common;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import macaca.client.model.JsonwireErrors;
+import macaca.client.model.JsonWireStatus;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.http.HttpEntity;
@@ -18,7 +18,6 @@ import org.apache.http.util.EntityUtils;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
-import java.util.Map;
 
 public class Utils {
 
@@ -28,7 +27,7 @@ public class Utils {
     private HttpPost httppost = null;
     private HttpDelete httpdelete = null;
     private CloseableHttpClient httpclient = HttpClients.createDefault();
-    ;
+
     private CloseableHttpResponse response = null;
     private HttpEntity entity = null;
     private StringEntity stringEntity = null;
@@ -161,16 +160,9 @@ public class Utils {
     }
 
     public void handleStatus(int statusCode) throws Exception {
-        JsonwireErrors jsonwireErrors = new JsonwireErrors();
-        Map<Integer, String> map = jsonwireErrors.getStatusMap();
-        for (Map.Entry<Integer, String> entry : map.entrySet()) {
-            if (entry.getKey() == statusCode) {
-                if (statusCode != 0) {
-                    throw new Exception(entry.getValue());
-                }
-
-                break;
-            }
+        JsonWireStatus status = JsonWireStatus.findByStatus(statusCode);
+        if (status != JsonWireStatus.Success && status != JsonWireStatus.Default) {
+            throw new Exception(status.message());
         }
     }
 
