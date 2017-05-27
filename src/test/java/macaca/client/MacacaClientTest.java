@@ -34,11 +34,11 @@ public class MacacaClientTest {
 				.withHeader("content-type", "application/json")
 				.withBody(defaultMockData.toString())));
 
-		JSONObject porps = new JSONObject();
-		porps.put("browserName", "electron");
-		porps.put("platformName", "desktop");
+		JSONObject props = new JSONObject();
+		props.put("browserName", "electron");
+		props.put("platformName", "desktop");
 		JSONObject desiredCapabilities = new JSONObject();
-		desiredCapabilities.put("desiredCapabilities", porps);
+		desiredCapabilities.put("desiredCapabilities", props);
 		driver.initDriver(desiredCapabilities);
 	}
 
