@@ -1359,7 +1359,7 @@ public class MacacaClient {
 		JSONObject actionObject = new JSONObject();
 		actionObject.put("type", action);
 		for (String key : args.keySet()) {
-			int value = args.getIntValue(key);
+			double value = args.getDoubleValue(key);
 			actionObject.put(key , value);
 		}
 		array.add(actionObject);
