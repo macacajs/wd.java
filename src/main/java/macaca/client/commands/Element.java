@@ -154,7 +154,7 @@ public class Element {
 		JSONObject jsonObject = new JSONObject();
 		jsonObject.put("sessionId", driver.getSessionId());
 		jsonObject.put("elementId", driver.getElementId());
-		Object response = (JSONObject) utils.request("GET", DriverCommand.GET_ELEMENT_RECT, jsonObject);
+		Object response = (Object) utils.request("GET", DriverCommand.GET_ELEMENT_RECT, jsonObject);
 		return response;
 	}
 

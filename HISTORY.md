@@ -1,3 +1,10 @@
+# 2.0.8 / 2017-06-02
+
+### update wd.java for macaca 2.0
+*   drag(double fromX, double fromY, double toX,double toY,double duration) ,remove "steps" param, system will caculate drag steps by duration, steps = duration * 40
+    the same change for press(double x,double y, double duration) 
+*  fix scrollTo* 
+
 # 2.0.3 / 2017-03-02
 
 Main commit:

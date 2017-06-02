@@ -38,13 +38,18 @@ public class MacacaClient {
 
 	private Window window = new Window(contexts);
 
-	/**
-	 * timeout for waitForElement
-	 */
+    /**
+     *  timeout for finding an element ,valid for waitForElement() function
+     *  paired with waitElementTimeInterval, if waitElementTimeout = 1000 & waitElementTimeInterval = 200,it means we will find given element per 200ms,until 1000ms passed,
+     *  which means we will find for 5 times
+     */
+
 	public int waitElementTimeout = 1000;
 
 	/**
-	 * interval for waitForElement
+	 *  time interval between finding an element ,valid for waitForElement() function
+     *  paired with waitElementTimeout, if waitElementTimeout = 1000 & waitElementTimeInterval = 200,it means we will find given element per 200ms,until 1000ms passed,
+     *  which means we will find for 5 times
 	 */
 	public int waitElementTimeInterval = 200;
 
@@ -718,7 +723,7 @@ public class MacacaClient {
 	 * root.<br>
 	 * Support: Android iOS Web(WebView)
 	 *
-	 * @param linkText
+	 * @param partialLinkText
 	 *            The partial link text attribute of elements
 	 * @return ElementSelector object
 	 * @throws Exception
@@ -1354,7 +1359,7 @@ public class MacacaClient {
 		JSONObject actionObject = new JSONObject();
 		actionObject.put("type", action);
 		for (String key : args.keySet()) {
-			String value = args.getString(key);
+			int value = args.getIntValue(key);
 			actionObject.put(key , value);
 		}
 		array.add(actionObject);
@@ -1406,18 +1411,15 @@ public class MacacaClient {
 	 * 			coordinate - x
 	 * @param y
 	 * 			coordinate - y
-	 * @param duration(for iOS,time-unit:s)
-	 * 			time to press(valid for iOS,time-unit:s)
-	 * @param steps(for android,time-unit:step)
-	 * 			time to press（valid for Android,1 step is about 5ms）
+	 * @param duration
+	 * 			time to press(valid for iOS and Android,time-unit:s)
 	 * @throws Exception
 	 */
-	public  void press(double x,double y, double duration,int steps) throws Exception{
+	public  void press(double x,double y, double duration) throws Exception{
 		JSONObject jsonObject = new JSONObject();
 		jsonObject.put("x", x);
 		jsonObject.put("y", y);
 		jsonObject.put("duration", duration);
-		jsonObject.put("steps", steps);
 		touch("press", jsonObject);
 	}
 
@@ -1433,7 +1435,7 @@ public class MacacaClient {
 	 *			valid for iOS, GesturePinchType.PINCH_IN: scale < 1;GesturePinchType.PINCH_OUT:scale > 1
 	 * @param velocity
 	 * 			valid for iOS
-	 * @param pinchType
+	 * @param direction
 	 * 			GesturePinchType.PINCH_IN，GesturePinchType.PINCH_OUT
 	 * @param percent
 	 * 			valid for Android, percent to pinch
@@ -1486,12 +1488,10 @@ public class MacacaClient {
 	 * @param toY
 	 * 			drag end y-coordinate
 	 * @param duration
-	 * 			drag duration (valid for iOS,time-unit:s)
-	 * @param steps
-	 * 			drag duration (valid for Android,time-unit:steps)
+	 * 			drag duration (valid for iOS and Android,time-unit:s)
 	 * @throws Exception
 	 */
-	public void drag(double fromX, double fromY, double toX,double toY,double duration, int steps) throws Exception{
+	public void drag(double fromX, double fromY, double toX,double toY,double duration) throws Exception{
 
 		JSONObject jsonObject = new JSONObject();
 		jsonObject.put("fromX", fromX);
@@ -1499,7 +1499,6 @@ public class MacacaClient {
 		jsonObject.put("toX", toX);
 		jsonObject.put("toY", toY);
 		jsonObject.put("duration", duration);
-		jsonObject.put("steps", steps);
 
 		touch("drag", jsonObject);
 	}
