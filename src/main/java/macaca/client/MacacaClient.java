@@ -995,7 +995,10 @@ public class MacacaClient {
 	 *
 	 * @param keys
 	 *            The keys sequence to be sent.
-	 * @return The currently instance of MacacaClient
+	 * @return
+	 * 			  The currently instance of MacacaClient
+	 * attention:
+	 *            if the textfiled has text already,you need clear it then sendkeys
 	 * @throws Exception
 	 */
 	@Deprecated
@@ -1105,11 +1108,12 @@ public class MacacaClient {
 	/**
 	 * <p>
 	 * Send a sequence of key strokes to the active window.<br>
-	 * Support: Android Web(WebView)
+	 * Support: Android iOS Web(Webview)
 	 *
 	 * @param keys
 	 *            The keys sequence to be sent.
 	 * @return The currently instance of MacacaClient
+	 * more info refer : https://github.com/alibaba/macaca/issues/487
 	 * @throws Exception
 	 */
 	public MacacaClient keys(String keys) throws Exception {
