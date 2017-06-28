@@ -6,6 +6,7 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 
 import macaca.client.common.DriverCommand;
+import macaca.client.common.GetElementWay;
 import macaca.client.common.MacacaDriver;
 import macaca.client.common.Utils;
 
@@ -68,46 +69,65 @@ public class Element {
 		}
 	}
 
-	public boolean hasElement(JSONObject jsonObject) throws Exception {
+
+
+	/**
+	 * check if this element has target child element
+	 * @param using way to find target element
+	 * @param value value to find target element,paired with using
+	 * @return
+	 * @throws Exception
+	 */
+	@Deprecated
+	public boolean hasChildElement(GetElementWay using, String value) throws  Exception {
+
+		JSONObject jsonObject = new JSONObject();
+		jsonObject.put("value", value);
+		jsonObject.put("using", using.getUsing());
+
 		jsonObject.put("sessionId", driver.getSessionId());
+		jsonObject.put("elementId", driver.getElementId());
+
 		JSONObject response = (JSONObject) utils.request("POST", DriverCommand.FIND_ELEMENT, jsonObject);
 		JSONObject element = (JSONObject) response.get("value");
 		Object elementId = (Object) element.get("ELEMENT");
 		return elementId != null;
 	}
 
+	/**
+	 * get child elements
+	 * @param using way to find target element
+	 * @param value value to find target element,paired with using
+	 * @return
+	 * @throws Exception
+	 */
+	@Deprecated
+	public JSONArray findChildElements(GetElementWay using, String value) throws  Exception {
+		JSONObject jsonObject = new JSONObject();
+		jsonObject.put("value", value);
+		jsonObject.put("using", using.getUsing());
 
-//	/**
-//	 * find an element
-//	 * @param jsonObject
-//	 * @return
-//	 * 		true - the element exists
-//	 * 		false - the element does not exist
-//	 *
-//	 * @throws Exception
-//	 */
-//	public boolean findElement(JSONObject jsonObject) throws Exception {
-//		jsonObject.put("sessionId", driver.getSessionId());
-//		JSONObject response = (JSONObject) utils.request("POST", DriverCommand.FIND_ELEMENT, jsonObject);
-//		JSONObject element = (JSONObject) response.get("value");
-//		Object elementId = (Object) element.get("ELEMENT");
-//		if (elementId !=  null) {
-//			// the element exists
-//			driver.setElementId(elementId);
-//			return true;
-//		} else {
-//			// the element does not exist
-//			return false;
-//		}
-//
-//	}
-//
-//	public JSONArray findElements(JSONObject jsonObject) throws Exception {
-//		jsonObject.put("sessionId", driver.getSessionId());
-//		JSONObject response = (JSONObject) utils.request("POST", DriverCommand.FIND_ELEMENTS, jsonObject);
-//		JSONArray elements = (JSONArray) response.get("value");
-//		return elements;
-//	}
+		jsonObject.put("sessionId", driver.getSessionId());
+		jsonObject.put("elementId", driver.getElementId());
+		JSONObject response = (JSONObject) utils.request("POST", DriverCommand.FIND_ELEMENTS, jsonObject);
+		JSONArray elements = (JSONArray) response.get("value");
+		return elements;
+
+	}
+
+	/**
+	 * get count of child elements
+	 * @param using way to find target element
+	 * @param value value to find target element,paired with using
+	 * @return
+	 * @throws Exception
+	 */
+	@Deprecated
+	public int countOfChildElements(GetElementWay using, String value) throws  Exception {
+
+		return  findChildElements(using,value).size();
+	}
+
 
 	public String getText() throws Exception {
 		JSONObject jsonObject = new JSONObject();
