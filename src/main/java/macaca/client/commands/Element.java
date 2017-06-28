@@ -216,7 +216,7 @@ public class Element {
 	 * @return
 	 * @throws Exception
 	 */
-	public  double getX() throws  Exception {
+	public  double getOriginX() throws  Exception {
 		JSONObject rect = (JSONObject)getRect();
 		double x = rect.getDoubleValue("x");
 		return  x;
@@ -227,7 +227,7 @@ public class Element {
 	 * @return
 	 * @throws Exception
 	 */
-	public  double getY() throws  Exception {
+	public  double getOriginY() throws  Exception {
 		JSONObject rect = (JSONObject)getRect();
 		double y = rect.getDoubleValue("y");
 		return y;
