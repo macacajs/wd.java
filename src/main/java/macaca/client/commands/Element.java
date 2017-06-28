@@ -211,4 +211,79 @@ public class Element {
 		utils.request("POST", DriverCommand.ACTIONS, jsonObject);
 	}
 
+	/**
+	 * get X coordinate for this element
+	 * @return
+	 * @throws Exception
+	 */
+	public  double getX() throws  Exception {
+		JSONObject rect = (JSONObject)getRect();
+		double x = rect.getDoubleValue("x");
+		return  x;
+	}
+
+	/**
+	 * get Y coordinater for this element
+	 * @return
+	 * @throws Exception
+	 */
+	public  double getY() throws  Exception {
+		JSONObject rect = (JSONObject)getRect();
+		double y = rect.getDoubleValue("y");
+		return y;
+	}
+
+	/**
+	 * get width for this element
+	 * @return
+	 * @throws Exception
+	 */
+	public  double getWidth() throws  Exception {
+		JSONObject rect = (JSONObject)getRect();
+		double width = rect.getDoubleValue("width");
+		return  width;
+	}
+
+	/**
+	 * get height for this element
+	 * @return
+	 * @throws Exception
+	 */
+	public  double getHeight() throws  Exception {
+		JSONObject rect = (JSONObject)getRect();
+		double height = rect.getDoubleValue("height");
+		return height;
+	}
+
+	/**
+	 * get CenterX coordinate for this element
+	 * @return
+	 * @throws Exception
+	 */
+	public  double getCenterX() throws  Exception {
+		JSONObject rect = (JSONObject)getRect();
+		double x = rect.getDoubleValue("x");
+		double y = rect.getDoubleValue("y");
+		double width = rect.getDoubleValue("width");
+		double height = rect.getDoubleValue("height");
+		double centerX = x + width/2.0;
+		return centerX;
+	}
+
+	/**
+	 * get CenterY coordinate for this element
+	 * @return
+	 * @throws Exception
+	 */
+	public double getCenterY() throws  Exception {
+		JSONObject rect = (JSONObject)getRect();
+		double x = rect.getDoubleValue("x");
+		double y = rect.getDoubleValue("y");
+		double width = rect.getDoubleValue("width");
+		double height = rect.getDoubleValue("height");
+		double centerY = y + height/2.0;
+		return centerY;
+	}
+
+
 }
