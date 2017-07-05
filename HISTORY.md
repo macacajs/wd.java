@@ -1,3 +1,8 @@
+# 2.0.12 / 2017-07-05
+
+### update wd.java fix elementsByCss using="selector" issue
+*   the using="selector" is wrong for webview mode. should be "css".
+
 # 2.0.8 / 2017-06-02
 
 ### update wd.java for macaca 2.0

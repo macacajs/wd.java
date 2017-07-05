@@ -693,7 +693,7 @@ public class MacacaClient {
 	public ElementSelector elementsByCss(String css) throws Exception {
 		JSONObject jsonObject = new JSONObject();
 		jsonObject.put("value", css);
-		jsonObject.put("using", "selector");
+		jsonObject.put("using", "css");
 		JSONArray jsonArray = findElements(jsonObject);
 		return new ElementSelector(contexts, this, jsonArray);
 	}
