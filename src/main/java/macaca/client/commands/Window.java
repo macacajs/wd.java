@@ -63,6 +63,6 @@ public class Window {
 
 	public void setFrame(JSONObject jsonObject) throws Exception {
 		jsonObject.put("sessionId", driver.getSessionId());
-		String name = (String) utils.request("POST", DriverCommand.FRAME, jsonObject);
+		String name = utils.request("POST", DriverCommand.FRAME, jsonObject).toString();
 	}
 }
