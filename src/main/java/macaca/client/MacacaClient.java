@@ -1333,6 +1333,40 @@ public class MacacaClient {
 	}
 
 	/**
+	 * @param locator
+	 * 				id, name, or xpath
+	 * @return The currently instance of MacacaClient
+	 * @throws Exception
+	 */
+	public MacacaClient frame(String locator) throws Exception {
+		String elementId;
+		JSONObject element = new JSONObject();
+		JSONObject objects = new JSONObject();
+
+		if (locator == "" || locator == null) {
+			objects.put("id", null);
+		} else {
+			if (locator.startsWith("//")) {
+				elementByXPath(locator);
+			}else {
+				try {
+					elementById(locator);
+				} catch (Exception e) {
+					elementByName(locator);
+				}
+			}
+
+			elementId = contexts.getElementId();
+			element.put("ELEMENT", elementId);
+
+			objects.put("id", element);
+		}
+
+		window.setFrame(objects);
+		return this;
+	}
+
+	/**
 	 * <p>
 	 * Get text of the element<br>
 	 * Support: Android iOS Web(WebView)

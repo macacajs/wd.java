@@ -2,6 +2,7 @@ package macaca.client.common;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson.serializer.SerializerFeature;
 import macaca.client.model.JsonWireStatus;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -86,7 +87,12 @@ public class Utils {
     public Object postRequest(String method, JSONObject jsonBody) throws Exception {
         JSONObject tempObj = new JSONObject();
         for (String key : jsonBody.keySet()) {
-            String value = jsonBody.get(key).toString();
+            String value;
+            if (jsonBody.get(key) == null) {
+                value = null;
+            }else {
+                value = jsonBody.get(key).toString();
+            }
             if (method.contains(":" + key)) {
                 method = method.replace(":" + key, value);
             } else {
@@ -99,13 +105,15 @@ public class Utils {
 
             httppost = new HttpPost(url);
             if (jsonBody != null) {
-                stringEntity = new StringEntity(tempObj.toString(), "utf-8");
+                stringEntity = new StringEntity(JSONObject.toJSONString(tempObj,
+                        SerializerFeature.WriteMapNullValue), "utf-8");
                 stringEntity.setContentEncoding("utf-8");
                 stringEntity.setContentType("application/json");
                 httppost.setEntity(stringEntity);
             }
 
-            printRequest(url + ":" + tempObj.toString());
+            printRequest(url + ":" + JSONObject.toJSONString(tempObj,
+                    SerializerFeature.WriteMapNullValue));
             response = httpclient.execute(httppost);
             entity = response.getEntity();
             if (entity != null) {
