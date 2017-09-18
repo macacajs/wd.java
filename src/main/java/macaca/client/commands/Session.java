@@ -18,13 +18,14 @@ public class Session {
 
 	public void createSession(JSONObject jsonObj) throws Exception {
 
-		if (jsonObj.get("host") != null){
-			String host = (String) jsonObj.get("host");
+		JSONObject desiredCapabilities = jsonObj.getJSONObject("desiredCapabilities");
+		if (desiredCapabilities.get("host") != null){
+			String host = (String) desiredCapabilities.get("host");
 			this.driver.setRemoteHost(host);
 		}
 
-		if (jsonObj.get("port") != null){
-			int port = (Integer) jsonObj.get("port");
+		if (desiredCapabilities.get("port") != null){
+			int port = (int) desiredCapabilities.get("port");
 			this.driver.setRemotePort(port);
 		}
 		
