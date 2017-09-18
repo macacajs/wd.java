@@ -55,7 +55,15 @@ public class MacacaDriver {
 		this.host = host;
 		this.port = port;			
 	}
-	
+
+	public void setRemoteHost(String host){
+		this.host = host;
+	}
+
+	public  void setRemotePort(int port){
+		this.port = port;
+	}
+
 	public String getHost() {
 		return this.host;
 	}

@@ -347,7 +347,7 @@ public class MacacaClient {
 			break;
 		}
 
-		if (elementSelector != null) {
+		if (elementSelector != null && elementSelector.size() > (index-1)) {
 			elementSelector.getIndex(index);
 		} else {
 			System.out.println("can't find the element:" + value + "[" + index + "]");
