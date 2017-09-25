@@ -1384,8 +1384,8 @@ public class MacacaClient {
 	 * Apply touch actions on devices. <br>
 	 * Support: Support: Android iOS
 	 *
-	 * @param action The new window width, such as, tap/doubleTap/press/pinch/rotate/drag
-	 * @param args Parameters of the action {@see <a href="https://github.com/alibaba/macaca/issues/366" target="_blank">more params</a>}
+	 * @param action touch actions, such as, tap/doubleTap/press/pinch/rotate/drag , if you want to operate specific action,there is the same name API in this doc,like tap(x,y)
+	 * @param args Parameters of the action:https://github.com/alibaba/macaca/issues/366 
 	 * @return The currently instance of MacacaClient
 	 * @throws Exception
 	 */
