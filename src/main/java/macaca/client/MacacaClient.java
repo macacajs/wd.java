@@ -932,12 +932,12 @@ public class MacacaClient {
 		jsonObject.put("value", value);
 		jsonObject.put("using", using);
 		try {
-			findElement(jsonObject);
+			return findElement(jsonObject);
 		} catch (Exception e) {
 			return false;
 		}
 
-		return element.isDisplayed();
+//		return element.isDisplayed();
 	}
 
 	/**
@@ -956,13 +956,13 @@ public class MacacaClient {
 	 */
 	public boolean isElementExist(GetElementWay wayToFind, String value, int index) throws Exception {
 		try {
-			getElement(wayToFind, value, index);
+			return  getElement(wayToFind, value, index)!= null;
 		} catch (Exception e) {
 			// TODO: handle exception
 			return false;
 		}
 
-		return element.isDisplayed();
+//		return element.isDisplayed();
 	}
 
 	/**
@@ -979,13 +979,13 @@ public class MacacaClient {
 	 */
 	public boolean isElementExist(GetElementWay wayToFind, String value) throws Exception {
 		try {
-			getElement(wayToFind, value);
+			return getElement(wayToFind, value)!= null;
 		} catch (Exception e) {
 			// TODO: handle exception
 			return false;
 		}
 
-		return element.isDisplayed();
+//		return element.isDisplayed();
 	}
 
 	/**
@@ -1385,7 +1385,7 @@ public class MacacaClient {
 	 * Support: Support: Android iOS
 	 *
 	 * @param action touch actions, such as, tap/doubleTap/press/pinch/rotate/drag , if you want to operate specific action,there is the same name API in this doc,like tap(x,y)
-	 * @param args Parameters of the action:https://github.com/alibaba/macaca/issues/366 
+	 * @param args Parameters of the action:https://github.com/alibaba/macaca/issues/366
 	 * @return The currently instance of MacacaClient
 	 * @throws Exception
 	 */

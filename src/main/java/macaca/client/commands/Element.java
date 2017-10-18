@@ -187,6 +187,7 @@ public class Element {
 		return computedCss;
 	}
 
+	@Deprecated
 	public boolean isDisplayed() throws Exception {
 		JSONObject jsonObject = new JSONObject();
 		jsonObject.put("sessionId", driver.getSessionId());
