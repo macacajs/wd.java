@@ -35,6 +35,7 @@ public class MacacaClient {
 	private Title title = new Title(contexts);
 	private Url _url = new Url(contexts);
 	private Utils utils = new Utils(contexts);
+	private Cookie cookie = new Cookie(contexts);
 
 	private Window window = new Window(contexts);
 
@@ -81,7 +82,7 @@ public class MacacaClient {
 	 * @return The currently instance of MacacaClient
 	 * @throws Exception
 	 */
-	public MacacaClient acceptAlert() throws Exception {
+	public MacacaClient acceptAlert() throws Exception{
 		alert.acceptAlert();
 		return this;
 	}
@@ -1540,6 +1541,61 @@ public class MacacaClient {
 
 		touch("drag", jsonObject);
 	}
+
+
+
+	/**
+	 * Returns all cookies associated with the address of the current browsing context’s active document.
+	 * @summary  Support: Web(WebView)
+	 * @return String
+	 * @throws Exception
+	 */
+	public String allCookies() throws Exception {
+		return cookie.allCookies();
+	}
+
+	/**
+	 * Adds a single cookie to the cookie store associated with the active document’s address. {url: 'https://macacajs.github.io', name:'foo', value:'bar'} Optional cookie fields: secure, expiry
+	 * @summary  Support: Web(WebView)
+	 * @param jsonObject
+	 * @throws Exception
+	 */
+	public void setCookie(JSONObject jsonObject) throws Exception {
+		cookie.setCookie(jsonObject);
+	}
+
+	/**
+	 * Delete either a single cookie by parameter name, or all the cookies associated with the active document’s address if name is undefined.
+	 * @param cookieName cookie name to delete
+	 * @throws Exception
+	 */
+	public void deleteCookie(String cookieName) throws Exception {
+		cookie.deleteCookie(cookieName);
+	}
+
+	/**
+	 * Allows deletion of all cookies associated with the active document’s address.
+	 * @summary  Support: Web(WebView)
+	 * @throws Exception
+	 */
+	public void deleteAllCookies() throws Exception {
+		cookie.deleteAllCookies();
+	}
+
+	/**
+	 * Navigate forwards in the browser history, if possible.
+	 * @summary  Support: Web(WebView)
+	 * @throws Exception
+	 */
+	public void forward() throws Exception {
+		_url.forward();
+	}
+
+
+
+
+
+
 
 
 }

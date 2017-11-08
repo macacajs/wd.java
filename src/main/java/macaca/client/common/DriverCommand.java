@@ -57,6 +57,7 @@ public class DriverCommand {
 	public static final String BACK = SESSION + "/back";
 	public static final String FORWARD = SESSION + "/forward";
 	public static final String REFRESH = SESSION + "/refresh";
+	public static final String COOKIE = SESSION + "/cookie";
 
 	// window
 	public static final String WINDOW_HANDLE = SESSION + "/window_handle";

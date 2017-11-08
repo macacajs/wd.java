@@ -28,7 +28,8 @@ public class Url {
 		utils.request("POST", DriverCommand.URL, jsonObject);
 	}
 
-	public void forward(JSONObject jsonObject) throws Exception {
+	public void forward() throws Exception {
+		JSONObject jsonObject = new JSONObject();
 		jsonObject.put("sessionId", driver.getSessionId());
 		utils.request("POST", DriverCommand.URL, jsonObject);
 	}
