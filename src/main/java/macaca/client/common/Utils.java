@@ -42,7 +42,7 @@ public class Utils {
 
 
     private void printResponse(String stringResponse) throws Exception {
-        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"); //设置日期格式
         if (stringResponse.length() > 800) {
             System.out.println(df.format(new java.util.Date()) + " Response:" + stringResponse.substring(0, 800) + "...more response is ignored..");
         } else {
@@ -51,7 +51,7 @@ public class Utils {
     }
 
     private void printRequest(String stringRequest) throws Exception {
-        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"); //设置日期格式
         System.out.println(df.format(new java.util.Date()) + " Request:" + stringRequest);
     }
 

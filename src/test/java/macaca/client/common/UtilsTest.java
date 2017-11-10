@@ -15,13 +15,13 @@ public class UtilsTest {
 
         try {
             utils.handleStatus(0);
-        }catch (Exception e){
+        } catch (Exception e) {
             throw new RuntimeException("");
         }
 
         try {
             utils.handleStatus(1);
-        }catch (Exception e){
+        } catch (Exception e) {
             throw new RuntimeException("");
         }
     }
