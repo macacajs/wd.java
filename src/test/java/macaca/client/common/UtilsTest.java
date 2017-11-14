@@ -9,7 +9,7 @@ public class UtilsTest {
         Utils utils = new Utils(new MacacaDriver());
         try {
             utils.handleStatus(11);
-        }catch (Exception e){
+        } catch (Exception e) {
             assert e.getMessage().equals("An element command could not be completed because the element is not visible on the page.");
         }
 
@@ -25,4 +25,5 @@ public class UtilsTest {
             throw new RuntimeException("");
         }
     }
+
 }

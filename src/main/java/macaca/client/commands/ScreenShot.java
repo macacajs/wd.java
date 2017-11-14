@@ -1,48 +1,49 @@
 package macaca.client.commands;
 
 import java.io.FileOutputStream;
-import java.io.OutputStream;
-
 import com.alibaba.fastjson.JSONObject;
-
 import macaca.client.common.DriverCommand;
 import macaca.client.common.MacacaDriver;
 import macaca.client.common.Utils;
-import sun.misc.BASE64Decoder;
+import org.apache.commons.codec.binary.Base64;
 
 public class ScreenShot {
 
-	private MacacaDriver driver;
-	private Utils utils;
+    private MacacaDriver driver;
+    private Utils utils;
 
-	public ScreenShot(MacacaDriver driver) {
-		this.driver = driver;
-		this.utils = new Utils(driver);
-	}
+    public ScreenShot(MacacaDriver driver) {
+        this.driver = driver;
+        this.utils = new Utils(driver);
+    }
 
-	public Object takeScreenshot() throws Exception {
-		JSONObject jsonObject = new JSONObject();
-		jsonObject.put("sessionId", driver.getSessionId());
-		return utils.request("GET", DriverCommand.SCREENSHOT, jsonObject);
-	}
+    public Object takeScreenshot() throws Exception {
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("sessionId", driver.getSessionId());
+        return utils.request("GET", DriverCommand.SCREENSHOT, jsonObject);
+    }
 
-	public void saveScreenshot(String filename) throws Exception {
-		BASE64Decoder decoder = new BASE64Decoder();
-		try {
-			// Decode Base64
-			byte[] b = decoder.decodeBuffer(takeScreenshot().toString());
-			for (int i = 0; i < b.length; ++i) {
-				if (b[i] < 0) {
-					b[i] += 256;
-				}
-			}
-			// generate the image file
-			OutputStream out = new FileOutputStream(filename);
-			out.write(b);
-			out.flush();
-			out.close();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
+    public void saveScreenshot(String filename) throws Exception {
+        Base64 decoder = new Base64();
+        try {
+            // Decode Base64
+            byte[] b = decoder.decode(takeScreenshot().toString());
+            for (int i = 0; i < b.length; ++i) {
+                if (b[i] < 0) {
+                    b[i] += 256;
+                }
+            }
+            // generate the image file
+            FileOutputStream out = new FileOutputStream(filename);
+            int n = 0;
+            byte[] bb = new byte[1024];
+            out.write(b);
+            out.flush();
+            out.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
 }

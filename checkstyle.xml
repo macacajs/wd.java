@@ -5,7 +5,7 @@
   <module name="NewlineAtEndOfFile"/>
 
   <module name="FileLength">
-    <property name="max" value="1500"/>
+    <property name="max" value="2000"/>
   </module>
 
   <module name="TreeWalker">
@@ -36,14 +36,14 @@
     <module name="UpperEll"/>
 
     <module name="LineLength">
-      <property name="max" value="120" />
+      <property name="max" value="200" />
     </module>
     <module name="MethodLength">
       <property name="tokens" value="METHOD_DEF" />
       <property name="max" value="50" />
     </module>
     <module name="ParameterNumber">
-      <property name="max" value="5" />
+      <property name="max" value="7" />
       <property name="ignoreOverriddenMethods" value="true"/>
       <property name="tokens" value="METHOD_DEF" />
     </module>
@@ -73,10 +73,6 @@
     </module>
     <module name="IllegalInstantiation"/>
     <module name="InnerAssignment"/>
-    <module name="MagicNumber">
-      <property name="ignoreNumbers" value="0, 1"/>
-      <property name="ignoreAnnotation" value="true"/>
-    </module>
     <module name="MissingSwitchDefault"/>
     <module name="SimplifyBooleanExpression"/>
     <module name="SimplifyBooleanReturn"/>

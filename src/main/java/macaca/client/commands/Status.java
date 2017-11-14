@@ -7,16 +7,17 @@ import com.alibaba.fastjson.JSONObject;
 
 public class Status {
 
-	private MacacaDriver driver;
-	private Utils utils;
+    private MacacaDriver driver;
+    private Utils utils;
 
-	public Status(MacacaDriver driver) {
-		this.driver = driver;
-		this.utils = new Utils(driver);
-	}
+    public Status(MacacaDriver driver) {
+        this.driver = driver;
+        this.utils = new Utils(driver);
+    }
 
-	public String getStatus() throws Exception {
-		JSONObject jsonObject = new JSONObject();
-		return utils.getStatus(DriverCommand.STATUS);
-	}
+    public String getStatus() throws Exception {
+        JSONObject jsonObject = new JSONObject();
+        return utils.getStatus(DriverCommand.STATUS);
+    }
+
 }

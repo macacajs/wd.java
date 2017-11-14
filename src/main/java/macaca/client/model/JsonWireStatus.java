@@ -26,9 +26,6 @@ public enum JsonWireStatus {
     InvalidSelector(32, "Argument was an invalid selector (e.g. XPath/CSS)."),
     Default(-1, "");
 
-    private int SessionNotCreatedException = 33;
-    private int MoveTargetOutOfBounds = 34;
-
     private int code;
     private String message;
 
@@ -49,4 +46,5 @@ public enum JsonWireStatus {
     public String message() {
         return message;
     }
+
 }

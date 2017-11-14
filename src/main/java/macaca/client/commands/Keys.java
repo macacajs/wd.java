@@ -8,16 +8,17 @@ import macaca.client.common.Utils;
 
 public class Keys {
 
-	private MacacaDriver driver;
-	private Utils utils;
+    private MacacaDriver driver;
+    private Utils utils;
 
-	public Keys(MacacaDriver driver) {
-		this.driver = driver;
-		this.utils = new Utils(driver);
-	}
+    public Keys(MacacaDriver driver) {
+        this.driver = driver;
+        this.utils = new Utils(driver);
+    }
 
-	public void keys(JSONObject jsonObject) throws Exception {
-		jsonObject.put("sessionId", driver.getSessionId());
-		utils.request("POST", DriverCommand.KEYS, jsonObject);
-	}
+    public void keys(JSONObject jsonObject) throws Exception {
+        jsonObject.put("sessionId", driver.getSessionId());
+        utils.request("POST", DriverCommand.KEYS, jsonObject);
+    }
+
 }

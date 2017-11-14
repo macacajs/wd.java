@@ -8,49 +8,50 @@ import macaca.client.common.Utils;
 
 public class Session {
 
-	private MacacaDriver driver;
-	private Utils utils;
+    private MacacaDriver driver;
+    private Utils utils;
 
-	public Session(MacacaDriver driver) {
-		this.driver = driver;
-		this.utils = new Utils(driver);
-	}
+    public Session(MacacaDriver driver) {
+        this.driver = driver;
+        this.utils = new Utils(driver);
+    }
 
-	public void createSession(JSONObject jsonObj) throws Exception {
+    public void createSession(JSONObject jsonObj) throws Exception {
 
-		JSONObject desiredCapabilities = jsonObj.getJSONObject("desiredCapabilities");
-		if (desiredCapabilities.get("host") != null){
-			String host = (String) desiredCapabilities.get("host");
-			this.driver.setRemoteHost(host);
-		}
+        JSONObject desiredCapabilities = jsonObj.getJSONObject("desiredCapabilities");
+        if (desiredCapabilities.get("host") != null) {
+            String host = (String) desiredCapabilities.get("host");
+            this.driver.setRemoteHost(host);
+        }
 
-		if (desiredCapabilities.get("port") != null){
-			int port = (int) desiredCapabilities.get("port");
-			this.driver.setRemotePort(port);
-		}
-		
-		if (System.getenv("MACACA_UDID") != null) {
-			jsonObj.put("udid", System.getenv("MACACA_UDID"));
-		}
-		
-		if (System.getenv("MACACA_APP_NAME") != null) {
-			jsonObj.put("package", System.getenv("MACACA_APP_NAME"));
-		}
+        if (desiredCapabilities.get("port") != null) {
+            int port = (int) desiredCapabilities.get("port");
+            this.driver.setRemotePort(port);
+        }
 
-		JSONObject response = (JSONObject) utils.request("POST", DriverCommand.CREATE_SESSION, jsonObj);
-		String sessionId = (String) response.get("sessionId");
-		this.driver.setSessionId(sessionId);
+        if (System.getenv("MACACA_UDID") != null) {
+            jsonObj.put("udid", System.getenv("MACACA_UDID"));
+        }
 
-		this.driver.setCapabilities(response);
-	}
+        if (System.getenv("MACACA_APP_NAME") != null) {
+            jsonObj.put("package", System.getenv("MACACA_APP_NAME"));
+        }
 
-	public void delSession() throws Exception {
-		JSONObject jsonObject = new JSONObject();
-		jsonObject.put("sessionId", driver.getSessionId());
-		utils.request("DELETE", DriverCommand.SESSION, jsonObject);
-	}
+        JSONObject response = (JSONObject) utils.request("POST", DriverCommand.CREATE_SESSION, jsonObj);
+        String sessionId = (String) response.get("sessionId");
+        this.driver.setSessionId(sessionId);
 
-	public JSONObject sessionAvailable() throws Exception {
-		return this.driver.getCapabilities();
-	}
+        this.driver.setCapabilities(response);
+    }
+
+    public void delSession() throws Exception {
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("sessionId", driver.getSessionId());
+        utils.request("DELETE", DriverCommand.SESSION, jsonObject);
+    }
+
+    public JSONObject sessionAvailable() throws Exception {
+        return this.driver.getCapabilities();
+    }
+
 }
