@@ -24,13 +24,13 @@ Details changes for each release are documented in the [HISTORY.md](HISTORY.md).
 
 ## Deploy
 
-```shell
+```bash
 $ mvn -s settings.xml clean source:jar deploy
 ```
 
 ## Generate Log
 
-```shell
+```bash
 $ make doc
 ```
 
