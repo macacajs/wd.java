@@ -45,9 +45,9 @@ $ git-contributor
 
 |[<img src="https://avatars1.githubusercontent.com/u/1011681?v=4" width="100px;"/><br/><sub><b>xudafeng</b></sub>](https://github.com/xudafeng)<br/>|[<img src="https://avatars3.githubusercontent.com/u/15025212?v=4" width="100px;"/><br/><sub><b>zhuyali</b></sub>](https://github.com/zhuyali)<br/>|[<img src="https://avatars2.githubusercontent.com/u/20984179?v=4" width="100px;"/><br/><sub><b>adfghzhang</b></sub>](https://github.com/adfghzhang)<br/>|[<img src="https://avatars2.githubusercontent.com/u/5562118?v=4" width="100px;"/><br/><sub><b>hustzyd</b></sub>](https://github.com/hustzyd)<br/>|[<img src="https://avatars1.githubusercontent.com/u/1044425?v=4" width="100px;"/><br/><sub><b>ziczhu</b></sub>](https://github.com/ziczhu)<br/>|[<img src="https://avatars2.githubusercontent.com/u/3398837?v=4" width="100px;"/><br/><sub><b>chenDoInG</b></sub>](https://github.com/chenDoInG)<br/>
 | :---: | :---: | :---: | :---: | :---: | :---: |
-|[<img src="https://avatars0.githubusercontent.com/u/6824951?v=4" width="100px;"/><br/><sub><b>kyowang</b></sub>](https://github.com/kyowang)<br/>
+|[<img src="https://avatars0.githubusercontent.com/u/6824951?v=4" width="100px;"/><br/><sub><b>kyowang</b></sub>](https://github.com/kyowang)<br/>|[<img src="https://avatars2.githubusercontent.com/u/7089720?v=4" width="100px;"/><br/><sub><b>wuweicoco</b></sub>](https://github.com/wuweicoco)<br/>
 
-This project follows the git-contributor [spec](https://github.com/xudafeng/git-contributor.git), auto upated at `Sun Mar 25 2018 15:32:38 GMT+0800`.
+This project follows the git-contributor [spec](https://github.com/xudafeng/git-contributor), auto upated at `Fri Apr 13 2018 21:10:44 GMT+0800`.
 
 <!-- GITCONTRIBUTOR_END -->
 
