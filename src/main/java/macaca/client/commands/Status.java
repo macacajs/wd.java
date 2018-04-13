@@ -3,7 +3,6 @@ package macaca.client.commands;
 import macaca.client.common.DriverCommand;
 import macaca.client.common.MacacaDriver;
 import macaca.client.common.Utils;
-import com.alibaba.fastjson.JSONObject;
 
 public class Status {
 
@@ -18,5 +17,4 @@ public class Status {
     public String getStatus() throws Exception {
         return utils.getStatus(DriverCommand.STATUS);
     }
-
 }
