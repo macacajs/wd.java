@@ -3,13 +3,11 @@ package macaca.client.common;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.serializer.SerializerFeature;
+import javafx.util.Callback;
 import macaca.client.model.JsonWireStatus;
 import org.apache.http.HttpEntity;
 import org.apache.http.client.ClientProtocolException;
-import org.apache.http.client.methods.CloseableHttpResponse;
-import org.apache.http.client.methods.HttpDelete;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.client.methods.HttpPost;
+import org.apache.http.client.methods.*;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
@@ -18,7 +16,6 @@ import org.apache.http.util.EntityUtils;
 import java.text.SimpleDateFormat;
 
 public class Utils {
-
 //    private final Log log = LogFactory.getLog(getClass());
 
     private HttpGet httpget = null;
@@ -30,17 +27,24 @@ public class Utils {
     private String stringResponse = "";
     private MacacaDriver driver;
 
+    private static Callback<Exception, Boolean> exceptionCallback;
+
     public Utils(MacacaDriver driver) {
         this.driver = driver;
     }
 
+    // you can set Exception Callback for request macaca server error process.
+    public static void setExceptionCallback(Callback<Exception, Boolean> callback) {
+        exceptionCallback = callback;
+    }
+
+    private static SimpleDateFormat sDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"); //设置日期格式
 
     private void printResponse(String stringResponse) throws Exception {
-        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"); //设置日期格式
         if (stringResponse.length() > 800) {
-            System.out.println(df.format(new java.util.Date()) + " Response:" + stringResponse.substring(0, 800) + "...more response is ignored..");
+            System.out.println(sDateFormat.format(new java.util.Date()) + " Response:" + stringResponse.substring(0, 800) + "...more response is ignored..");
         } else {
-            System.out.println(df.format(new java.util.Date()) + " Response:" + stringResponse);
+            System.out.println(sDateFormat.format(new java.util.Date()) + " Response:" + stringResponse);
         }
     }
 
@@ -49,29 +53,33 @@ public class Utils {
         System.out.println(df.format(new java.util.Date()) + " Request:" + stringRequest);
     }
 
-    private Object getRequest(String method, JSONObject jsonBody) throws Exception {
+    private void executeRequest(HttpRequestBase request) throws Exception {
+        // avoid entity is null
+        jsonResponse = null;
 
+        response = httpclient.execute(request);
+        entity = response.getEntity();
+        //System.out.println(response.getStatusLine().getStatusCode());
+        if (entity != null) {
+            stringResponse = EntityUtils.toString(entity);
+            printResponse(stringResponse);
+            jsonResponse = JSON.parseObject(stringResponse);
+            handleStatus(jsonResponse.getInteger("status"));
+        }
+    }
+
+    private Object getRequest(String method, JSONObject jsonBody) throws Exception {
         for (String key : jsonBody.keySet()) {
             String value = jsonBody.get(key).toString();
             method = method.replace(":" + key, value);
         }
 
-        try {
-            String url = Constants.SUFFIX.replace("${host}", driver.getHost()).replace("${port}", driver.getPort()) + method;
-            printRequest(url);
-            httpget = new HttpGet(url);
-            response = httpclient.execute(httpget);
-            entity = response.getEntity();
-            //System.out.println(response.getStatusLine().getStatusCode());
-            if (entity != null) {
-                stringResponse = EntityUtils.toString(entity);
-                printResponse(stringResponse);
-                jsonResponse = JSON.parseObject(stringResponse);
-                handleStatus(jsonResponse.getInteger("status"));
-                return jsonResponse.get("value");
-            }
-        } catch (ClientProtocolException e) {
-            e.printStackTrace();
+        String url = Constants.SUFFIX.replace("${host}", driver.getHost()).replace("${port}", driver.getPort()) + method;
+        printRequest(url);
+        httpget = new HttpGet(url);
+        executeRequest(httpget);
+        if (jsonResponse != null) {
+            return jsonResponse.get("value");
         }
         return null;
     }
@@ -94,36 +102,21 @@ public class Utils {
             }
         }
 
-        try {
-            String url = Constants.SUFFIX.replace("${host}", driver.getHost()).replace("${port}", driver.getPort()) + method;
+        String url = Constants.SUFFIX.replace("${host}", driver.getHost()).replace("${port}", driver.getPort()) + method;
 
-            HttpPost httppost = new HttpPost(url);
-            StringEntity stringEntity = new StringEntity(JSONObject.toJSONString(tempObj,
-                    SerializerFeature.WriteMapNullValue), "utf-8");
-            stringEntity.setContentEncoding("utf-8");
-            stringEntity.setContentType("application/json");
-            httppost.setEntity(stringEntity);
+        HttpPost httppost = new HttpPost(url);
+        StringEntity stringEntity = new StringEntity(JSONObject.toJSONString(tempObj, SerializerFeature.WriteMapNullValue), "utf-8");
+        stringEntity.setContentEncoding("utf-8");
+        stringEntity.setContentType("application/json");
+        httppost.setEntity(stringEntity);
 
-            printRequest(url + ":" + JSONObject.toJSONString(tempObj,
-                    SerializerFeature.WriteMapNullValue));
-            response = httpclient.execute(httppost);
-            entity = response.getEntity();
-            if (entity != null) {
-                stringResponse = EntityUtils.toString(entity);
-                printResponse(stringResponse);
-                jsonResponse = JSON.parseObject(stringResponse);
-                handleStatus(jsonResponse.getInteger("status"));
-                return jsonResponse;
-            }
-        } catch (ClientProtocolException e) {
-            e.printStackTrace();
-        }
-
-        return null;
+        printRequest(url + ":" + JSONObject.toJSONString(tempObj,
+                SerializerFeature.WriteMapNullValue));
+        executeRequest(httppost);
+        return jsonResponse;
     }
 
     public Object deleteRequest(String method, JSONObject jsonBody) throws Exception {
-
         for (String key : jsonBody.keySet()) {
             String value = jsonBody.get(key).toString();
             method = method.replace(":" + key, value);
@@ -131,27 +124,29 @@ public class Utils {
 
         String url = Constants.SUFFIX.replace("${host}", driver.getHost()).replace("${port}", driver.getPort()) + method;
         HttpDelete httpdelete = new HttpDelete(url);
-        response = httpclient.execute(httpdelete);
-        entity = response.getEntity();
-        System.out.println(response.getStatusLine().getStatusCode());
-        if (entity != null) {
-            stringResponse = EntityUtils.toString(entity);
-            printResponse(stringResponse);
-            jsonResponse = JSON.parseObject(stringResponse);
-            handleStatus(jsonResponse.getInteger("status"));
-            return jsonResponse;
-        }
-        return null;
+        executeRequest(httpdelete);
+        return jsonResponse;
     }
 
     public Object request(String method, String url, JSONObject jsonObj) throws Exception {
-
-        if ("GET".equals(method.toUpperCase())) {
-            return getRequest(url, jsonObj);
-        } else if ("POST".equals(method.toUpperCase())) {
-            return postRequest(url, jsonObj);
-        } else if ("DELETE".equals(method.toUpperCase())) {
-            return deleteRequest(url, jsonObj);
+        try {
+            if ("GET".equals(method.toUpperCase())) {
+                return getRequest(url, jsonObj);
+            } else if ("POST".equals(method.toUpperCase())) {
+                return postRequest(url, jsonObj);
+            } else if ("DELETE".equals(method.toUpperCase())) {
+                return deleteRequest(url, jsonObj);
+            }
+        } catch (Exception e) {
+            // if exceptionCallback return Boolean.TRUE, throw exception again
+            if (exceptionCallback != null) {
+                Boolean needThrow = exceptionCallback.call(e);
+                if (needThrow != null && needThrow.booleanValue()) {
+                    throw e;
+                }
+            } else {
+                throw e;
+            }
         }
 
         return null;
@@ -159,7 +154,7 @@ public class Utils {
 
     void handleStatus(int statusCode) throws Exception {
         JsonWireStatus status = JsonWireStatus.findByStatus(statusCode);
-        if (status != JsonWireStatus.Success && status != JsonWireStatus.Default) {
+        if (status != JsonWireStatus.Success && status != JsonWireStatus.Default && status != JsonWireStatus.NoAlertOpenError) {
             throw new Exception(status.message());
         }
     }
@@ -176,5 +171,4 @@ public class Utils {
         }
         return "get server status error";
     }
-
 }

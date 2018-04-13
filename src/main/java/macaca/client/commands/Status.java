@@ -16,7 +16,6 @@ public class Status {
     }
 
     public String getStatus() throws Exception {
-        JSONObject jsonObject = new JSONObject();
         return utils.getStatus(DriverCommand.STATUS);
     }
 
