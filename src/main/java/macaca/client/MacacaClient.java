@@ -1362,7 +1362,6 @@ public class MacacaClient {
                 }
             }
             //elementId = contexts.getElementId()
-            // 修改id在element之间共享的bug，把id从 MacacaDriver类移到 Element类
             elementId = element.getElementId();
             tmpElement.put("ELEMENT", elementId);
 
