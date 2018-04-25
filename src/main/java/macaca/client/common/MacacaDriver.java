@@ -5,7 +5,7 @@ import com.alibaba.fastjson.JSONObject;
 public class MacacaDriver {
     private String sessionId;
     private String windowHandle;
-    // 新element覆盖老element的bug，把id从 MacacaDriver类移到 Element类
+    // fix bug：The new element covers the old element,elementId moves from the MacacaDriver class to the Element class
     // private String elementId;
     private String context;
     private JSONObject capabilities;
@@ -36,7 +36,7 @@ public class MacacaDriver {
         return this.windowHandle;
     }
 
-    // 新element覆盖老element的bug，把id从 MacacaDriver类移到 Element类
+    // fix bug：The new element covers the old element,elementId moves from the MacacaDriver class to the Element class
 //    public void setElementId(Object elementId) {
 //        this.elementId = String.valueOf(elementId);
 //    }

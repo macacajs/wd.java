@@ -13,7 +13,7 @@ import macaca.client.common.Utils;
 public class Element {
 
     private MacacaDriver driver;
-    // 新element覆盖老element的bug，Element 类新增elementId属性。把id从 MacacaDriver类移到 Element类
+    // fix bug：The new element covers the old element,elementId moves from the MacacaDriver class to the Element class
     private String elementId;
     private Utils utils;
     private Boolean globalTap;
@@ -25,11 +25,9 @@ public class Element {
         this.utils = new Utils(driver);
     }
 
-    // 新element覆盖老element的bug，把id从 MacacaDriver类移到 Element类
     public void setElementId(Object elementId) {
         this.elementId = String.valueOf(elementId);
     }
-    // 新element覆盖老element的bug，把id从 MacacaDriver类移到 Element类
     public String getElementId() {
         return this.elementId;
     }

@@ -28,7 +28,7 @@ public class MacacaClient {
 
 
     public MacacaDriver contexts = new MacacaDriver();
-    // 新element覆盖老element的bug，把id从 MacacaDriver类移到 Element类。在获取到element位置进行初始化。不能直接初始化
+    // fix bug：The new element covers the old element
     //public Element element = new Element(contexts);
     public Element element;
     /**
@@ -192,7 +192,7 @@ public class MacacaClient {
         if (elementId != null) {
             // the element exists
             // contexts.setElementId(elementId);
-            // 新element覆盖老element的bug
+            // fix bug：The new element covers the old element
             element = new Element(elementId, contexts);
             return true;
         } else {
