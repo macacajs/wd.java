@@ -13,14 +13,25 @@ import macaca.client.common.Utils;
 public class Element {
 
     private MacacaDriver driver;
+    // fix bug：The new element covers the old element,elementId moves from the MacacaDriver class to the Element class
+    private String elementId;
     private Utils utils;
     private Boolean globalTap;
 
-    public Element(MacacaDriver driver) {
+    public Element(String id, MacacaDriver driver) {
+        this.elementId = id;
         this.driver = driver;
         this.globalTap = false;
         this.utils = new Utils(driver);
     }
+
+    public void setElementId(Object elementId) {
+        this.elementId = String.valueOf(elementId);
+    }
+    public String getElementId() {
+        return this.elementId;
+    }
+
 
     /**
      * <p>
@@ -46,7 +57,7 @@ public class Element {
      */
     public void setValue(JSONObject jsonObject) throws Exception {
         jsonObject.put("sessionId", driver.getSessionId());
-        jsonObject.put("elementId", driver.getElementId());
+        jsonObject.put("elementId", this.getElementId());
         utils.request("POST", DriverCommand.ELEMENT_VALUE, jsonObject);
     }
 
@@ -60,7 +71,7 @@ public class Element {
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("sessionId", driver.getSessionId());
         if (!globalTap) {
-            jsonObject.put("elementId", driver.getElementId());
+            jsonObject.put("elementId", this.getElementId());
             utils.request("POST", DriverCommand.CLICK_ELEMENT, jsonObject);
         } else {
             utils.request("POST", DriverCommand.CLICK, jsonObject);
@@ -85,12 +96,13 @@ public class Element {
         jsonObject.put("using", using.getUsing());
 
         jsonObject.put("sessionId", driver.getSessionId());
-        jsonObject.put("elementId", driver.getElementId());
+        jsonObject.put("elementId", this.getElementId());
 
         JSONObject response = (JSONObject) utils.request("POST", DriverCommand.FIND_ELEMENT, jsonObject);
         JSONObject element = (JSONObject) response.get("value");
-        Object elementId = (Object) element.get("ELEMENT");
-        return elementId != null;
+        //  mpdify for erroe :HiddenField: 'elementId' hides a field.
+        Object eleId = (Object) element.get("ELEMENT");
+        return eleId != null;
     }
 
     /**
@@ -107,7 +119,7 @@ public class Element {
         jsonObject.put("value", value);
         jsonObject.put("using", using.getUsing());
         jsonObject.put("sessionId", driver.getSessionId());
-        jsonObject.put("elementId", driver.getElementId());
+        jsonObject.put("elementId", this.getElementId());
         JSONObject response = (JSONObject) utils.request("POST", DriverCommand.FIND_ELEMENTS, jsonObject);
         JSONArray elements = (JSONArray) response.get("value");
         return elements;
@@ -132,7 +144,7 @@ public class Element {
     public String getText() throws Exception {
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("sessionId", driver.getSessionId());
-        jsonObject.put("elementId", driver.getElementId());
+        jsonObject.put("elementId", this.getElementId());
         String text = (String) utils.request("GET", DriverCommand.GET_ELEMENT_TEXT, jsonObject);
         return text;
     }
@@ -140,7 +152,7 @@ public class Element {
     public void clearText() throws Exception {
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("sessionId", driver.getSessionId());
-        jsonObject.put("elementId", driver.getElementId());
+        jsonObject.put("elementId", this.getElementId());
         utils.request("POST", DriverCommand.CLEAR_ELEMENT, jsonObject);
     }
 
@@ -165,7 +177,7 @@ public class Element {
     public Object getProperty(String name) throws Exception {
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("sessionId", driver.getSessionId());
-        jsonObject.put("elementId", driver.getElementId());
+        jsonObject.put("elementId", this.getElementId());
         jsonObject.put("name", name);
         Object response = utils.request("GET", DriverCommand.GET_ELEMENT_PROPERTY, jsonObject);
         return response;
@@ -174,7 +186,7 @@ public class Element {
     public Object getRect() throws Exception {
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("sessionId", driver.getSessionId());
-        jsonObject.put("elementId", driver.getElementId());
+        jsonObject.put("elementId", this.getElementId());
         Object response = (Object) utils.request("GET", DriverCommand.GET_ELEMENT_RECT, jsonObject);
         return response;
     }
@@ -182,7 +194,7 @@ public class Element {
     public String getComputedCss(String propertyName) throws Exception {
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("sessionId", driver.getSessionId());
-        jsonObject.put("elementId", driver.getElementId());
+        jsonObject.put("elementId", this.getElementId());
         jsonObject.put("propertyName", propertyName);
         String computedCss = (String) utils.request("GET", DriverCommand.GET_ELEMENT_VALUE_OF_CSS_PROPERTY, jsonObject);
         return computedCss;
@@ -192,7 +204,7 @@ public class Element {
     public boolean isDisplayed() throws Exception {
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("sessionId", driver.getSessionId());
-        jsonObject.put("elementId", driver.getElementId());
+        jsonObject.put("elementId", this.getElementId());
         boolean displayed = (Boolean) utils.request("GET", DriverCommand.IS_ELEMENT_DISPLAYED, jsonObject);
         return displayed;
     }
@@ -202,7 +214,7 @@ public class Element {
         jsonObject.put("sessionId", driver.getSessionId());
         JSONArray array = new JSONArray();
         JSONObject actionObject = new JSONObject();
-        actionObject.put("element", driver.getElementId());
+        actionObject.put("element", this.getElementId());
         actionObject.put("type", action);
         for (String key : args.keySet()) {
             String value = args.getString(key);

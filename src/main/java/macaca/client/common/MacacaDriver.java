@@ -5,7 +5,8 @@ import com.alibaba.fastjson.JSONObject;
 public class MacacaDriver {
     private String sessionId;
     private String windowHandle;
-    private String elementId;
+    // fix bug：The new element covers the old element,elementId moves from the MacacaDriver class to the Element class
+    // private String elementId;
     private String context;
     private JSONObject capabilities;
     private String host = "localhost";
@@ -35,13 +36,14 @@ public class MacacaDriver {
         return this.windowHandle;
     }
 
-    public void setElementId(Object elementId) {
-        this.elementId = String.valueOf(elementId);
-    }
-
-    public String getElementId() {
-        return this.elementId;
-    }
+    // fix bug：The new element covers the old element,elementId moves from the MacacaDriver class to the Element class
+//    public void setElementId(Object elementId) {
+//        this.elementId = String.valueOf(elementId);
+//    }
+//
+//    public String getElementId() {
+//        return this.elementId;
+//    }
 
     public JSONObject getCapabilities() {
         return capabilities;
@@ -73,4 +75,3 @@ public class MacacaDriver {
     }
 
 }
-
