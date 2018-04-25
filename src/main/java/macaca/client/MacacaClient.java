@@ -1,25 +1,25 @@
 package macaca.client;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 
-import macaca.client.commands.Element;
 import macaca.client.commands.Alert;
 import macaca.client.commands.Context;
-import macaca.client.commands.Keys;
-import macaca.client.commands.Execute;
-import macaca.client.commands.ScreenShot;
-import macaca.client.commands.Source;
 import macaca.client.commands.Cookie;
-import macaca.client.commands.Url;
-import macaca.client.commands.Title;
-import macaca.client.commands.Window;
-import macaca.client.commands.Status;
+import macaca.client.commands.Element;
+import macaca.client.commands.Execute;
+import macaca.client.commands.Keys;
+import macaca.client.commands.ScreenShot;
 import macaca.client.commands.Session;
+import macaca.client.commands.Source;
+import macaca.client.commands.Status;
+import macaca.client.commands.Title;
+import macaca.client.commands.Url;
+import macaca.client.commands.Window;
 import macaca.client.common.DriverCommand;
-import macaca.client.common.ElementSelector;
 import macaca.client.common.GetElementWay;
 import macaca.client.common.MacacaDriver;
 import macaca.client.common.Utils;
@@ -28,7 +28,9 @@ public class MacacaClient {
 
 
     public MacacaDriver contexts = new MacacaDriver();
-    public Element element = new Element(contexts); // TODO
+    // 新element覆盖老element的bug，把id从 MacacaDriver类移到 Element类。在获取到element位置进行初始化。不能直接初始化
+    //public Element element = new Element(contexts);
+    public Element element;
     /**
      * timeout for finding an element ,valid for waitForElement() function
      * paired with waitElementTimeInterval, if waitElementTimeout = 1000 & waitElementTimeInterval = 200,it means we will find given element per 200ms,until 1000ms passed,
@@ -186,10 +188,12 @@ public class MacacaClient {
         jsonObject.put("sessionId", contexts.getSessionId());
         JSONObject response = (JSONObject) utils.request("POST", DriverCommand.FIND_ELEMENT, jsonObject);
         JSONObject tmpElement = (JSONObject) response.get("value");
-        Object elementId = (Object) tmpElement.get("ELEMENT");
+        String elementId = (String) tmpElement.get("ELEMENT");
         if (elementId != null) {
             // the element exists
-            contexts.setElementId(elementId);
+            // contexts.setElementId(elementId);
+            // 新element覆盖老element的bug
+            element = new Element(elementId, contexts);
             return true;
         } else {
             // the element does not exist
@@ -304,40 +308,40 @@ public class MacacaClient {
      * @return return the element to find if it exists,if it does not exist ,return null
      */
     public Element getElement(GetElementWay wayToFind, String value, int index) throws Exception {
-        ElementSelector elementSelector;
+        List<Element> elements = new ArrayList<Element>();
         switch (wayToFind) {
             case ID:
-                elementSelector = elementsById(value);
+                elements = elementsById(value);
                 break;
             case CSS:
-                elementSelector = elementsByCss(value);
+                elements = elementsByCss(value);
                 break;
             case NAME:
-                elementSelector = elementsByName(value);
+                elements = elementsByName(value);
                 break;
             case XPATH:
-                elementSelector = elementsByXPath(value);
+                elements = elementsByXPath(value);
                 break;
             case CLASS_NAME:
-                elementSelector = elementsByClassName(value);
+                elements = elementsByClassName(value);
                 break;
             case LINK_TEXT:
-                elementSelector = elementsByLinkText(value);
+                elements = elementsByLinkText(value);
                 break;
             case PARTIAL_LINK_TEXT:
-                elementSelector = elementsByPartialLinkText(value);
+                elements = elementsByPartialLinkText(value);
                 break;
             case TAG_NAME:
-                elementSelector = elementsByTagName(value);
+                elements = elementsByTagName(value);
                 break;
 
             default:
-                elementSelector = null;
+                elements = null;
                 break;
         }
 
-        if (elementSelector != null && elementSelector.size() > (index - 1)) {
-            elementSelector.getIndex(index);
+        if (elements != null && elements.size() > (index - 1)) {
+            elements.get(index);
         } else {
             System.out.println("can't find the element:" + value + "[" + index + "]");
             return null;
@@ -392,48 +396,48 @@ public class MacacaClient {
      */
     public int countOfElements(GetElementWay wayToFind, String value) throws Exception {
 
-        ElementSelector elementSelector = getElementSelector(wayToFind, value);
-        if (elementSelector != null) {
-            return elementSelector.size();
+        List<Element> elements = getElementList(wayToFind, value);
+        if (elements != null) {
+            return elements.size();
         }
 
         return 0;
     }
 
-    private ElementSelector getElementSelector(GetElementWay wayToFind, String value) throws Exception {
-        ElementSelector elementSelector;
+    private List<Element> getElementList(GetElementWay wayToFind, String value) throws Exception {
+        List<Element> elements = new ArrayList<Element>();
         switch (wayToFind) {
             case ID:
-                elementSelector = elementsById(value);
+                elements = elementsById(value);
                 break;
             case CSS:
-                elementSelector = elementsByCss(value);
+                elements = elementsByCss(value);
                 break;
             case NAME:
-                elementSelector = elementsByName(value);
+                elements = elementsByName(value);
                 break;
             case XPATH:
-                elementSelector = elementsByXPath(value);
+                elements = elementsByXPath(value);
                 break;
             case CLASS_NAME:
-                elementSelector = elementsByClassName(value);
+                elements = elementsByClassName(value);
                 break;
             case LINK_TEXT:
-                elementSelector = elementsByLinkText(value);
+                elements = elementsByLinkText(value);
                 break;
             case PARTIAL_LINK_TEXT:
-                elementSelector = elementsByPartialLinkText(value);
+                elements = elementsByPartialLinkText(value);
                 break;
             case TAG_NAME:
-                elementSelector = elementsByTagName(value);
+                elements = elementsByTagName(value);
                 break;
 
             default:
-                elementSelector = null;
+                elements = null;
                 break;
         }
 
-        return elementSelector;
+        return elements;
     }
 
     /**
@@ -598,15 +602,41 @@ public class MacacaClient {
      * Support: Android iOS Web(WebView)
      *
      * @param xpath The XPath expression of elements
-     * @return ElementSelector object
+     * @return List<Element> elements
      * @throws Exception
      */
-    public ElementSelector elementsByXPath(String xpath) throws Exception {
+    public List<Element> elementsByXPath(String xpath) throws Exception {
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("value", xpath);
         jsonObject.put("using", "xpath");
         JSONArray jsonArray = findElements(jsonObject);
-        return new ElementSelector(contexts, this, jsonArray);
+        if (jsonArray.size() > 0) {
+            return getElements(jsonArray);
+        } else {
+            return null;
+        }
+
+    }
+
+    // add for replace ElementSelector
+    private List<Element> getElements(JSONArray jsonArray) {
+        List<Element> elements = new ArrayList<Element>();
+        for (int i = 0; i < jsonArray.size(); i++) {
+            Element elem = new Element(((JSONObject) jsonArray.get(i)).getString("ELEMENT"), contexts);
+            elements.add(elem);
+        }
+        return elements;
+    }
+
+
+    // add for replace ElementSelector
+    private Element getElement(JSONArray jsonArray, int index) {
+        if (jsonArray.size() >= index) {
+            element = new Element(((JSONObject) jsonArray.get(index - 1)).getString("ELEMENT"), contexts);
+            return element;
+        } else {
+            return null;
+        }
     }
 
     /**
@@ -616,15 +646,19 @@ public class MacacaClient {
      * Support: Android iOS Web(WebView)
      *
      * @param name The name attribute of elements
-     * @return ElementSelector object
+     * @return List<Element> elements
      * @throws Exception
      */
-    public ElementSelector elementsByName(String name) throws Exception {
+    public List<Element> elementsByName(String name) throws Exception {
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("value", name);
         jsonObject.put("using", "name");
         JSONArray jsonArray = findElements(jsonObject);
-        return new ElementSelector(contexts, this, jsonArray);
+        if (jsonArray.size() > 0) {
+            return getElements(jsonArray);
+        } else {
+            return null;
+        }
     }
 
     /**
@@ -634,15 +668,19 @@ public class MacacaClient {
      * Support: Android iOS Web(WebView)
      *
      * @param elementId The elementId attribute of elements
-     * @return ElementSelector object
+     * @return List<Element> elements
      * @throws Exception
      */
-    public ElementSelector elementsById(String elementId) throws Exception {
+    public List<Element> elementsById(String elementId) throws Exception {
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("value", elementId);
         jsonObject.put("using", "id");
         JSONArray jsonArray = findElements(jsonObject);
-        return new ElementSelector(contexts, this, jsonArray);
+        if (jsonArray.size() > 0) {
+            return getElements(jsonArray);
+        } else {
+            return null;
+        }
     }
 
     /**
@@ -652,15 +690,19 @@ public class MacacaClient {
      * Support: Android iOS Web(WebView)
      *
      * @param className The className attribute of elements
-     * @return ElementSelector object
+     * @return List<Element> elements
      * @throws Exception
      */
-    public ElementSelector elementsByClassName(String className) throws Exception {
+    public List<Element> elementsByClassName(String className) throws Exception {
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("value", className);
         jsonObject.put("using", "class name");
         JSONArray jsonArray = findElements(jsonObject);
-        return new ElementSelector(contexts, this, jsonArray);
+        if (jsonArray.size() > 0) {
+            return getElements(jsonArray);
+        } else {
+            return null;
+        }
     }
 
     /**
@@ -670,15 +712,19 @@ public class MacacaClient {
      * Support: Web(WebView)
      *
      * @param css The selector selector of elements
-     * @return ElementSelector object
+     * @return List<Element> elements
      * @throws Exception
      */
-    public ElementSelector elementsByCss(String css) throws Exception {
+    public List<Element> elementsByCss(String css) throws Exception {
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("value", css);
         jsonObject.put("using", "css");
         JSONArray jsonArray = findElements(jsonObject);
-        return new ElementSelector(contexts, this, jsonArray);
+        if (jsonArray.size() > 0) {
+            return getElements(jsonArray);
+        } else {
+            return null;
+        }
     }
 
     /**
@@ -688,15 +734,19 @@ public class MacacaClient {
      * Support: Android iOS Web(WebView)
      *
      * @param linkText The link text attribute of elements
-     * @return ElementSelector object contains elements
+     * @return List<Element> elements contains elements
      * @throws Exception
      */
-    public ElementSelector elementsByLinkText(String linkText) throws Exception {
+    public List<Element> elementsByLinkText(String linkText) throws Exception {
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("value", linkText);
         jsonObject.put("using", "link text");
         JSONArray jsonArray = findElements(jsonObject);
-        return new ElementSelector(contexts, this, jsonArray);
+        if (jsonArray.size() > 0) {
+            return getElements(jsonArray);
+        } else {
+            return null;
+        }
     }
 
     /**
@@ -706,15 +756,19 @@ public class MacacaClient {
      * Support: Android iOS Web(WebView)
      *
      * @param partialLinkText The partial link text attribute of elements
-     * @return ElementSelector object
+     * @return List<Element> elements
      * @throws Exception
      */
-    public ElementSelector elementsByPartialLinkText(String partialLinkText) throws Exception {
+    public List<Element> elementsByPartialLinkText(String partialLinkText) throws Exception {
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("value", partialLinkText);
         jsonObject.put("using", "partial link text");
         JSONArray jsonArray = findElements(jsonObject);
-        return new ElementSelector(contexts, this, jsonArray);
+        if (jsonArray.size() > 0) {
+            return getElements(jsonArray);
+        } else {
+            return null;
+        }
     }
 
     /**
@@ -724,15 +778,19 @@ public class MacacaClient {
      * Support: Android iOS Web(WebView)
      *
      * @param tagName The tag name attribute of elements
-     * @return ElementSelector object
+     * @return List<Element> elements
      * @throws Exception
      */
-    public ElementSelector elementsByTagName(String tagName) throws Exception {
+    public List<Element> elementsByTagName(String tagName) throws Exception {
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("value", tagName);
         jsonObject.put("using", "tag name");
         JSONArray jsonArray = findElements(jsonObject);
-        return new ElementSelector(contexts, this, jsonArray);
+        if (jsonArray.size() > 0) {
+            return getElements(jsonArray);
+        } else {
+            return null;
+        }
     }
 
     /**
@@ -921,7 +979,6 @@ public class MacacaClient {
         try {
             return getElement(wayToFind, value, index) != null;
         } catch (Exception e) {
-            // TODO: handle exception
             return false;
         }
 
@@ -1304,8 +1361,9 @@ public class MacacaClient {
                     elementByName(locator);
                 }
             }
-
-            elementId = contexts.getElementId();
+            //elementId = contexts.getElementId()
+            // 修改id在element之间共享的bug，把id从 MacacaDriver类移到 Element类
+            elementId = element.getElementId();
             tmpElement.put("ELEMENT", elementId);
 
             objects.put("id", tmpElement);
