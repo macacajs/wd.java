@@ -3,6 +3,7 @@ package macaca.client;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 
@@ -1391,23 +1392,25 @@ public class MacacaClient {
      * Support: Support: Android iOS
      *
      * @param action touch actions, such as, tap/doubleTap/press/pinch/rotate/drag , if you want to operate specific action,there is the same name API in this doc,like tap(x,y)
-     * @param args   Parameters of the action:https://github.com/alibaba/macaca/issues/366
+     * @param args JSONObject or JSONArray, Parameters of the action:https://github.com/alibaba/macaca/issues/366.<br>
+     *             eg:{"duration":0.5,"fromX":250,"toX":800,"fromY":1050,"toY":1050} for two points.<br>
+     *                [{"duration":0.5,"fromX":250,"toX":800,"fromY":1050,"toY":1050},{"toX":800,"toY":1550}] for three points.
      * @return The currently instance of MacacaClient
      * @throws Exception
      */
-    public MacacaClient touch(String action, JSONObject args) throws Exception {
-
+    public MacacaClient touch(String action, JSON args) throws Exception {
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("sessionId", contexts.getSessionId());
-        JSONArray array = new JSONArray();
-        JSONObject actionObject = new JSONObject();
-        actionObject.put("type", action);
-        for (String key : args.keySet()) {
-            double value = args.getDoubleValue(key);
-            actionObject.put(key, value);
+        JSONArray jsonArray = new JSONArray();
+        if (args instanceof JSONObject) {
+            jsonArray.add(args);
+        } else {
+            jsonArray = (JSONArray) args;
         }
-        array.add(actionObject);
-        jsonObject.put("actions", array);
+        for (int i = 0; i < jsonArray.size(); i++) {
+            jsonArray.getJSONObject(i).put("type", action);
+        }
+        jsonObject.put("actions", jsonArray);
         utils.request("POST", DriverCommand.ACTIONS, jsonObject);
         return this;
     }
