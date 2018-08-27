@@ -14,16 +14,41 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.methods.HttpRequestBase;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
-import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
-
+import org.apache.http.impl.client.HttpClientBuilder;
+import org.apache.http.impl.conn.PoolingHttpClientConnectionManager;
+import org.apache.http.message.BasicHeader;
 import java.text.SimpleDateFormat;
-
+import java.util.Arrays;
+import org.apache.http.client.config.CookieSpecs;
+import org.apache.http.client.config.RequestConfig;
 public class Utils {
 //    private final Log log = LogFactory.getLog(getClass());
 
     private HttpGet httpget = null;
-    private CloseableHttpClient httpclient = HttpClients.createDefault();
+    //Use static variables to ensure that the same connection pool is used when
+    // multiple macacaClient instances are initialized in the application.
+    private static CloseableHttpClient httpclient;
+    static {
+        PoolingHttpClientConnectionManager connectionManager = new PoolingHttpClientConnectionManager();
+        //max size conect per host route
+        connectionManager.setDefaultMaxPerRoute(500);
+        //max size connect
+        connectionManager.setMaxTotal(1000);
+        HttpClientBuilder builder = HttpClientBuilder.create();
+
+        RequestConfig.Builder requestConfigBuilder = RequestConfig.custom().setCookieSpec(
+                CookieSpecs.STANDARD);
+        //set timeout config
+        RequestConfig requestConfig = requestConfigBuilder.setConnectTimeout(20000)
+                .setSocketTimeout(20000).build();
+
+        builder.setConnectionManager(connectionManager).setDefaultHeaders(Arrays.asList(
+                new BasicHeader("Accept", "*/*"),
+                new BasicHeader("Connection", "keep-alive")));
+        builder.setDefaultRequestConfig(requestConfig);
+        httpclient = builder.build();
+    }
 
     private CloseableHttpResponse response = null;
     private HttpEntity entity = null;
@@ -60,16 +85,23 @@ public class Utils {
     private void executeRequest(HttpRequestBase request) throws Exception {
         // avoid entity is null
         jsonResponse = null;
-
-        response = httpclient.execute(request);
-        entity = response.getEntity();
-        //System.out.println(response.getStatusLine().getStatusCode());
-        if (entity != null) {
-            stringResponse = EntityUtils.toString(entity);
-            printResponse(stringResponse);
-            jsonResponse = JSON.parseObject(stringResponse);
-            handleStatus(jsonResponse.getInteger("status"));
+        try {
+            response = httpclient.execute(request);
+            entity = response.getEntity();
+            //System.out.println(response.getStatusLine().getStatusCode());
+            if (entity != null) {
+                stringResponse = EntityUtils.toString(entity);
+                printResponse(stringResponse);
+                jsonResponse = JSON.parseObject(stringResponse);
+                handleStatus(jsonResponse.getInteger("status"));
+            }
+        } finally {
+            if (response != null) {
+                //Release the resources occupied by the connection after use
+                response.close();
+            }
         }
+        
     }
 
     private Object getRequest(String method, JSONObject jsonBody) throws Exception {
