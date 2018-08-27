@@ -26,19 +26,20 @@ public class Utils {
 //    private final Log log = LogFactory.getLog(getClass());
 
     private HttpGet httpget = null;
-    //使用静态变量保证应用中初始化多个macacaClient实例也会使用同一个连接池
+    //Use static variables to ensure that the same connection pool is used when
+    // multiple macacaClient instances are initialized in the application.
     private static CloseableHttpClient httpclient;
     static {
         PoolingHttpClientConnectionManager connectionManager = new PoolingHttpClientConnectionManager();
-        //单个路由域名最大连接数
+        //max size conect per host route
         connectionManager.setDefaultMaxPerRoute(500);
-        //最大连接维持数
+        //max size connect
         connectionManager.setMaxTotal(1000);
         HttpClientBuilder builder = HttpClientBuilder.create();
 
         RequestConfig.Builder requestConfigBuilder = RequestConfig.custom().setCookieSpec(
                 CookieSpecs.STANDARD);
-        //设置超时时间
+        //set timeout config
         RequestConfig requestConfig = requestConfigBuilder.setConnectTimeout(20000)
                 .setSocketTimeout(20000).build();
 
@@ -96,7 +97,7 @@ public class Utils {
             }
         } finally {
             if (response != null) {
-                //使用后释放连接占用的资源
+                //Release the resources occupied by the connection after use
                 response.close();
             }
         }
