@@ -40,8 +40,8 @@ public class Utils {
         RequestConfig.Builder requestConfigBuilder = RequestConfig.custom().setCookieSpec(
                 CookieSpecs.STANDARD);
         //set timeout config
-        RequestConfig requestConfig = requestConfigBuilder.setConnectTimeout(20000)
-                .setSocketTimeout(20000).build();
+        RequestConfig requestConfig = requestConfigBuilder.setConnectTimeout(50000)
+                .setSocketTimeout(50000).build();
 
         builder.setConnectionManager(connectionManager).setDefaultHeaders(Arrays.asList(
                 new BasicHeader("Accept", "*/*"),
