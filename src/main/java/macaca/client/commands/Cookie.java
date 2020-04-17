@@ -24,7 +24,11 @@ public class Cookie {
     public String allCookies() throws Exception {
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("sessionId", driver.getSessionId());
-        return (String) utils.request("GET", DriverCommand.COOKIE, jsonObject);
+        Object cookies = utils.request("GET", DriverCommand.COOKIE, jsonObject);
+        if (cookies == null) {
+            return null;
+        }
+        return cookies.toString();
     }
 
     /**

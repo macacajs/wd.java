@@ -16,17 +16,16 @@ public class Window {
         this.utils = new Utils(driver);
     }
 
-    public void getWindow() throws Exception {
+    public Object getWindow() throws Exception {
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("sessionId", driver.getSessionId());
-        String windowHandle = (String) utils.request("GET", DriverCommand.WINDOW_HANDLE, jsonObject);
-        driver.setWindowHandle(windowHandle);
+        return utils.request("GET", DriverCommand.WINDOW_HANDLE, jsonObject);
     }
 
-    public void getWindows() throws Exception {
+    public Object getWindows() throws Exception {
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("sessionId", driver.getSessionId());
-        utils.request("GET", DriverCommand.WINDOW_HANDLES, jsonObject);
+        return utils.request("GET", DriverCommand.WINDOW_HANDLES, jsonObject);
     }
 
     public JSONObject getWindowSize() throws Exception {
@@ -49,10 +48,11 @@ public class Window {
         utils.request("POST", DriverCommand.MAXIMIZE_WINDOW, jsonObject);
     }
 
-    public String setWindow(JSONObject jsonObject) throws Exception {
+    public void setWindow(String handle) throws Exception {
+        JSONObject jsonObject = new JSONObject();
         jsonObject.put("sessionId", driver.getSessionId());
-        String name = (String) utils.request("POST", DriverCommand.WINDOW, jsonObject);
-        return name;
+        jsonObject.put("name", handle);
+        utils.request("POST", DriverCommand.WINDOW, jsonObject);
     }
 
     public void deleteWindow() throws Exception {
