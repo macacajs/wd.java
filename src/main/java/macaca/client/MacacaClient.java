@@ -1345,10 +1345,10 @@ public class MacacaClient {
     }
 
     /**
-     * defaultSwitchToWindow handle
+     * defaultSwitchWindow handle
      * @throws Exception
      */
-    public void defaultSwitchToWindow() throws Exception {
+    public void defaultSwitchWindow() throws Exception {
         //获取当前的 handle
         String handle = this.getWindowHandle();
         //获取所有的 handle
