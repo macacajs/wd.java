@@ -3,7 +3,6 @@ package macaca.client.common;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.serializer.SerializerFeature;
-import javafx.util.Callback;
 import macaca.client.model.JsonWireStatus;
 import org.apache.http.HttpEntity;
 import org.apache.http.client.ClientProtocolException;
