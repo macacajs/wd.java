@@ -6,7 +6,6 @@ import java.util.List;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-
 import macaca.client.commands.Alert;
 import macaca.client.commands.Context;
 import macaca.client.commands.Cookie;
@@ -1325,6 +1324,42 @@ public class MacacaClient {
         jsonObject.put("height", height);
         window.setWindowSize(jsonObject);
         return this;
+    }
+
+    /**
+     * getWindowHandle
+     * @return
+     * @throws Exception
+     */
+    public String getWindowHandle() throws Exception {
+        return (String) window.getWindow();
+    }
+
+    /**
+     * getWindowHandles
+     * @return
+     * @throws Exception
+     */
+    public JSONArray getWindowHandles() throws Exception {
+        return (JSONArray) window.getWindows();
+    }
+
+    /**
+     * defaultSwitchWindow handle
+     * @throws Exception
+     */
+    public void defaultSwitchWindow() throws Exception {
+        //获取当前的 handle
+        String handle = this.getWindowHandle();
+        //获取所有的 handle
+        JSONArray handleList = this.getWindowHandles();
+        // 循环遍历判断handle是否与当前handle一致，不一致则进行切换。
+        for (Object h : handleList) {
+            if (!h.toString().equals(handle)) {
+                //  切换
+                window.setWindow(h.toString());
+            }
+        }
     }
 
     /**
